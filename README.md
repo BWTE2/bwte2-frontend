@@ -60,7 +60,7 @@ Ak sa vyskytnú nejake chyby, skontrolujte konzolu, ak request blokla CORS polic
 Servisy su triedy ktorých inštancie netreba volať pretože su automaticky injectnuté, v našom prípade, ak sa servis volá MenoServisuService
 pristupime knemu bez inštancie nasledovne
 ```javascript
-import {menoServisuService} from "../../shared/services/menoServisu.service.js";
+import {menoServisuService} from "../../shared/services/meno-servisu.service.js";
 menoServisuService.metoda(); //import servisu je výhodné nechať robiť automaticky a len doplniť '.js' 
 ```
 **Dôležité servisy bez ktorých sa nezobídete**
@@ -89,8 +89,10 @@ menoServisuService.metoda(); //import servisu je výhodné nechať robiť automa
 import {domService} from "../../shared/services/dom.service.js";
 const nejakaFarba = domService.getInlineAttribute(this, 'farba'); //return biela
 const nejakaFarba1 = domService.getInlineAttribute(this, 'farbaMoja'); //return NULL a Warning farbaMoja nebola nastavená 
-``` 
- **Dynamicky atribút**, túto metódu použijeme ak chceme komponentu definovať dynamicku alebo staticku vlastnosť v javascripte, môže byť typu any  
+```  
+  
+ **Dynamicky atribút**, túto metódu použijeme ak chceme komponentu definovať dynamicku alebo staticku vlastnosť v javascripte, môže byť typu any
+   
   **Nastavenie dynamickej/statickej vlastnosti z javascriptu**
  ```javascript
 //app-rodic-tutorial.js
@@ -106,7 +108,7 @@ import {domService} from "../../shared/services/dom.service.js";
 const headerName = domService.getAttribute(this, "nejakyObjektAleboPremenna"); //return { meno:"lubos", vek:21, citiSaNa:80 }
 ```
 
-* Dieťa -> Rodič
+#### Dieťa -> Rodič
 Event emit
   **Nastavenie eventu a vlozenie dat do eventu**
  ```javascript
