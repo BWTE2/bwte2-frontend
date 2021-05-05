@@ -74,16 +74,17 @@ menoServisuService.metoda(); //import servisu je výhodné nechať robiť automa
 ## Práca s komponentami 
 * Ak pri vytvárani komponentu vnorujete komponent do podpriečinka, napríklad do ďalšieho komponentu, **potrebujete pridať do ciest pre template a style daný priečinok**  
 ### Komunikácia medzi komponentami
-**Používame DomService**
+* **Používame DomService**
 
 #### Rodič -> Dieťa 
- **Inline atribút**, túto metódu použijeme ak chceme komponentu definovať statickú vlastnosť priamo v HTML, vlastnosť môže byť len typu string   
+##### **Inline atribút**, túto metódu použijeme ak chceme komponentu definovať statickú vlastnosť priamo v HTML, vlastnosť môže byť len typu string   
+   
   **Nastavenie 'inline' vlastnosti**
  ```html
 //index.html 
 <app-tutorial mnou-definovana-vlastnost="moj string" farba="biela" nazov-ktory-sa-nebude-menit="staticky nazov"></app-tuttorial>
 ```
- #### Prečitanie 'inline' vlastnosti
+##### Prečitanie 'inline' vlastnosti
 ```javascript
 //app-dieta-tutorial.js
 import {domService} from "../../shared/services/dom.service.js";
@@ -91,9 +92,9 @@ const nejakaFarba = domService.getInlineAttribute(this, 'farba'); //return biela
 const nejakaFarba1 = domService.getInlineAttribute(this, 'farbaMoja'); //return NULL a Warning farbaMoja nebola nastavená 
 ```  
   
- **Dynamicky atribút**, túto metódu použijeme ak chceme komponentu definovať dynamicku alebo staticku vlastnosť v javascripte, môže byť typu any
-   
-  **Nastavenie dynamickej/statickej vlastnosti z javascriptu**
+###### **Dynamicky atribút**, túto metódu použijeme ak chceme komponentu definovať dynamicku alebo staticku vlastnosť v javascripte, môže byť typu any
+     
+ **Nastavenie dynamickej/statickej vlastnosti z javascriptu**
  ```javascript
 //app-rodic-tutorial.js
 import {domService} from "../../shared/services/dom.service.js";
@@ -101,7 +102,7 @@ const data={ meno:"lubos", vek:21, citiSaNa:80 };
 const componentAppTutorial = this.dom.getElementById("id-app-tutorial");
 domService.setAttribute(componentAppTutorial, "nejakyObjektAleboPremenna", data);
 ```
-  **Prečitanie dynamickej/statickej vlastnosti z javascriptu**
+**Prečitanie dynamickej/statickej vlastnosti z javascriptu**
   ```javascript
 //app-dieta-tutorial.js
 import {domService} from "../../shared/services/dom.service.js";
@@ -109,8 +110,8 @@ const headerName = domService.getAttribute(this, "nejakyObjektAleboPremenna"); /
 ```
 
 #### Dieťa -> Rodič
-Event emit
-  **Nastavenie eventu a vlozenie dat do eventu**
+##### Event emit      
+**Nastavenie eventu a vlozenie dat do eventu**
  ```javascript
 //app-dieta-tutorial.js
 import {domService} from "../../shared/services/dom.service.js";
@@ -121,8 +122,8 @@ domService.emitEvent(this, event); // vyvolá event
 //moznost2
 domService.createAndEmitEvent(this, "mojEvent", data);  // urobi to iste co predošla možnosť v jednom kroku
 ```
-  **Reakcia na event a precitanie dat eventu, vzdy ku datam prsitupujeme cez premennu detail (tak to je urcene v JS) !!!**
-  ```javascript
+**Reakcia na event a precitanie dat eventu, vzdy ku datam prsitupujeme cez premennu detail (tak to je urcene v JS) !!!**
+```javascript
 //app-rodic-tutorial.js
  this.dom.getElementById("send-test-button").addEventListener('mojEvent', (eventData)=>{
   const premennaZDietata=eventData.detail; return { mikofloso:"rytmo" }
