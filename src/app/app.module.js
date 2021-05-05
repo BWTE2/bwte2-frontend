@@ -46,7 +46,7 @@ export class AppModule {
 
     createComponents(component) {
         {
-            console.log("<" + component.selector + "></" + component.selector + ">");
+            // console.log("<" + component.selector + "></" + component.selector + ">");
             customElements.define(component.selector, component);
         }
     }
