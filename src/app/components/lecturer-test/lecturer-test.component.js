@@ -1,5 +1,6 @@
 import {Component} from "../../shared/model/component/component.js";
 import {domService} from "../../shared/services/dom.service.js";
+import {keyGeneratorService} from "../../api/key-generator/services/key-generator.service.js";
 
 
 const component = {
@@ -26,10 +27,7 @@ export class LecturerTestComponent extends Component {
     }
 
     eventsInitializer() {
-        const sideMenu = this.dom.getElementById("side-menu");
-        sideMenu.addEventListener("sendTest", (e) => {
-            console.log(e.detail);
-        });
+
     }
 
     setName() {
@@ -37,5 +35,6 @@ export class LecturerTestComponent extends Component {
         const sideMenu = this.dom.getElementById("side-menu");
         domService.setAttribute(sideMenu, "headerName", actualName);
     }
+
 
 }

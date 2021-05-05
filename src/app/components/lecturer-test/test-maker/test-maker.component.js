@@ -1,4 +1,6 @@
 import {Component} from "../../../shared/model/component/component.js";
+import {keyGeneratorService} from "../../../api/key-generator/services/key-generator.service.js";
+import {testsService} from "../../../api/tests/services/tests.service.js";
 
 
 const component = {
@@ -22,9 +24,34 @@ export class TestMakerComponent extends Component {
 
     attributesInitializer() {
 
+
     }
 
     eventsInitializer() {
-
+        document.addEventListener("sendTest", this.sendTest);
     }
+
+    sendTest = () =>{
+        keyGeneratorService.readGeneratedKey()
+            .then(this.sendTestWithKey)
+    }
+
+    sendTestWithKey = (json) =>{
+        const testName = this.dom.getElementById("test-name").value;
+        const timeLimit = this.dom.getElementById("time-limit").value;
+        const key = json.response.key;
+
+        const test = {
+            name: testName,
+            timeLimit: timeLimit,
+            questions: [
+
+            ]
+        }
+
+       testsService.createTest(key, test).then(() => location.reload());
+    }
+
+
+
 }
