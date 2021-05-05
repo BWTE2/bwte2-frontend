@@ -92,7 +92,7 @@ const nejakaFarba = domService.getInlineAttribute(this, 'farba'); //return biela
 const nejakaFarba1 = domService.getInlineAttribute(this, 'farbaMoja'); //return NULL a Warning farbaMoja nebola nastavená 
 ```  
   
-###### **Dynamicky atribút**, túto metódu použijeme ak chceme komponentu definovať dynamicku alebo staticku vlastnosť v javascripte, môže byť typu any
+##### **Dynamicky atribút**, túto metódu použijeme ak chceme komponentu definovať dynamicku alebo staticku vlastnosť v javascripte, môže byť typu any
      
  **Nastavenie dynamickej/statickej vlastnosti z javascriptu**
  ```javascript
