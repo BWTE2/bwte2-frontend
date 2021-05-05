@@ -1,0 +1,58 @@
+#test-table {
+    width: fit-content;
+    max-width: 90vw;
+    height: fit-content;
+}
+
+
+#test-table .title {
+    align-self: flex-start;
+    margin-bottom: 44px;
+}
+
+#test-table #table {
+    border-collapse: collapse;
+}
+
+#test-table #table :is(#table-header th,td) {
+    padding: 0.4em;
+    text-align: center;
+    min-width: 120px;
+
+}
+
+#test-table #table td {
+    word-break: break-word;
+}
+
+#test-table #table #table-header :first-child {
+    border-top-left-radius: 20px;
+
+}
+
+#test-table #table #table-header :last-child {
+    border-top-right-radius: 20px;
+}
+
+@media screen and (max-width: 700px) {
+    table, th, td, tr {
+        display: block;
+    }
+
+    #test-table #table, #table-header {
+        border-radius: 20px;
+    }
+
+    #test-table :is(#table, #table-header) {
+        width: 90vw;
+    }
+
+    #test-table #table :is(#table-header th,td) {
+        min-width: 0;
+        text-align: center;
+    }
+
+    #test-table #table #table-header th {
+        font-size: 5vw !important;
+    }
+}

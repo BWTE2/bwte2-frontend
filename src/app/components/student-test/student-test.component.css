@@ -1,0 +1,21 @@
+#student-test {
+    height: 100%;
+    width: 100%;
+}
+
+#student-test #paper {
+    width: 63vw;
+    height: 100%;
+}
+
+app-question-wording {
+    margin: 50px 6.3vw 25px 6.3vw;
+}
+
+@media screen and (max-width: 600px) {
+    #student-test #paper {
+        width: 90vw;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
