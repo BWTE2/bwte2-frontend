@@ -48,7 +48,8 @@ export class TestMakerComponent extends Component {
             questions: questions
         }
 
-       testsService.createTest(key, test).then((json) => console.log(json));
+       testsService.createTest(key, test)
+           .then(() => location.reload());
     }
 
     getAllQuestions(){
