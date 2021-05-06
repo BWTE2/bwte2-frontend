@@ -122,13 +122,22 @@ domService.emitEvent(this, event); // vyvolá event
 //moznost2
 domService.createAndEmitEvent(this, "mojEvent", data);  // urobi to iste co predošla možnosť v jednom kroku
 ```
-**Reakcia na event a precitanie dat eventu, vzdy ku datam prsitupujeme cez premennu detail (tak to je urcene v JS) !!!**
+**Reakcia na event a precitanie dat eventu, vzdy ku datam pristupujeme cez premennu detail (tak to je urcene v JS) !!!**
 ```javascript
 //app-rodic-tutorial.js
  this.dom.getElementById("send-test-button").addEventListener('mojEvent', (eventData)=>{
   const premennaZDietata=eventData.detail; return { mikofloso:"rytmo" }
  });
 ```
+
+#### Dieťa -> Dieťa
+**Globálny event**
+```javascript
+//nevytvara event na this ale priamo na document to iste pri odchytávani eventu
+document.emitEvent(this, event); // vyvolá event
+document..addEventListener(...);
+```
+
 
 
 
