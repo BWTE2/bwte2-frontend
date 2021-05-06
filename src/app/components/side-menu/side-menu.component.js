@@ -33,7 +33,7 @@ export class SideMenuComponent extends Component {
     }
 
     sendTest = () => {
-        domService.createAndEmitEvent(this, "sendTest", true);
+        domService.createAndEmitEvent(document, "sendTest", true);
     };
 
     showMenu = () => {

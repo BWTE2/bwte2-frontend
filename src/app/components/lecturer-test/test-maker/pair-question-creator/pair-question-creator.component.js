@@ -28,4 +28,9 @@ export class PairQuestionCreatorComponent extends Component {
 
     }
 
+    getInfo(){
+        //TODO: tu sa vracaju vsetky info o otazke ktoru vytvoril ucitel
+        return {};
+    }
+
 }
