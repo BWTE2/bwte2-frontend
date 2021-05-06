@@ -122,7 +122,7 @@ button:focus {
     outline: 0;
 }
 
-input {
+input,textarea {
     border-radius: 20px;
     color: var(--text-input-color);
     border-color: var(--text-input-color);
@@ -135,7 +135,7 @@ input {
     font-size: 20px;
 }
 
-input::placeholder {
+:is(input,textarea)::placeholder {
     color: var(--text-input-color);
     font-family: Roboto, sans-serif;
     font-style: normal;
