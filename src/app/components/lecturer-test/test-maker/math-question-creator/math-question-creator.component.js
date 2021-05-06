@@ -27,4 +27,9 @@ export class MathQuestionCreatorComponent extends Component {
     eventsInitializer() {
 
     }
+
+    getInfo(){
+        //TODO: tu sa vracaju vsetky info o otazke ktoru vytvoril ucitel
+        return {};
+    }
 }
