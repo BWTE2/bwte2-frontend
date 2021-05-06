@@ -49,7 +49,7 @@ export class TestMakerComponent extends Component {
             ]
         }
 
-       testsService.createTest(key, test).then(() => location.reload());
+       testsService.createTest(key, test).then((json) => console.log(json));
     }
 
 
