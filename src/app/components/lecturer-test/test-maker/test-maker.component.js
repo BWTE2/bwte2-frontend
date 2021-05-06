@@ -85,19 +85,23 @@ export class TestMakerComponent extends Component {
     }
 
     getMultiChoiceQuestionInfo(question){
-        return {type: "multiChoice"};
+        const data = question.getInfo();
+        return {type: "multiChoice", data: data};
     }
 
     getMathQuestionInfo(question){
-        return {type: "math"};
+        const data = question.getInfo();
+        return {type: "math", data: data};
     }
 
     getOneAnswerQuestionInfo(question){
-        return {type: "oneAnswer"};
+        const data = question.getInfo();
+        return {type: "oneAnswer", data: data};
     }
 
     getPairQuestionInfo(question){
-        return {type: "oneAnswer"};
+        const data = question.getInfo();
+        return {type: "oneAnswer", data: data};
     }
 
 }
