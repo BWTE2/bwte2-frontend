@@ -38,6 +38,7 @@ export class TestTableComponent extends Component {
 
     getTestRow(test){
         const row = document.createElement("TR");
+
         const titleColumn = this.getColumn(test.title);
         const keyColumn = this.getColumn(test.code);
         const activityColumn = this.getActivityColumn(test.is_active);
