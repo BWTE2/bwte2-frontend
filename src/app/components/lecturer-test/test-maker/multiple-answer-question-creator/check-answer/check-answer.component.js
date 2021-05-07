@@ -1,4 +1,5 @@
 import {Component} from "../../../../../shared/model/component/component.js";
+import {domService} from "../../../../../shared/services/dom.service.js";
 
 
 const component = {
@@ -21,14 +22,20 @@ export class CheckAnswerComponent extends Component {
     }
 
     attributesInitializer() {
-
+        this.dom.getElementById("truth-box").checked = domService.getAttribute(this, "defaultChecked");
     }
 
     eventsInitializer() {
 
     }
 
-    isRightAnswer(){
+    getInfo(){
+        const checked = this.dom.getElementById("truth-box").checked;
+        const answerText = this.dom.getElementById("answer").value;
 
+        return {
+            checked: checked,
+            answerText: answerText
+        };
     }
 }

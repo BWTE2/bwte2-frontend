@@ -1,8 +1,8 @@
 #multiple-answer-question-creator{
     margin: 20px 0;
     width: 100% !important;
+    height: 100% !important;
 }
-
 
 #multiple-answer-question-creator #question-type{
     margin-bottom: 30px;
@@ -23,4 +23,28 @@
     height: 50px;
     border-radius: 20px;
     margin-bottom: 20px;
+}
+
+#multiple-answer-question-creator #add-answer-button{
+    margin-bottom: 30px;
+    margin-left: auto;
+    height: 50px;
+    width: 50% !important;
+    display: flex;
+    padding: 20px 0 20px 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#multiple-answer-question-creator #add-answer-button .text{
+    font-weight: 700;
+}
+
+#multiple-answer-question-creator #add-answer-button .icon-plus{
+    margin-right: 20px;
+    font-weight: 700;
+    font-size: x-large;
+    border: solid 3px;
+    border-radius: 50%;
+    padding: 0 7px 0 7px;
 }

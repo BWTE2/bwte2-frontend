@@ -8,10 +8,16 @@
     </label>
 
     <label>
-        <input class="text" placeholder="Body" type="number" min="0">
+        <input class="text"  id="points" placeholder="Body" type="number" min="0">
     </label>
 
-    <app-check-answer></app-check-answer>
-    <app-check-answer></app-check-answer>
+    <div id="all-answers-container">
+        <app-check-answer defaultChecked=true></app-check-answer>
+        <app-check-answer defaultChecked=false></app-check-answer>
+    </div>
 
+    <button id="add-answer-button" class="highlight-lecturer-background ">
+        <span class="text">Pridať možnosť</span>
+        <span class="icon-plus">+</span>
+    </button>
 </div>
