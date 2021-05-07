@@ -18,6 +18,7 @@ import {MathQuestionCreatorComponent} from "./components/lecturer-test/test-make
 import {MultipleAnswerQuestionCreatorComponent} from "./components/lecturer-test/test-maker/multiple-answer-question-creator/multiple-answer-question-creator.component.js";
 import {OneAnswerQuestionCreatorComponent} from "./components/lecturer-test/test-maker/one-answer-question-creator/one-answer-question-creator.component.js";
 import {PairQuestionCreatorComponent} from "./components/lecturer-test/test-maker/pair-question-creator/pair-question-creator.component.js";
+import {CheckAnswerComponent} from "./components/lecturer-test/test-maker/multiple-answer-question-creator/check-answer/check-answer.component.js";
 
 
 export class AppModule {
@@ -41,7 +42,8 @@ export class AppModule {
         MathQuestionCreatorComponent,
         MultipleAnswerQuestionCreatorComponent,
         OneAnswerQuestionCreatorComponent,
-        PairQuestionCreatorComponent
+        PairQuestionCreatorComponent,
+        CheckAnswerComponent
     ]
 
     constructor() {

@@ -1,4 +1,17 @@
-<div id="multiple-answer-question-creator" class="flex-column">
-    <div id="question-type" class="highlight-lecturer-background">5</div>
-    <input value="kral" type="text">
+<div id="multiple-answer-question-creator">
+    <div id="question-type" class="highlight-lecturer-background">
+        <span class="text">Otvorena krátka odpoveď</span>
+    </div>
+
+    <label>
+        <textarea class="text" id="question" placeholder="Otázka bez názvu"></textarea>
+    </label>
+
+    <label>
+        <input class="text" placeholder="Body" type="number" min="0">
+    </label>
+
+    <app-check-answer></app-check-answer>
+    <app-check-answer></app-check-answer>
+
 </div>
