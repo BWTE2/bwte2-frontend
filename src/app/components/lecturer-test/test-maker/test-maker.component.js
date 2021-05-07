@@ -114,7 +114,7 @@ export class TestMakerComponent extends Component {
 
     getPairQuestionInfo(question){
         const data = question.getInfo();
-        return {type: "oneAnswer", data: data};
+        return {type: "pairQuestion", data: data};
     }
 
 }
