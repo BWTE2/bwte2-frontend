@@ -28,7 +28,19 @@ export class TestMakerComponent extends Component {
     }
 
     eventsInitializer() {
+        this.initButtons();
         document.addEventListener("sendTest", this.sendTest);
+    }
+
+    initButtons(){
+        const addMultiChoiceButton = this.dom.getElementById("add-multichoice-button");
+        addMultiChoiceButton.addEventListener("click", this.creatMultiChoiceQuestion);
+    }
+
+    creatMultiChoiceQuestion = () =>{
+        const multiChoiceQuestion = document.createElement("APP-MULTIPLE-ANSWER-QUESTION-CREATOR");
+        const questionsContainer = this.dom.getElementById("question-wording-properties");
+        questionsContainer.appendChild(multiChoiceQuestion);
     }
 
     sendTest = () =>{

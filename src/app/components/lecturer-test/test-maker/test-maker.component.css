@@ -57,3 +57,11 @@
         width: 85vw;
     }
 }
+
+
+#test-maker #question-wording-properties{
+    align-items: flex-start !important;
+    width: calc(100% + 20px);
+    height: 100%;
+    margin-left: 20px;
+}
