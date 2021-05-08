@@ -1,5 +1,5 @@
 import {Component} from "../../../shared/model/component/component.js";
-import {domService} from "../../../shared/services/dom.service";
+import {domService} from "../../../shared/services/dom.service.js";
 
 
 const component = {
@@ -37,10 +37,6 @@ export class PairQuestionComponent extends Component {
     }
 
     eventsInitializer() {
-
-    }
-
-    setQuestion(){
 
     }
 }
