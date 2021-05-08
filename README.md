@@ -126,7 +126,7 @@ domService.createAndEmitEvent(this, "mojEvent", data);  // urobi to iste co pred
 ```javascript
 //app-rodic-tutorial.js
  this.dom.getElementById("send-test-button").addEventListener('mojEvent', (eventData)=>{
-  const premennaZDietata=eventData.detail; return { mikofloso:"rytmo" }
+  const premennaZDietata=eventData.detail; //return { mikofloso:"rytmo" }
  });
 ```
 
@@ -134,8 +134,8 @@ domService.createAndEmitEvent(this, "mojEvent", data);  // urobi to iste co pred
 **Globálny event**
 ```javascript
 //nevytvara event na this ale priamo na document to iste pri odchytávani eventu
-document.emitEvent(this, event); // vyvolá event
-document..addEventListener(...);
+domService.emitEvent(document, event); // vyvolá event
+document.addEventListener(...);
 ```
 
 
