@@ -56,8 +56,26 @@ export class StudentTestComponent extends Component {
         return keyInput.value;
     }
 
-    showQuestions = () =>{
-        
+    showQuestions = (json) =>{
+        const test = json.response;
+        //TODO: funkcia informAboutTestFetch je len pre development, po dokonceni loginu treba preprogramovat
+        this.informAboutTestFetch(test);
+        if(!test.exists){
+            return;
+        }
+
+        for(let question of test.questions){
+            console.log(question);
+        }
+    }
+
+    informAboutTestFetch(test){
+        if(!test.exists){
+            this.dom.getElementById("test-info").innerHTML = "TEST NEEXISTUJE";
+        }
+        else{
+            this.dom.getElementById("test-info").innerHTML = "TEST: " + test.testName;
+        }
     }
 
 }
