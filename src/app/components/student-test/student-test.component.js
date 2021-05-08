@@ -1,5 +1,6 @@
 import {Component} from "../../shared/model/component/component.js";
 import {domService} from "../../shared/services/dom.service.js";
+import {testsService} from "../../api/tests/services/tests.service.js";
 
 
 const component = {
@@ -19,6 +20,7 @@ export class StudentTestComponent extends Component {
     onInit() {
         this.attributesInitializer();
         this.eventsInitializer();
+        this.loadTest();
     }
 
 
@@ -31,12 +33,31 @@ export class StudentTestComponent extends Component {
         sideMenu.addEventListener("sendTest", (e) => {
             console.log(e.detail);
         });
+
+        const questionsButton = this.dom.getElementById("questions-button");
+        questionsButton.addEventListener("click", this.loadTest);
     }
 
     setName() {
         const actualName = "Lubos Sremanak";
         const sideMenu = this.dom.getElementById("side-menu");
         domService.setAttribute(sideMenu, "headerName", actualName);
+    }
+
+    loadTest = () =>{
+        const testKey = this.getTestKey();
+        testsService.readQuestions(testKey)
+            .then(this.showQuestions);
+    }
+
+    getTestKey(){
+        //TODO: tento kod treba prerobit ked sa vytvori prihlasovanie k testu
+        const keyInput = this.dom.getElementById("key-input");
+        return keyInput.value;
+    }
+
+    showQuestions = () =>{
+        
     }
 
 }
