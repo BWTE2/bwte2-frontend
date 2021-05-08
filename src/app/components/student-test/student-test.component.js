@@ -64,11 +64,11 @@ export class StudentTestComponent extends Component {
             return;
         }
 
-        let testCount = 1;
+        let questionCount = 1;
         for(let question of test.questions){
-            question.questionText = testCount + ". " + question.questionText;
+            question.questionText = questionCount + ". " + question.questionText;
             this.showQuestion(question);
-            testCount++;
+            questionCount++;
         }
     }
 

@@ -25,6 +25,11 @@ export class MultipleAnswerQuestionComponent extends Component {
         const question = domService.getAttribute(this, "questionInfo");
 
        this.loadQuestionWording(question);
+       this.loadQuestionBody(question);
+    }
+
+    eventsInitializer(){
+
     }
 
     loadQuestionWording(question){
@@ -36,8 +41,9 @@ export class MultipleAnswerQuestionComponent extends Component {
         domService.setAttribute(questionWordingElement, "questionWording", questionWording);
     }
 
-    eventsInitializer(){
-
+    loadQuestionBody(question){
+        //TODO: dorobit zobrazenie otazky (okrem samotneho textu otazky/zadania jej bodov)
     }
+
 
 }
