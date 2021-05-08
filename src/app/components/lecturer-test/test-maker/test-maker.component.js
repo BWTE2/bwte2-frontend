@@ -47,30 +47,34 @@ export class TestMakerComponent extends Component {
     }
 
     creatMultiChoiceQuestion = () => {
-        const multiChoiceQuestion = document.createElement("APP-MULTIPLE-ANSWER-QUESTION-CREATOR");
-        this.questionsContainer.appendChild(multiChoiceQuestion);
+        const question = document.createElement("APP-MULTIPLE-ANSWER-QUESTION-CREATOR");
+        this.appendQuestionAndScroll(question);
     }
 
     createOpenAnswerQuestion = () => {
-        const multiChoiceQuestion = document.createElement("APP-ONE-ANSWER-QUESTION-CREATOR");
-        this.questionsContainer.appendChild(multiChoiceQuestion);
+        const question = document.createElement("APP-ONE-ANSWER-QUESTION-CREATOR");
+        this.appendQuestionAndScroll(question);
     };
 
     createPairQuestion = () => {
-        const multiChoiceQuestion = document.createElement("APP-PAIR-QUESTION-CREATOR");
-        this.questionsContainer.appendChild(multiChoiceQuestion);
+        const question = document.createElement("APP-PAIR-QUESTION-CREATOR");
+        this.appendQuestionAndScroll(question);
     };
 
     createDrawQuestion = () => {
-        const multiChoiceQuestion = document.createElement("APP-DRAW-QUESTION-CREATOR");
-        this.questionsContainer.appendChild(multiChoiceQuestion);
+        const question = document.createElement("APP-DRAW-QUESTION-CREATOR");
+        this.appendQuestionAndScroll(question);
     };
 
     createMathQuestion = () => {
-        const multiChoiceQuestion = document.createElement("APP-MATH-QUESTION-CREATOR");
-        this.questionsContainer.appendChild(multiChoiceQuestion);
+        const question = document.createElement("APP-MATH-QUESTION-CREATOR");
+        this.appendQuestionAndScroll(question);
     };
 
+    appendQuestionAndScroll(question) {
+        this.questionsContainer.appendChild(question);
+        question.scrollIntoView();
+    }
 
     sendTest = () => {
         keyGeneratorService.readGeneratedKey()
