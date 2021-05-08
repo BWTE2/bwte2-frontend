@@ -10,7 +10,7 @@ export class ApiService {
     constructor() {
         const pathEncoder = new PathEncoder();
         if (pathEncoder.isLocalhost()) {
-            this.rootURL = 'https://wt143.fei.stuba.sk/bwte2/bwte2-api/';
+            this.rootURL = 'https://wt117.fei.stuba.sk/bwte2/bwte2-api/';
         } else {
             this.rootURL = '/bwte2/bwte2-api/';
         }
