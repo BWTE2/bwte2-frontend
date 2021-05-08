@@ -78,7 +78,6 @@ export class TestMakerComponent extends Component {
     }
 
     getQuestionInfo(question){
-        //TODO: doplnte obsah funkcii na ziskavanie info z vasej otazky
         let questionInfo;
 
         if(question.tagName === 'APP-MULTIPLE-ANSWER-QUESTION-CREATOR'){
