@@ -95,9 +95,8 @@ export class TestMakerComponent extends Component {
 
     getAllQuestions() {
         const allQuestions = [];
-        const questionCreatorsContainer = this.dom.getElementById("question-creator-container");
-
-        for (let question of questionCreatorsContainer.getElementsByTagName("*")) {
+        const allCreators = this.questionsContainer.getElementsByTagName("*");
+        for (let question of allCreators) {
             const questionInfo = this.getQuestionInfo(question);
             allQuestions.push(questionInfo);
         }
