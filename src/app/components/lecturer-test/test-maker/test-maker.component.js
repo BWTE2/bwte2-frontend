@@ -46,7 +46,7 @@ export class TestMakerComponent extends Component {
         addMathQuestionButton.addEventListener("click", this.createMathQuestion);
     }
 
-    creatMultiChoiceQuestion = () => {
+    createMultiChoiceQuestion = () => {
         const multiChoiceQuestion = document.createElement("APP-MULTIPLE-ANSWER-QUESTION-CREATOR");
         this.questionsContainer.appendChild(multiChoiceQuestion);
     }
@@ -95,7 +95,7 @@ export class TestMakerComponent extends Component {
 
     getAllQuestions() {
         const allQuestions = [];
-        const questionCreatorsContainer = this.dom.getElementById("question-wording-properties");
+        const questionCreatorsContainer = this.dom.getElementById("question-creator-container");
 
         for (let question of questionCreatorsContainer.getElementsByTagName("*")) {
             const questionInfo = this.getQuestionInfo(question);
