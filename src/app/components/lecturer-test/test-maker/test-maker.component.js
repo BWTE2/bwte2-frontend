@@ -35,7 +35,7 @@ export class TestMakerComponent extends Component {
 
     initButtons() {
         const addMultiChoiceButton = this.dom.getElementById("add-multichoice-button");
-        addMultiChoiceButton.addEventListener("click", this.creatMultiChoiceQuestion);
+        addMultiChoiceButton.addEventListener("click", this.createMultiChoiceQuestion);
         const addOpenAnswerQuestionButton = this.dom.getElementById("add-open-answer-button");
         addOpenAnswerQuestionButton.addEventListener("click", this.createOpenAnswerQuestion);
         const addPairQuestionButton = this.dom.getElementById("add-pair-question-button");

@@ -15,7 +15,7 @@ export class DrawQuestionCreatorComponent extends Component {
         this.load().then(() => this.onInit());
     }
 
- onInit() {
+    onInit() {
         this.attributesInitializer();
         this.eventsInitializer();
     }
@@ -25,5 +25,9 @@ export class DrawQuestionCreatorComponent extends Component {
     }
 
     eventsInitializer() {
-}
     }
+
+    getInfo(){
+
+    }
+}
