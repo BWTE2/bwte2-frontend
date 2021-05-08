@@ -108,28 +108,28 @@ export class StudentTestComponent extends Component {
 
     showOneAnswerQuestion(question){
         const paper = this.dom.getElementById("paper");
-        const appQuestion = document.createElement("APP-MULTIPLE-ANSWER-QUESTION");
+        const appQuestion = document.createElement("APP-ONE-ANSWER-QUESTION");
         domService.setAttribute(appQuestion, "questionInfo", question);
         paper.appendChild(appQuestion);
     }
 
     showPairQuestion(question){
         const paper = this.dom.getElementById("paper");
-        const appQuestion = document.createElement("APP-MULTIPLE-ANSWER-QUESTION");
+        const appQuestion = document.createElement("APP-PAIR-QUESTION");
         domService.setAttribute(appQuestion, "questionInfo", question);
         paper.appendChild(appQuestion);
     }
 
     showDrawQuestion(question){
         const paper = this.dom.getElementById("paper");
-        const appQuestion = document.createElement("APP-MULTIPLE-ANSWER-QUESTION");
+        const appQuestion = document.createElement("APP-MATH-QUESTION");
         domService.setAttribute(appQuestion, "questionInfo", question);
         paper.appendChild(appQuestion);
     }
 
     showMathQuestion(question){
         const paper = this.dom.getElementById("paper");
-        const appQuestion = document.createElement("APP-MULTIPLE-ANSWER-QUESTION");
+        const appQuestion = document.createElement("APP-DRAW-QUESTION");
         domService.setAttribute(appQuestion, "questionInfo", question);
         paper.appendChild(appQuestion);
     }
