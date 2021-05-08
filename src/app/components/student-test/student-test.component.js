@@ -47,7 +47,7 @@ export class StudentTestComponent extends Component {
     loadTest = () =>{
         const testKey = this.getTestKey();
         testsService.readQuestions(testKey)
-            .then(this.showQuestions);
+            .then(this.showAllQuestions);
     }
 
     getTestKey(){
@@ -56,7 +56,7 @@ export class StudentTestComponent extends Component {
         return keyInput.value;
     }
 
-    showQuestions = (json) =>{
+    showAllQuestions = (json) =>{
         const test = json.response;
         //TODO: funkcia informAboutTestFetch je len pre development, po dokonceni loginu treba preprogramovat
         this.informAboutTestFetch(test);
@@ -65,7 +65,7 @@ export class StudentTestComponent extends Component {
         }
 
         for(let question of test.questions){
-            console.log(question);
+            this.showQuestion(question);
         }
     }
 
@@ -78,4 +78,41 @@ export class StudentTestComponent extends Component {
         }
     }
 
+    showQuestion(question){
+        if(question.type === "CHOICE"){
+            this.showMultiChoiceQuestion(question);
+        }
+        else if(question.type === "SHORT_ANSWER"){
+            this.showOneAnswerQuestion(question);
+        }
+        else if(question.type === "PAIR"){
+            this.showPairQuestion(question);
+        }
+        else if(question.type === "DRAW"){
+            this.showDrawQuestion(question);
+        }
+        else if(question.type === "MATH"){
+            this.showMathQuestion(question)
+        }
+    }
+
+    showMultiChoiceQuestion(question){
+
+    }
+
+    showOneAnswerQuestion(question){
+
+    }
+
+    showPairQuestion(question){
+
+    }
+
+    showDrawQuestion(question){
+
+    }
+
+    showMathQuestion(question){
+
+    }
 }
