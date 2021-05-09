@@ -46,7 +46,7 @@ export class TestMakerComponent extends Component {
         addMathQuestionButton.addEventListener("click", this.createMathQuestion);
     }
 
-    creatMultiChoiceQuestion = () => {
+    createMultiChoiceQuestion = () => {
         const question = document.createElement("APP-MULTIPLE-ANSWER-QUESTION-CREATOR");
         this.appendQuestionAndScroll(question);
     }
