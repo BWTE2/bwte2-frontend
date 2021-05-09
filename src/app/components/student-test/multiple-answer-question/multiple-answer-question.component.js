@@ -46,7 +46,7 @@ export class MultipleAnswerQuestionComponent extends Component {
         const optionsContainer = this.dom.getElementById("options-container");
         for(let option of allOptions){
             const optionElement = document.createElement("APP-MULTICHOICE-OPTION");
-            domService.setAttribute(optionElement,"text", option);
+            domService.setAttribute(optionElement,"option", option);
             optionsContainer.appendChild(optionElement);
         }
     }
