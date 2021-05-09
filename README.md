@@ -137,6 +137,10 @@ domService.createAndEmitEvent(this, "mojEvent", data);  // urobi to iste co pred
 domService.emitEvent(document, event); // vyvolá event
 document.addEventListener(...);
 ```
+## Môže sa hodiť
+
+### Ikony
+![ikony](https://user-images.githubusercontent.com/69248396/117558245-eb4ba000-b07b-11eb-8373-68dd29819fea.png)
 
 
 
