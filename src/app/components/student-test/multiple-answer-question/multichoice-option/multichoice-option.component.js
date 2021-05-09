@@ -30,5 +30,11 @@ export class MultichoiceOptionComponent extends Component {
 
     }
 
+    isChecked(){
+        return this.dom.getElementById("option-checkbox").checked;
+    }
 
+    getAnswer(){
+        return this.dom.getElementById("option-label").innerText;
+    }
 }
