@@ -29,16 +29,15 @@ export class StudentTestComponent extends Component {
     }
 
     eventsInitializer() {
+        document.addEventListener("sendTest", this.sendTest);
         const sideMenu = this.dom.getElementById("side-menu");
-        sideMenu.addEventListener("sendTest", this.sendTest);
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
         const questionsButton = this.dom.getElementById("questions-button");
         questionsButton.addEventListener("click", this.loadTest);
     }
 
-    sendTest = (e) => {
-        const test = e.detail;
-        console.log(test);
+    sendTest = () => {
+
     };
 
 
