@@ -47,6 +47,7 @@ export class OneAnswerQuestionComponent extends Component {
 
     getAnswer(){
         //TODO: dorobit vratenie odpovede v podobe akej je potrebne, pre odoslanie testu
+        return [];
     }
 
 }
