@@ -3,16 +3,3 @@
     width: 100%;
 }
 
-#multiple-answer-question #options-container input {
-    width: 30px !important;
-    height: 30px !important;
-    -webkit-appearance: none;
-    border-radius: 100px !important;
-    background-color: #FDFDFD;
-    border: 2px solid #BDBDBD;
-    padding: 9px;
-    cursor: pointer;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 40px;
-}

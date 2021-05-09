@@ -8,6 +8,10 @@
     height: 100%;
 }
 
+#student-test #paper *{
+    width: 90%;
+}
+
 app-question-wording {
     margin: 50px 6.3vw 25px 6.3vw;
 }
