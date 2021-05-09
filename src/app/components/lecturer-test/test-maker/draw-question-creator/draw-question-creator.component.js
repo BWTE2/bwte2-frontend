@@ -27,7 +27,12 @@ export class DrawQuestionCreatorComponent extends Component {
     eventsInitializer() {
     }
 
-    getInfo(){
+    getInfo() {
+        const question = this.dom.getElementById("question").value;
+        const points = this.dom.getElementById("points").value;
 
+        return {
+            question, points,
+        };
     }
 }
