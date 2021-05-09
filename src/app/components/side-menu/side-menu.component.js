@@ -34,14 +34,23 @@ export class SideMenuComponent extends Component {
     }
 
     swapMenu = () => {
-
         const menu = this.dom.getElementById("side-menu");
+        const menuHeader = this.dom.getElementById("side-menu-header");
+        const menuHeaderName = this.dom.getElementById("side-menu-header-name");
         const width = menu.style.width;
-
+        domService.createAndEmitEvent(this, "menuSwap", width);
         if (width === '0px' || width === '') {
             this.showMenu();
+            menuHeader.style.width = '400px';
+            menuHeaderName.style.display = "flex";
+            menuHeaderName.style.marginRight = "0px";
+
         } else {
             this.hideMenu();
+            menuHeader.style.width = '100px';
+            menuHeaderName.style.display = "none";
+            menuHeaderName.style.marginRight = "50px";
+
         }
     };
 
@@ -58,7 +67,6 @@ export class SideMenuComponent extends Component {
         const header = this.dom.getElementById("side-menu-header");
         header.style.borderBottomRightRadius = '0px';
         sideMenu.style.width = "400px";
-        console.log(this.animation)
         this.animation.setSpeed(1.8);
         this.animation.playSegments([30, 60], true);
     }

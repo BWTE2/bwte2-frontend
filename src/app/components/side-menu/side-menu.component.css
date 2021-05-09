@@ -3,8 +3,7 @@
     top: 0;
     left: 0;
     height: 100px;
-    max-width: 400px;
-    width: 100%;
+    width: 100px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     z-index: 999;
@@ -13,6 +12,15 @@
     color: var(--primary-color);
     transition: 0.2s;
 }
+#side-menu-header lottie-player{
+    height: 90px;
+    width: 100px;
+}
+
+
+#side-menu-header #side-menu-header-name{
+    display: none;
+}
 
 #side-menu-header .text {
     margin-left: 30px;
@@ -20,12 +28,10 @@
 }
 
 #side-menu-header #side-menu-swap-button {
-    margin-right: 50px;
     background-color: transparent !important;
     color: var(--primary-color);
     transition: 0.2s;
     cursor: pointer;
-    height: 90px;
 }
 
 #side-menu {

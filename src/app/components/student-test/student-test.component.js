@@ -31,6 +31,15 @@ export class StudentTestComponent extends Component {
         sideMenu.addEventListener("sendTest", (e) => {
             console.log(e.detail);
         });
+        sideMenu.addEventListener("menuSwap", (e) => {
+            const paper = this.dom.getElementById("paper");
+            console.log(e)
+            if (e.detail === "400px") {
+            paper.style.marginLeft="0px";
+            } else {
+                paper.style.marginLeft="400px";
+            }
+        });
     }
 
     setName() {

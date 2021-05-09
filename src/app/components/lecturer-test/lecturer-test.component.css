@@ -4,6 +4,9 @@
     height: 100%;
 }
 
+#lecturer-test #dynamic-test-form{
+    transition: 0.2s;
+}
 @media screen and (max-width: 600px) {
     #lecturer-test {
         margin-top: 0;
