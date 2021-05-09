@@ -29,18 +29,49 @@ export class StudentTestComponent extends Component {
     }
 
     eventsInitializer() {
+        document.addEventListener("sendTest", this.sendTest);
         const sideMenu = this.dom.getElementById("side-menu");
-        sideMenu.addEventListener("sendTest", this.sendTest);
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
         const questionsButton = this.dom.getElementById("questions-button");
         questionsButton.addEventListener("click", this.loadTest);
     }
 
-    sendTest = (e) => {
-        const test = e.detail;
-        console.log(test);
+    sendTest = () => {
+        const testKey = this.getTestKey();
+        const studentId = this.getStudentId();
+        const allAnswers = this.getAllAnswers();
+
+        testsService.createStudentTestAnswers(studentId, testKey, allAnswers)
+            .then();
     };
 
+    getStudentId() {
+        //TODO: prerobit podla potreby, zatial v development faze
+        return "1";
+    }
+
+    getAllAnswers(){
+        const allAnswers = [];
+        const paper = this.dom.getElementById("paper");
+
+        for(let answerElement of paper.getElementsByTagName("*")){
+            const answer = this.getAnswer(answerElement);
+            allAnswers.push(answer);
+        }
+
+        return {
+            answers: allAnswers
+        };
+    }
+
+    getAnswer(answerElement){
+        const questionInfo = domService.getAttribute(answerElement, "questionInfo");
+        const questionAnswer = answerElement.getAnswer();
+        return {
+            questionInfo: questionInfo,
+            answer: questionAnswer
+        }
+    }
 
     menuSwapped = (e) => {
         const paper = this.dom.getElementById("paper");
