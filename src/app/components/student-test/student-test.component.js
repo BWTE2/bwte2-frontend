@@ -108,6 +108,8 @@ export class StudentTestComponent extends Component {
             return;
         }
 
+        this.dom.getElementById("paper").innerHTML = "";
+
         let questionCount = 1;
         for (let question of test.questions) {
             question.questionText = questionCount + ". " + question.questionText;
