@@ -42,7 +42,13 @@ export class MultipleAnswerQuestionComponent extends Component {
     }
 
     loadQuestionBody(question){
-        //TODO: dorobit zobrazenie otazky (okrem samotneho textu otazky/zadania jej bodov)
+        const allOptions = question.otherInfo.options;
+        const optionsContainer = this.dom.getElementById("options-container");
+        for(let option of allOptions){
+            const optionElement = document.createElement("APP-MULTICHOICE-OPTION");
+            optionElement.setAttribute("text", option);
+            optionsContainer.appendChild(optionElement);
+        }
     }
 
 
