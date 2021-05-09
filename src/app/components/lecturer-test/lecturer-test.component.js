@@ -1,6 +1,5 @@
 import {Component} from "../../shared/model/component/component.js";
 import {domService} from "../../shared/services/dom.service.js";
-import {keyGeneratorService} from "../../api/key-generator/services/key-generator.service.js";
 
 
 const component = {
@@ -28,15 +27,16 @@ export class LecturerTestComponent extends Component {
 
     eventsInitializer() {
         const sideMenu = this.dom.getElementById("side-menu");
-        sideMenu.addEventListener("menuSwap", (e) => {
-            const paper = this.dom.getElementById("dynamic-test-form");
-            console.log(e)
-            if (e.detail === "400px") {
-                paper.style.marginLeft="0px";
-            } else {
-                paper.style.marginLeft="400px";
-            }
-        });
+        sideMenu.addEventListener("menuSwap", this.menuSwapped);
+    }
+
+    menuSwapped = (e) => {
+        const formContainer = this.dom.getElementById("dynamic-test-form");
+        if (e.detail === "400px") {
+            formContainer.style.marginLeft = "0px";
+        } else {
+            formContainer.style.marginLeft = "400px";
+        }
     }
 
     setName() {
