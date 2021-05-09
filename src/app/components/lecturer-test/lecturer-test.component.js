@@ -27,7 +27,16 @@ export class LecturerTestComponent extends Component {
     }
 
     eventsInitializer() {
-
+        const sideMenu = this.dom.getElementById("side-menu");
+        sideMenu.addEventListener("menuSwap", (e) => {
+            const paper = this.dom.getElementById("dynamic-test-form");
+            console.log(e)
+            if (e.detail === "400px") {
+                paper.style.marginLeft="0px";
+            } else {
+                paper.style.marginLeft="400px";
+            }
+        });
     }
 
     setName() {
