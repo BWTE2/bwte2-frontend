@@ -35,7 +35,7 @@ export class TestMakerComponent extends Component {
 
     initButtons() {
         const addMultiChoiceButton = this.dom.getElementById("add-multichoice-button");
-        addMultiChoiceButton.addEventListener("click", this.creatMultiChoiceQuestion);
+        addMultiChoiceButton.addEventListener("click", this.createMultiChoiceQuestion);
         const addOpenAnswerQuestionButton = this.dom.getElementById("add-open-answer-button");
         addOpenAnswerQuestionButton.addEventListener("click", this.createOpenAnswerQuestion);
         const addPairQuestionButton = this.dom.getElementById("add-pair-question-button");
@@ -46,7 +46,7 @@ export class TestMakerComponent extends Component {
         addMathQuestionButton.addEventListener("click", this.createMathQuestion);
     }
 
-    creatMultiChoiceQuestion = () => {
+    createMultiChoiceQuestion = () => {
         const question = document.createElement("APP-MULTIPLE-ANSWER-QUESTION-CREATOR");
         this.appendQuestionAndScroll(question);
     }
@@ -99,9 +99,8 @@ export class TestMakerComponent extends Component {
 
     getAllQuestions() {
         const allQuestions = [];
-        const questionCreatorsContainer = this.dom.getElementById("question-wording-properties");
-
-        for (let question of questionCreatorsContainer.getElementsByTagName("*")) {
+        const allCreators = this.questionsContainer.getElementsByTagName("*");
+        for (let question of allCreators) {
             const questionInfo = this.getQuestionInfo(question);
             allQuestions.push(questionInfo);
         }
