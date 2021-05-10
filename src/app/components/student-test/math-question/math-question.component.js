@@ -45,5 +45,8 @@ export class MathQuestionComponent extends Component {
         //TODO: dorobit zobrazenie otazky (okrem samotneho textu otazky/zadania jej bodov)
     }
 
-
+    getAnswer(){
+        //TODO: dorobit vratenie odpovede v podobe akej je potrebne, pre odoslanie testu
+        return [];
+    }
 }

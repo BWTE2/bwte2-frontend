@@ -42,8 +42,28 @@ export class MultipleAnswerQuestionComponent extends Component {
     }
 
     loadQuestionBody(question){
-        //TODO: dorobit zobrazenie otazky (okrem samotneho textu otazky/zadania jej bodov)
+        const allOptions = question.otherInfo.options;
+        const optionsContainer = this.dom.getElementById("options-container");
+        for(let option of allOptions){
+            const optionElement = document.createElement("APP-MULTICHOICE-OPTION");
+            domService.setAttribute(optionElement,"option", option);
+            optionsContainer.appendChild(optionElement);
+        }
     }
 
+
+    getAnswer(){
+        const answersId = []
+        const optionsContainer = this.dom.getElementById("options-container");
+        for (let optionElement of optionsContainer.getElementsByTagName("*")){
+            if(optionElement.isChecked()) {
+                const optionInfo = domService.getAttribute(optionElement, "option");
+                const optionId = optionInfo.id;
+                answersId.push(optionId);
+            }
+        }
+
+        return answersId;
+    }
 
 }
