@@ -27,9 +27,7 @@ export class PairQuestionCreatorComponent extends Component {
         let pairsDiv = this.dom.getElementById("question-pairs");
         this.addFirstPair(pairsDiv);
 
-        this.dom.getElementById("add-pair-button").addEventListener("click",() =>{
-            this.addPair(pairsDiv);
-        });
+        
 
     }
 
@@ -38,7 +36,10 @@ export class PairQuestionCreatorComponent extends Component {
     }
 
     eventsInitializer() {
-
+        this.dom.getElementById("add-pair-button").addEventListener("click",() =>{
+            
+                this.addPair(pairsDiv);
+        });
     }
 
     addFirstPair(pairsDiv)
