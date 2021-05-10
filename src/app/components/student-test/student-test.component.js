@@ -40,9 +40,9 @@ export class StudentTestComponent extends Component {
         const testKey = this.getTestKey();
         const studentId = this.getStudentId();
         const allAnswers = this.getAllAnswers();
-
+        console.log(allAnswers)
         testsService.createStudentTestAnswers(studentId, testKey, allAnswers)
-            .then();
+            .then((json) => console.log(json));
     };
 
     getStudentId() {

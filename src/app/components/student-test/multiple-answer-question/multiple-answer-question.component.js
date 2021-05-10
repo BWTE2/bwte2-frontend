@@ -46,15 +46,24 @@ export class MultipleAnswerQuestionComponent extends Component {
         const optionsContainer = this.dom.getElementById("options-container");
         for(let option of allOptions){
             const optionElement = document.createElement("APP-MULTICHOICE-OPTION");
-            domService.setAttribute(optionElement,"text", option);
+            domService.setAttribute(optionElement,"option", option);
             optionsContainer.appendChild(optionElement);
         }
     }
 
 
     getAnswer(){
-        //TODO: dorobit vratenie odpovede v podobe akej je potrebne, pre odoslanie testu
-        return [];
+        const answersId = []
+        const optionsContainer = this.dom.getElementById("options-container");
+        for (let optionElement of optionsContainer.getElementsByTagName("*")){
+            if(optionElement.isChecked()) {
+                const optionInfo = domService.getAttribute(optionElement, "option");
+                const optionId = optionInfo.id;
+                answersId.push(optionId);
+            }
+        }
+
+        return answersId;
     }
 
 }
