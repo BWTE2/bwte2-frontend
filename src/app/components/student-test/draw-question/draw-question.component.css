@@ -1,3 +1,20 @@
 #draw-question {
-    background-color: green;
+    width: 100%;
+    height: auto;
+    margin: 20px 0;
+}
+
+#draw-question .highlight-student-background {
+    margin-bottom: 30px;
+    height: 60px;
+    width: 200px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#draw-question .highlight-student-background .button-icon {
+    margin-right: 20px;
+    font-size: 30px;
 }
