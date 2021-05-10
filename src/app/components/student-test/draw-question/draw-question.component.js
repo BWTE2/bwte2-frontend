@@ -4,8 +4,8 @@ import {domService} from "../../../shared/services/dom.service.js";
 
 const component = {
     selector: 'app-draw-question',
-    templatePath: 'draw-question/draw-question.component.html',
-    stylePaths: ['draw-question/draw-question.component.css'],
+    templatePath: 'student-test/draw-question/draw-question.component.html',
+    stylePaths: ['student-test/draw-question/draw-question.component.css'],
 };
 
 export class DrawQuestionComponent extends Component {
