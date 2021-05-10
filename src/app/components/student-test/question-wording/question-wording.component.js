@@ -41,14 +41,16 @@ export class QuestionWordingComponent extends Component {
         try {
             domService.getInlineAttribute(this, "titleHidden");
             this.dom.getElementById("answer-title").innerText = "";
-        }
-        catch (e) {
-            
+        } catch (e) {
+
         }
     }
 
     correctDeclension(points) {
         if (points === 1) {
+            return points + "bod";
+        }
+        if (points <= 4 && points > 1) {
             return points + "bod";
         }
         return points + "bodov";
