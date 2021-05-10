@@ -38,15 +38,10 @@
     font-weight: 700;
 }
 
-#multiple-answer-question-creator #add-answer-button .icon-plus {
+#multiple-answer-question-creator #add-answer-button .add-icon {
     margin-right: 20px;
-    font-weight: 700;
-    font-size: x-large;
-    border: solid 3px;
-    border-radius: 50%;
-    padding: 0 7px 0 7px;
 }
 
-#multiple-answer-question-creator #all-answers-container app-check-answer{
+#multiple-answer-question-creator #all-answers-container app-check-answer {
     width: 100%;
 }

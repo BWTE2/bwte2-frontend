@@ -50,13 +50,8 @@
     font-weight: 700;
 }
 
-#test-maker #question-type-menu .icon-plus {
+#test-maker #question-type-menu .add-icon {
     margin-right: 20px;
-    font-weight: 700;
-    font-size: x-large;
-    border: solid 3px;
-    border-radius: 50%;
-    padding: 0 7px 0 7px;
 }
 
 @media screen and (max-width: 700px) {

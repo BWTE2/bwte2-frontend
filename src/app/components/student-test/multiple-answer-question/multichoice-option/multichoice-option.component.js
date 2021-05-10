@@ -22,7 +22,7 @@ export class MultichoiceOptionComponent extends Component {
     }
 
     attributesInitializer(){
-        const text = domService.getAttribute(this, "text");
+        const text = domService.getAttribute(this, "option").value1;
         this.dom.getElementById("option-label").innerText = text;
     }
 
