@@ -1,4 +1,5 @@
 import {Component} from "../../../shared/model/component/component.js";
+import {domService} from "../../../shared/services/dom.service.js";
 
 
 const component = {
@@ -20,11 +21,32 @@ export class MathQuestionComponent extends Component {
         this.eventsInitializer();
     }
 
-    attributesInitializer() {
+    attributesInitializer(){
+        const question = domService.getAttribute(this, "questionInfo");
+
+        this.loadQuestionWording(question);
+        this.loadQuestionBody(question);
+    }
+
+    eventsInitializer(){
 
     }
 
-    eventsInitializer() {
+    loadQuestionWording(question){
+        const questionWordingElement = this.dom.getElementById("question-wording-element");
+        const questionWording = {
+            text: question.questionText,
+            points: question.points
+        }
+        domService.setAttribute(questionWordingElement, "questionWording", questionWording);
+    }
 
+    loadQuestionBody(question){
+        //TODO: dorobit zobrazenie otazky (okrem samotneho textu otazky/zadania jej bodov)
+    }
+
+    getAnswer(){
+        //TODO: dorobit vratenie odpovede v podobe akej je potrebne, pre odoslanie testu
+        return [];
     }
 }

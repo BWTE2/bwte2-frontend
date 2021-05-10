@@ -1,5 +1,6 @@
 import {Component} from "../../../../shared/model/component/component.js";
-
+import {domService} from "../../../../shared/services/dom.service.js";
+import "https://use.fontawesome.com/releases/v5.15.3/js/all.js";
 
 const component = {
     selector: 'app-multiple-answer-question-creator',
@@ -25,11 +26,38 @@ export class MultipleAnswerQuestionCreatorComponent extends Component {
     }
 
     eventsInitializer() {
+        const addAnswerButton = this.dom.getElementById("add-answer-button");
+        addAnswerButton.addEventListener("click", this.addAnswer);
+    }
 
+    addAnswer = () =>{
+        const newAnswer = document.createElement("APP-CHECK-ANSWER");
+        domService.setAttribute(newAnswer, "defaultChecked", false);
+
+        const allAnswersContainer = this.dom.getElementById("all-answers-container");
+        allAnswersContainer.appendChild(newAnswer);
     }
 
     getInfo(){
-        //TODO: tu sa vracaju vsetky info o otazke ktoru vytvoril ucitel
-        return {};
+        const allAnswers = this.getAllAnswers();
+        const question = this.dom.getElementById("question").value;
+        const points = this.dom.getElementById("points").value;
+
+        return  {
+            question: question,
+            points: points,
+            answers: allAnswers
+        };
+    }
+
+    getAllAnswers(){
+        const allAnswers = [];
+
+        const allAnswerElements = this.dom.getElementById("all-answers-container").getElementsByTagName("*");
+        for(let answer of allAnswerElements){
+            allAnswers.push(answer.getInfo());
+        }
+
+        return allAnswers;
     }
 }
