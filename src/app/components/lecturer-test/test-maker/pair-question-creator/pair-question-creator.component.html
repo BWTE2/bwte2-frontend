@@ -1,21 +1,21 @@
 <div id="pair-question-creator">
-
     <div class="question-option">
-        <div class="question-header input-bottom-margin">
-            <p class="question-header-text">Párovanie správnych odpovedí</p>
+        <div class="question-header  text highlight-lecturer-background">
+            Párovanie správnych odpovedí
         </div>
-
-        <textarea placeholder="Otázka" id="question-text" class="input-bottom-margin"></textarea>
-        <input type="number" placeholder="Body" class="input-bottom-margin" id="question-points">
+        <label for="question-text"></label>
+        <textarea placeholder="Otázka" id="question-text"></textarea>
+        <label for="question-points"></label>
+        <input type="number" placeholder="Body" id="question-points">
     </div>
 
     <div id="question-pairs">
 
     </div>
 
-    <div  class="add-pair-button-div">
-        <button class="add-pair-button" id="add-pair-button">Pridať možnosť +</button>
-    </div>
-
-
+    <button class="highlight-lecturer-background text" id="add-pair-button">
+        <span class="text semiBold">Pridať možnosť</span>
+        <span class="add-icon"><i class="fas fa-plus-circle"></i></span>
+    </button>
 </div>
+

@@ -1,89 +1,60 @@
-/*#pair-question-creator{*/
-/*    background-color: green;*/
-/*}*/
-
-#pair-question-creator
-{
+#pair-question-creator {
     width: 100%;
 }
 
-.question-option
-{
-    width: 47%;
+#pair-question-creator :is(#question-text,#question-points) {
+    height: 44px;
+    margin-bottom: 20px;
 }
 
-
-#question-pairs
-{
+#question-pairs {
     display: flex;
     flex-direction: column;
 }
 
-.pair{
+.pair {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.input-pair-value{
-    /*min-width: 50%;*/
-    /*flex:  1 1 48%;*/
-
-    /*max-width: 48%;*/
-    /*flex: 48%;*/
-    /*width: 100%;*/
+.input-pair-value {
     flex: 1 0 calc(48% - 70px);
 }
 
-.input-pair-left-value
-{
+.input-pair-left-value {
     margin-right: 60px;
 }
 
-.input-bottom-margin
-{
+.input-bottom-margin {
     margin-bottom: 20px;
 }
 
 
-.question-header{
-    border-radius: 20px;
-    background-color: var(--secondary-color-lecturer);
-    color: white;
-    /*border-color: var(--text-input-color);*/
-    outline: none !important;
-    -webkit-appearance: none;
-    border-style: solid;
-    width: 100%;
-    min-height: 50px;
-    height: auto;
-    padding-left: 20px;
-    font-size: 20px;
-    font-weight: bold;
-
-}
-
-/*.question-header-text{*/
-
-
-/*}*/
-
-.add-pair-button{
-    width: 230px;
+.question-header {
+    margin-bottom: 30px;
     height: 50px;
-    background-color: var(--secondary-color-lecturer);
-    color: white;
-    font-weight: bold;
-    /*margin-right: 0;*/
-    /*margin-left: auto;*/
+    width: calc(100% - 20px);
+    padding: 0 0 0 20px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
 }
 
-.add-pair-button-div
-{
+#add-pair-button {
+    margin-bottom: 30px;
+    margin-left: auto;
+    height: 44px;
+    width: 50%;
     display: flex;
-    justify-content: flex-end;
-    width: 48%;
+    padding: 20px 0 20px 20px;
+    justify-content: space-between;
+    align-items: center;
+}
 
-
+.add-icon {
+    margin-right: 20px;
 }
