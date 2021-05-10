@@ -38,6 +38,13 @@ export class QuestionWordingComponent extends Component {
         questionContainer.innerText = text;
         pointsContainer.innerText = this.correctDeclension(points);
 
+        try {
+            domService.getInlineAttribute(this, "titleHidden");
+            this.dom.getElementById("answer-title").innerText = "";
+        }
+        catch (e) {
+            
+        }
     }
 
     correctDeclension(points) {
