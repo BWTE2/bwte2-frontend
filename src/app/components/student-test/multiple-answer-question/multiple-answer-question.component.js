@@ -53,8 +53,17 @@ export class MultipleAnswerQuestionComponent extends Component {
 
 
     getAnswer(){
-        //TODO: dorobit vratenie odpovede v podobe akej je potrebne, pre odoslanie testu
-        return [];
+        const answersId = []
+        const optionsContainer = this.dom.getElementById("options-container");
+        for (let optionElement of optionsContainer.getElementsByTagName("*")){
+            if(optionElement.isChecked()) {
+                const optionInfo = domService.getAttribute(optionElement, "option");
+                const optionId = optionInfo.id;
+                answersId.push(optionId);
+            }
+        }
+
+        return answersId;
     }
 
 }
