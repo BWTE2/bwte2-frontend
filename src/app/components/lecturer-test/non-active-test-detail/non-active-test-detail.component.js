@@ -35,7 +35,8 @@ export class NonActiveTestDetailComponent extends Component {
 
     setStudents() {
         const testInfo = domService.getAttribute(this, 'test');
-        this.dom.getElementById("test-title").innerText = testInfo.title + " #" + testInfo.code
+        this.dom.getElementById("test-title").innerText = testInfo.title;
+        this.dom.getElementById("test-code").innerText = "#" + testInfo.code
         testsService.readTestAnswers(testInfo.code).then(this.appendStudents);
     }
 

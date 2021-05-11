@@ -10,6 +10,13 @@
     margin-bottom: 44px;
 }
 
+#test-table .subtitle {
+    align-self: flex-start;
+    margin-top: -22px;
+    margin-bottom: 22px;
+}
+
+
 #test-table #table {
     border-collapse: collapse;
     border-radius: 20px;
