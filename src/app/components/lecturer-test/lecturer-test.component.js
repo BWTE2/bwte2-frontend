@@ -37,7 +37,6 @@ export class LecturerTestComponent extends Component {
         sideMenu.addEventListener("showAllTests", this.openAllTests);
         document.addEventListener("updateAllTests", this.openAllTests);
         allTests.addEventListener("testDetail", this.openTestDetail)
-
     }
 
     menuSwapped = (e) => {

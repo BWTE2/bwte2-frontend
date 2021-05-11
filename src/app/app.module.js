@@ -24,7 +24,9 @@ import {MultichoiceOptionComponent} from "./components/student-test/multiple-ans
 import {EditTestComponent} from "./components/lecturer-test/edit-test/edit-test.component.js";
 import {ActiveTestDetailComponent} from "./components/lecturer-test/active-test-detail/active-test-detail.component.js";
 import {NonActiveTestDetailComponent} from "./components/lecturer-test/non-active-test-detail/non-active-test-detail.component.js";
+import {SnackbarComponent} from "./components/snackbar/snackbar.component.js";
 import * as FontAwesome from "https://kit.fontawesome.com/a2f338e40d.js";
+
 
 export class AppModule {
     components = [
@@ -53,7 +55,8 @@ export class AppModule {
         MultichoiceOptionComponent,
         EditTestComponent,
         ActiveTestDetailComponent,
-        NonActiveTestDetailComponent
+        NonActiveTestDetailComponent,
+        SnackbarComponent
     ]
 
     constructor() {

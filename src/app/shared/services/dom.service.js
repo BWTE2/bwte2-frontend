@@ -56,6 +56,26 @@ class DomService {
         dom.append(dynamicComponent);
     }
 
+
+    /**
+     * Append content of DOM/Element to Component and set attribute
+     *
+     * @param {any} dom - Dom or Element
+     * @param {any} component - Component
+     * @param {any} attribute - Component
+     * @return {void}
+     *
+     * @example
+     *
+     *    changeDom(domElement,UserComponent);
+     */
+    appendDomAndSetAttribute(dom, component, attribute) {
+        const dynamicComponent = document.createElement(component.selector);
+        this.setAttribute(dynamicComponent, attribute.name, attribute.data);
+        dom.append(dynamicComponent);
+    }
+
+
     /**
      * Get object/variable passed from parent by setAttribute()
      *
