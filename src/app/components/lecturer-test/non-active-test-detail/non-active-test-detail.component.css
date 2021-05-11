@@ -1,3 +1,10 @@
 #non-active-test-detail{
     background-color: green;
 }
+
+#test-title{
+    font-size: x-large;
+    text-align: left;
+    margin-bottom: 20px;
+    width: 100%;
+}

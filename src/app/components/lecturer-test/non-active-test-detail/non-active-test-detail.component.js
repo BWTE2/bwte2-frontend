@@ -33,8 +33,9 @@ export class NonActiveTestDetailComponent extends Component {
     }
 
     setStudents() {
-        const testCode = JSON.parse(this.getAttribute("testCode"));
-        testsService.readTestAnswers(testCode).then(this.appendStudents);
+        const testInfo = JSON.parse(this.getAttribute("test"));
+        this.dom.getElementById("test-title").innerText = testInfo.title + " #" + testInfo.code
+        testsService.readTestAnswers(testInfo.code).then(this.appendStudents);
     }
 
     appendStudents = (json) => {
@@ -43,7 +44,6 @@ export class NonActiveTestDetailComponent extends Component {
     };
 
     createRow = (student) => {
-        //TODO: Uprav premenne prosimta nevim ci som trafil nazvy
         const name = tableService.getColumn(student.name + ' ' + student.surname);
         const id = tableService.getColumn(student.id);
         const action = tableService.getIconButton('editTest', 'fa-arrow-circle-right');
