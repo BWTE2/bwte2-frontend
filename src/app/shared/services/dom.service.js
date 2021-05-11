@@ -142,6 +142,21 @@ class DomService {
             return '#3C1874'
         }
     }
+
+    /**
+     * Remove all elements in this.dom by class name
+     *
+     * @param {any} dom
+     * @param {string} type
+     */
+    removeAllElementsByClass(dom, type) {
+        const content = dom.querySelectorAll("*");
+        for (let studentContentElement of content) {
+            if (studentContentElement.classList.contains(type)) {
+                studentContentElement.remove();
+            }
+        }
+    }
 }
 
 /**
