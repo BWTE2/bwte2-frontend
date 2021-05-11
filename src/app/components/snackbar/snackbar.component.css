@@ -25,7 +25,7 @@
 
 .show {
 
-    animation: showAnimation 0.35s linear;
+    animation: showAnimation 0.3s cubic-bezier(0.280, 0.840, 0.420, 1);
 }
 
 .hide {
