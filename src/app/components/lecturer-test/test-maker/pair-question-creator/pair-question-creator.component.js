@@ -23,12 +23,6 @@ export class PairQuestionCreatorComponent extends Component {
     onInit() {
         this.attributesInitializer();
         this.eventsInitializer();
-
-        let pairsDiv = this.dom.getElementById("question-pairs");
-        this.addFirstPair(pairsDiv);
-
-        
-
     }
 
     attributesInitializer() {
@@ -36,30 +30,28 @@ export class PairQuestionCreatorComponent extends Component {
     }
 
     eventsInitializer() {
-        this.dom.getElementById("add-pair-button").addEventListener("click",() =>{
-            
-                this.addPair(pairsDiv);
-        });
+        let pairsDiv = this.dom.getElementById("question-pairs");
+        this.addFirstPair(pairsDiv);
+        const pairButton = this.dom.getElementById("add-pair-button");
+        pairButton.addEventListener("click", () => this.addPair(pairsDiv));
+
     }
 
-    addFirstPair(pairsDiv)
-    {
+    addFirstPair(pairsDiv) {
         this.addPair(pairsDiv);
     }
 
-    addPair(pairsDiv)
-    {
+    addPair(pairsDiv) {
         this.countPair++;
         pairsDiv.append(this.createPair(this.countPair))
     }
 
-    createPair(orderPair)
-    {
+    createPair(orderPair) {
         let baseId = "pair-";
         let fullId = baseId + orderPair.toString();
 
         let pairDiv = document.createElement("div");
-        pairDiv.setAttribute("id",fullId);
+        pairDiv.setAttribute("id", fullId);
         pairDiv.classList.add("pair");
 
         pairDiv.append(this.createQuestionPair(orderPair));
@@ -68,53 +60,47 @@ export class PairQuestionCreatorComponent extends Component {
         return pairDiv;
     }
 
-    createQuestionPair(orderPair)
-    {
+    createQuestionPair(orderPair) {
         let placeholder = "Otázka";
 
         let fullId = this.baseQuestionPairId + orderPair.toString();
 
         let textarea = document.createElement("textarea");
-        textarea.setAttribute("id",fullId);
-        textarea.setAttribute("placeholder",placeholder);
+        textarea.setAttribute("id", fullId);
+        textarea.setAttribute("placeholder", placeholder);
         textarea.classList.add("input-pair-value", "input-bottom-margin", "input-pair-left-value");
 
         return textarea;
     }
 
-    createAnswerPair(orderPair)
-    {
+    createAnswerPair(orderPair) {
         let placeholder = "Odpoveď";
 
         let fullId = this.baseAnswerPairId + orderPair.toString();
 
         let textarea = document.createElement("textarea");
-        textarea.setAttribute("id",fullId);
-        textarea.setAttribute("placeholder",placeholder);
+        textarea.setAttribute("id", fullId);
+        textarea.setAttribute("placeholder", placeholder);
         textarea.classList.add("input-pair-value", "input-bottom-margin");
 
         return textarea;
     }
 
 
-    getQuestionText()
-    {
+    getQuestionText() {
         let questionText = this.dom.getElementById("question-text");
         return questionText.value;
     }
 
-    getQuestionPoints()
-    {
+    getQuestionPoints() {
         let questionPoints = this.dom.getElementById("question-points")
         return parseFloat(questionPoints.value);
     }
 
-    getPairs()
-    {
+    getPairs() {
         let pairs = [];
 
-        for (let i = 1; i <= this.countPair ; i++)
-        {
+        for (let i = 1; i <= this.countPair; i++) {
             let pair = {};
             pair["question"] = this.getQuestionPairValue(i);
             pair["answer"] = this.getAnswerPairValue(i);
@@ -123,24 +109,21 @@ export class PairQuestionCreatorComponent extends Component {
         return pairs;
     }
 
-    getQuestionPairValue(orderPair)
-    {
+    getQuestionPairValue(orderPair) {
         let fullId = this.baseQuestionPairId + orderPair.toString();
 
         let questionValue = this.dom.getElementById(fullId);
         return questionValue.value.toString();
     }
 
-    getAnswerPairValue(orderPair)
-    {
+    getAnswerPairValue(orderPair) {
         let fullId = this.baseAnswerPairId + orderPair.toString();
 
         let questionValue = this.dom.getElementById(fullId);
         return questionValue.value.toString();
     }
 
-    createInfo()
-    {
+    createInfo() {
         let info = {};
 
         info["type"] = this.questionType;
@@ -149,12 +132,11 @@ export class PairQuestionCreatorComponent extends Component {
         info["questionPairs"] = this.getPairs();
 
 
-
         return info;
     }
 
 
-    getInfo(){
+    getInfo() {
         return this.createInfo();
     }
 
