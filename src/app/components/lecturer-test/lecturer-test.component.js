@@ -1,5 +1,7 @@
 import {Component} from "../../shared/model/component/component.js";
 import {domService} from "../../shared/services/dom.service.js";
+import {TestMakerComponent} from "./test-maker/test-maker.component.js";
+import {TestTableComponent} from "./test-table/test-table.component.js";
 
 
 const component = {
@@ -28,6 +30,9 @@ export class LecturerTestComponent extends Component {
     eventsInitializer() {
         const sideMenu = this.dom.getElementById("side-menu");
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
+        sideMenu.addEventListener("openCreateTest", this.openTestBuilder);
+        sideMenu.addEventListener("showAllTests", this.openAllTests);
+        document.addEventListener("updateAllTests", this.openAllTests);
     }
 
     menuSwapped = (e) => {
@@ -38,6 +43,16 @@ export class LecturerTestComponent extends Component {
             formContainer.style.marginLeft = "400px";
         }
     }
+
+    openTestBuilder = () => {
+        const container = this.dom.getElementById("dynamic-test-form");
+        domService.changeDom(container, TestMakerComponent);
+    };
+
+    openAllTests = () => {
+        const container = this.dom.getElementById("dynamic-test-form");
+        domService.changeDom(container, TestTableComponent);
+    };
 
     setName() {
         const actualName = "Lubos Sremanak";
