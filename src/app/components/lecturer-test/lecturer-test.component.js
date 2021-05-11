@@ -65,6 +65,7 @@ export class LecturerTestComponent extends Component {
         } else {
             this.nonActiveTestDetail(test);
         }
+        domService.createAndEmitEvent(document, "testDetail", true);
     };
 
     activeTestDetail(test) {
