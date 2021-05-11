@@ -3,7 +3,7 @@ import {Component} from "../../../shared/model/component/component.js";
 const component = {
     selector: 'app-lecturer-register-form',
     templatePath: 'home/lecturer-register-form/lecturer-register-form.component.html',
-    stylePaths: ['home/lecturer-register-form/lecturer-register-form.component.css'],
+    stylePaths: ['home/lecturer-login-form/lecturer-login-form.component.css'],
 };
 
 export class LecturerRegisterFormComponent extends Component {
