@@ -4,7 +4,6 @@ import {TestMakerComponent} from "./test-maker/test-maker.component.js";
 import {TestTableComponent} from "./test-table/test-table.component.js";
 import {ActiveTestDetailComponent} from "./active-test-detail/active-test-detail.component.js";
 import {NonActiveTestDetailComponent} from "./non-active-test-detail/non-active-test-detail.component.js";
-import {snackbarService} from "../../shared/services/snackbar.service.js";
 
 
 const component = {
@@ -38,11 +37,6 @@ export class LecturerTestComponent extends Component {
         sideMenu.addEventListener("showAllTests", this.openAllTests);
         document.addEventListener("updateAllTests", this.openAllTests);
         allTests.addEventListener("testDetail", this.openTestDetail)
-
-        this.dom.getElementById("try-snackbar").addEventListener("click", () => {
-            snackbarService.open(this.dom, {type: "success", message: "Ahoj som snackbar", duration: 3});
-        })
-
     }
 
     menuSwapped = (e) => {
