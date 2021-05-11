@@ -16,7 +16,9 @@ body {
     --secondary-color-lecturer: #3C1874;
     --secondary-color-student-hover: #BC2237;
     --secondary-color-lecturer-hover: #261049;
-    --text-input-color: #BDBDBD;
+    --text-input-placholder-color: #BDBDBD;
+    --text-input-color: #080808;
+    --success-color: #55AB5D;
 }
 
 .flex-column {
@@ -89,6 +91,26 @@ body {
     background-color: var(--secondary-color-lecturer-hover)
 }
 
+.icon-button {
+    margin-bottom: 30px;
+    height: 44px;
+    width: 50%;
+    display: flex;
+    padding: 20px 0 20px 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon-button span {
+    font-weight: 700;
+    margin-right: 20px;
+}
+
+.icon-button i {
+    font-size: 1.5em;
+}
+
+
 .form-header {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -125,7 +147,7 @@ button:focus {
 input, textarea {
     border-radius: 20px;
     color: var(--text-input-color);
-    border-color: var(--text-input-color);
+    border-color: var(--text-input-placholder-color);
     border-width: 2px !important;
     outline: none !important;
     -webkit-appearance: none;
@@ -138,7 +160,7 @@ input, textarea {
 }
 
 :is(input,textarea)::placeholder {
-    color: var(--text-input-color);
+    color: var(--text-input-placholder-color);
     font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -149,10 +171,10 @@ input:focus {
 }
 
 
-.semiBold {
+.semi-bold {
     font-weight: 700;
 }
 
-.fa-plus-circle {
- font-size: 30px;
+.add-icon {
+    font-size: 30px;
 }
