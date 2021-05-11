@@ -1,6 +1,7 @@
 import {Component} from "../../../shared/model/component/component.js";
 import {testsService} from "../../../api/tests/services/tests.service.js";
 import {tableService} from "../../../shared/services/table.service.js";
+import {domService} from "../../../shared/services/dom.service";
 
 const component = {
     selector: 'app-non-active-test-detail',
@@ -33,7 +34,7 @@ export class NonActiveTestDetailComponent extends Component {
     }
 
     setStudents() {
-        const testInfo = JSON.parse(this.getAttribute("test"));
+        const testInfo = domService.getAttribute(this,'test') ;
         this.dom.getElementById("test-title").innerText = testInfo.title + " #" + testInfo.code
         testsService.readTestAnswers(testInfo.code).then(this.appendStudents);
     }
