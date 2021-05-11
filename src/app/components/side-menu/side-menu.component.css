@@ -12,13 +12,13 @@
     color: var(--primary-color);
     transition: 0.2s;
 }
-#side-menu-header lottie-player{
+
+#side-menu-header lottie-player {
     height: 90px;
     width: 100px;
 }
 
-
-#side-menu-header #side-menu-header-name{
+#side-menu-header #side-menu-header-name {
     display: none;
 }
 
@@ -35,45 +35,37 @@
 }
 
 #side-menu {
-    height: 99%;
+    height: 98vh;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 0;
     top: 100px;
     left: 0;
     background-color: var(--primary-color);
     color: var(--primary-color);
     overflow: hidden;
     transition: 0.2s;
-    padding-top: 60px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-}
-
-#side-menu .space {
-    margin-bottom: 9.3vh;
-}
-
-#hide-side-menu, #show-side-menu {
-    position: absolute;
-    top: 50vh;
-    left: 0;
-}
-
-#side-menu #side-menu-header {
-    height: 9.3vh;
-    width: 100%;
-    top: 0;
-    position: absolute;
     justify-content: flex-start;
     align-items: center;
 }
 
-
-#side-menu #side-menu-header #side-menu-header-name {
-    margin-left: 30px;
-    width: 100%;
+#create-test-button, #show-all-tests {
+    margin-top: 50px;
 }
+
+#show-all-tests {
+    display: none;
+}
+
+#logout-button, #send-test-button {
+    position: absolute;
+    top: calc(80% - 100px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 
 button, span, a {
     white-space: nowrap;
