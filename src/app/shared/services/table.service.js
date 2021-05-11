@@ -27,6 +27,15 @@ class TableService {
         });
         return row;
     }
+
+    getEmptyTablePlaceholder(message) {
+        const el = document.createElement("td");
+        el.innerText = message;
+        el.setAttribute("colspan", 3);
+        el.classList.add("empty-table")
+        return el;
+    }
+
 }
 
 export const tableService = new TableService();

@@ -1,10 +1,19 @@
-#non-active-test-detail{
-    background-color: green;
+#non-active-test-detail {
+
 }
 
-#test-title{
+#test-title {
     font-size: x-large;
     text-align: left;
     margin-bottom: 20px;
     width: 100%;
+}
+
+.empty-table {
+    width: 100%;
+    height: 200px;
+    font-weight: 700;
+    font-size: x-large;
+    color: var(--text-input-placholder-color);
+    text-align: center;
 }

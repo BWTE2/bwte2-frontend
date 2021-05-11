@@ -1,6 +1,7 @@
 import {Component} from "../../../shared/model/component/component.js";
 import {tableService} from "../../../shared/services/table.service.js";
 import {testsService} from "../../../api/tests/services/tests.service.js";
+import {domService} from "../../../shared/services/dom.service.js";
 
 
 const component = {
@@ -33,16 +34,23 @@ export class ActiveTestDetailComponent extends Component {
     }
 
     setStudents() {
-        const testCode = this.getAttribute("testCode");
-        testsService.readTestAnswers(testCode).then(this.appendStudents);
+        const testInfo = domService.getAttribute(this, 'test');
+        this.dom.getElementById("test-title").innerText = testInfo.title + " #" + testInfo.code
+        testsService.readTestAnswers(testInfo.code).then(this.appendStudents);
     }
 
-    appendStudents = (students) => {
-        students.forEach(this.createRow);
+    appendStudents = (json) => {
+        const students = json.response.students;
+        if (students) {
+            students.forEach(this.createRow);
+        } else {
+            const body = this.dom.getElementById("test-table-body");
+            const placeHolder = tableService.getEmptyTablePlaceholder("Nikto nepíše test");
+            body.appendChild(placeHolder);
+        }
     };
 
     createRow = (student) => {
-        //TODO: Uprav premenne prosimta nevim ci som trafi lnazvy
         const name = tableService.getColumn(student.name + ' ' + student.surname);
         const id = tableService.getColumn(student.id);
         // const status = tableService.getColumn(student.status);

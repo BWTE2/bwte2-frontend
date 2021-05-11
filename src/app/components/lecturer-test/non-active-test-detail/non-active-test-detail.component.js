@@ -1,7 +1,7 @@
 import {Component} from "../../../shared/model/component/component.js";
 import {testsService} from "../../../api/tests/services/tests.service.js";
 import {tableService} from "../../../shared/services/table.service.js";
-import {domService} from "../../../shared/services/dom.service";
+import {domService} from "../../../shared/services/dom.service.js";
 
 const component = {
     selector: 'app-non-active-test-detail',
@@ -34,14 +34,20 @@ export class NonActiveTestDetailComponent extends Component {
     }
 
     setStudents() {
-        const testInfo = domService.getAttribute(this,'test') ;
+        const testInfo = domService.getAttribute(this, 'test');
         this.dom.getElementById("test-title").innerText = testInfo.title + " #" + testInfo.code
         testsService.readTestAnswers(testInfo.code).then(this.appendStudents);
     }
 
     appendStudents = (json) => {
         const students = json.response.students;
-        students.forEach(this.createRow);
+        if (students) {
+            students.forEach(this.createRow);
+        } else {
+            const body = this.dom.getElementById("test-table-body");
+            const placeHolder = tableService.getEmptyTablePlaceholder("Nikto nepisal test");
+            body.appendChild(placeHolder);
+        }
     };
 
     createRow = (student) => {
