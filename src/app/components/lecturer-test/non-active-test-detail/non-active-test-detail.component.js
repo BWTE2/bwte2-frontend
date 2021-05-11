@@ -33,11 +33,12 @@ export class NonActiveTestDetailComponent extends Component {
     }
 
     setStudents() {
-        const testCode = this.getAttribute("testCode");
+        const testCode = JSON.parse(this.getAttribute("testCode"));
         testsService.readTestAnswers(testCode).then(this.appendStudents);
     }
 
-    appendStudents = (students) => {
+    appendStudents = (json) => {
+        const students = json.response.students;
         students.forEach(this.createRow);
     };
 
