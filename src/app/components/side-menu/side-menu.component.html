@@ -1,16 +1,28 @@
-<div class="flex-row shadow" id="side-menu-header">
+<div class="flex-row" id="side-menu-header">
     <span class="text" id="side-menu-header-name"></span>
     <div id="side-menu-swap-button">
-        <lottie-player id="side-menu-swap-button-animation" src="../../../assets/animations/menuAnimation.json" background="transparent" speed="1">
+        <lottie-player id="side-menu-swap-button-animation" src="../../../assets/animations/menuAnimation.json"
+                       background="transparent" speed="1">
         </lottie-player>
     </div>
 
 </div>
 <div class="shadow flex-column" id="side-menu">
-    <button id="send-test-button">Odoslať test</button>
-    <span id="timer"></span>
-    <a href="../../../index.html">
-        Lecturer test
-    </a>
+    <button id="send-test-button" class="student highlight-student-background icon-button">
+        <span class="text">Odovzdať test</span>
+        <span class=""><i class="fas fa-paper-plane"></i></span>
+    </button>
+    <button id="create-test-button" class="lecturer highlight-lecturer-background icon-button">
+        <span class="text">Vytvoriť test</span>
+        <span class=""><i class="fas fa-plus-circle"></i></span>
+    </button>
+    <button id="show-all-tests" class="lecturer highlight-lecturer-background icon-button">
+        <span class="text">Všetky testy</span>
+        <span><i class="fas fa-table"></i></span>
+    </button>
+    <button id="logout-button" class="lecturer highlight-lecturer-background icon-button">
+        <span class="text">Odhlásiť sa</span>
+        <span class=""><i class="fas fa-sign-out-alt"></i></span>
+    </button>
 </div>
 

@@ -1,5 +1,9 @@
 import {Component} from "../../shared/model/component/component.js";
 import {domService} from "../../shared/services/dom.service.js";
+import {TestMakerComponent} from "./test-maker/test-maker.component.js";
+import {TestTableComponent} from "./test-table/test-table.component.js";
+import {ActiveTestDetailComponent} from "./active-test-detail/active-test-detail.component.js";
+import {NonActiveTestDetailComponent} from "./non-active-test-detail/non-active-test-detail.component.js";
 
 
 const component = {
@@ -27,7 +31,13 @@ export class LecturerTestComponent extends Component {
 
     eventsInitializer() {
         const sideMenu = this.dom.getElementById("side-menu");
+        const allTests = this.dom.getElementById("all-tests");
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
+        sideMenu.addEventListener("openCreateTest", this.openTestBuilder);
+        sideMenu.addEventListener("showAllTests", this.openAllTests);
+        document.addEventListener("updateAllTests", this.openAllTests);
+        allTests.addEventListener("testDetail", this.openTestDetail)
+
     }
 
     menuSwapped = (e) => {
@@ -37,6 +47,45 @@ export class LecturerTestComponent extends Component {
         } else {
             formContainer.style.marginLeft = "400px";
         }
+    }
+
+    openTestBuilder = () => {
+        this.changePage(TestMakerComponent);
+    };
+
+    openAllTests = () => {
+        this.changePage(TestTableComponent);
+    };
+
+    openTestDetail = (response) => {
+        const test = response.detail;
+        if (test.is_active === 1) {
+            this.activeTestDetail(test);
+        } else {
+            this.nonActiveTestDetail(test);
+        }
+    };
+
+    activeTestDetail(test) {
+        const attribute = {name: 'students', data: test.code}
+        this.changePageAndSendAttribute(ActiveTestDetailComponent, attribute);
+
+    }
+
+    nonActiveTestDetail(test) {
+        const attribute = {name: 'students', data: test.code}
+        this.changePageAndSendAttribute(NonActiveTestDetailComponent, attribute);
+    }
+
+
+    changePageAndSendAttribute(component, attribute) {
+        const container = this.dom.getElementById("dynamic-test-form");
+        domService.changeDomAndSetAttribute(container, component, attribute);
+    }
+
+    changePage(component) {
+        const container = this.dom.getElementById("dynamic-test-form");
+        domService.changeDom(container, component);
     }
 
     setName() {

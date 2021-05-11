@@ -1,5 +1,7 @@
 import {Component} from "../../../shared/model/component/component.js";
 import {testsService} from "../../../api/tests/services/tests.service.js";
+import {domService} from "../../../shared/services/dom.service.js";
+import {tableService} from "../../../shared/services/table.service.js";
 
 
 const component = {
@@ -20,50 +22,92 @@ export class TestTableComponent extends Component {
         this.setAllTests();
     }
 
-    setAllTests(){
+    setAllTests() {
         testsService.readTests()
             .then(this.writeAllTestsToTable)
     }
 
-    writeAllTestsToTable = (json) =>{
-        for(let test of json.response.tests){
+    writeAllTestsToTable = (json) => {
+        for (let test of json.response.tests) {
             this.writeTestToTable(test);
         }
     }
 
-    writeTestToTable(test){
+    writeTestToTable(test) {
         const row = this.getTestRow(test);
         this.dom.getElementById("test-table-body").appendChild(row);
     }
 
-    getTestRow(test){
+    getTestRow(test) {
         const row = document.createElement("TR");
 
-        const titleColumn = this.getColumn(test.title);
-        const keyColumn = this.getColumn(test.code);
+        const titleColumn = this.getLinkColumn(test);
+        const keyColumn = tableService.getColumn(test.code);
         const activityColumn = this.getActivityColumn(test.is_active);
-        const dateColumn = this.getColumn(test.test_created);
-
+        const dateColumn = tableService.getColumn(test.test_created);
+        const actionColumn = this.getAction(test);
         row.appendChild(titleColumn);
         row.appendChild(keyColumn);
         row.appendChild(dateColumn);
         row.appendChild(activityColumn);
-
+        row.appendChild(actionColumn);
         return row;
     }
 
-    getColumn(text){
+    getAction(test) {
         const column = document.createElement("TD");
-        column.innerText = text;
+        const activate = tableService.getIconButton("activateButton", "fa-play-circle");
+        const deactivate = tableService.getIconButton("deactivateButton", "fa-stop-circle");
+        activate.addEventListener("click", () => this.activateTest(test));
+        deactivate.addEventListener("click", () => this.deactivateTest(test));
+        activate.disabled = !test.is_active;
+        deactivate.disabled = test.is_active;
+        column.append(activate);
+        column.append(deactivate);
         return column;
     }
 
-    getActivityColumn(activity){
-        if(activity === 1){
-            return this.getColumn("Aktívny");
-        }
-        else{
-            return this.getColumn("Neaktívny");
+
+    getLinkColumn(test) {
+        const column = document.createElement("TD");
+        const link = document.createElement("a");
+        link.setAttribute("class", "link");
+        link.classList.add("link");
+        link.classList.add("semi-bold");
+        link.addEventListener("click", () => this.openDetail(test));
+        link.innerText = test.title;
+        column.append(link);
+        return column;
+    }
+
+    activateTest = (test) => {
+
+        console.log(test);
+        //TODO:TEST ACTIVATION
+        testsService.updateTest(test.code, test).then(this.updateAllTests);
+    };
+
+    deactivateTest = (test) => {
+        console.log(test);
+        //TODO:TEST DEACTIVATION
+        testsService.updateTest(test.code, test).then(this.updateAllTests);
+
+    };
+
+    updateAllTests() {
+        domService.emitEvent(document, 'updateAllTests');
+    }
+
+    openDetail = (test) => {
+        domService.createAndEmitEvent(this, "testDetail", test);
+    };
+
+
+    getActivityColumn(activity) {
+        if (activity === 1) {
+            return tableService.getColumn("Aktívny");
+        } else {
+            return tableService.getColumn("Neaktívny");
         }
     }
 

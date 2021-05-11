@@ -21,9 +21,10 @@ import {PairQuestionCreatorComponent} from "./components/lecturer-test/test-make
 import {CheckAnswerComponent} from "./components/lecturer-test/test-maker/multiple-answer-question-creator/check-answer/check-answer.component.js";
 import {DrawQuestionCreatorComponent} from "./components/lecturer-test/test-maker/draw-question-creator/draw-question-creator.component.js";
 import {MultichoiceOptionComponent} from "./components/student-test/multiple-answer-question/multichoice-option/multichoice-option.component.js";
+import {EditTestComponent} from "./components/lecturer-test/edit-test/edit-test.component.js";
+import {ActiveTestDetailComponent} from "./components/lecturer-test/active-test-detail/active-test-detail.component.js";
+import {NonActiveTestDetailComponent} from "./components/lecturer-test/non-active-test-detail/non-active-test-detail.component.js";
 import * as FontAwesome from "https://kit.fontawesome.com/a2f338e40d.js";
-
-
 
 export class AppModule {
     components = [
@@ -49,7 +50,10 @@ export class AppModule {
         PairQuestionCreatorComponent,
         CheckAnswerComponent,
         DrawQuestionCreatorComponent,
-        MultichoiceOptionComponent
+        MultichoiceOptionComponent,
+        EditTestComponent,
+        ActiveTestDetailComponent,
+        NonActiveTestDetailComponent
     ]
 
     constructor() {

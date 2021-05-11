@@ -1,6 +1,7 @@
 import {Component} from "../../../shared/model/component/component.js";
 import {keyGeneratorService} from "../../../api/key-generator/services/key-generator.service.js";
 import {testsService} from "../../../api/tests/services/tests.service.js";
+import {domService} from "../../../shared/services/dom.service.js";
 
 
 const component = {
@@ -30,7 +31,8 @@ export class TestMakerComponent extends Component {
 
     eventsInitializer() {
         this.initButtons();
-        document.addEventListener("sendTest", this.sendTest);
+        const submitButton = this.dom.getElementById("submit");
+        submitButton.addEventListener("click", this.sendTest);
     }
 
     initButtons() {
@@ -94,8 +96,12 @@ export class TestMakerComponent extends Component {
         }
 
         testsService.createTest(key, test)
-            .then(() => location.reload());
+            .then(this.updateTable);
     }
+
+    updateTable = () => {
+        domService.createAndEmitEvent(document, 'updateAllTests', true);
+    };
 
     getAllQuestions() {
         const allQuestions = [];
