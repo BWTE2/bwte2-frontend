@@ -21,6 +21,26 @@ class DomService {
     }
 
     /**
+     * Change content of DOM/Element to Component and set attribute
+     *
+     * @param {any} dom - Dom or Element
+     * @param {any} component - Component
+     * @param {any} attribute - Component
+     * @return {void}
+     *
+     * @example
+     *
+     *    changeDom(domElement,UserComponent);
+     */
+    changeDomAndSetAttribute(dom, component, attribute) {
+        dom.innerHTML = "";
+        const dynamicComponent = document.createElement(component.selector);
+        this.setAttribute(dynamicComponent, attribute.name, attribute.data);
+        dom.append(dynamicComponent);
+    }
+
+
+    /**
      * Append content of DOM/Element to Component
      *
      * @param {any} dom - Dom or Element
