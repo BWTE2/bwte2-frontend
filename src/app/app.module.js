@@ -23,7 +23,7 @@ import {DrawQuestionCreatorComponent} from "./components/lecturer-test/test-make
 import {MultichoiceOptionComponent} from "./components/student-test/multiple-answer-question/multichoice-option/multichoice-option.component.js";
 import {EditTestComponent} from "./components/lecturer-test/edit-test/edit-test.component.js";
 import {ActiveTestDetailComponent} from "./components/lecturer-test/active-test-detail/active-test-detail.component.js";
-import {DisabledTestDetailComponent} from "./components/lecturer-test/disabled-test-detail/disabled-test-detail.component.js";
+import {NonActiveTestDetailComponent} from "./components/lecturer-test/non-active-test-detail/non-active-test-detail.component.js";
 import * as FontAwesome from "https://kit.fontawesome.com/a2f338e40d.js";
 
 export class AppModule {
@@ -53,7 +53,7 @@ export class AppModule {
         MultichoiceOptionComponent,
         EditTestComponent,
         ActiveTestDetailComponent,
-        DisabledTestDetailComponent
+        NonActiveTestDetailComponent
     ]
 
     constructor() {

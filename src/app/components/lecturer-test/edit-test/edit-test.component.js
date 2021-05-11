@@ -1,4 +1,4 @@
-import {Component} from "../../../shared/model/component/component";
+import {Component} from "../../../shared/model/component/component.js";
 
 const component = {
     selector: 'app-edit-test',
