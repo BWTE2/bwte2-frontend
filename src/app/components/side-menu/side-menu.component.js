@@ -34,6 +34,7 @@ export class SideMenuComponent extends Component {
             this.dom.getElementById("side-menu-swap-button").addEventListener("click", this.swapMenu);
             this.dom.getElementById("send-test-button").addEventListener('click', this.sendTest);
         } catch (e) {
+            document.addEventListener("testDetail", this.showDetailMenu);
             this.dom.getElementById("create-test-button").addEventListener('click', this.openCreateTest);
             this.dom.getElementById("show-all-tests").addEventListener('click', this.openShowAll);
             this.dom.getElementById("logout-button").addEventListener('click', this.logout);
@@ -79,6 +80,13 @@ export class SideMenuComponent extends Component {
     openShowAll = () => {
         this.swapShowAllButton()
         domService.createAndEmitEvent(this, "showAllTests", true);
+    };
+
+    showDetailMenu = () => {
+        const all = this.dom.getElementById("show-all-tests");
+        const create = this.dom.getElementById("create-test-button");
+        all.style.display = "flex";
+        create.style.display = "flex";
     };
 
     swapShowAllButton() {
