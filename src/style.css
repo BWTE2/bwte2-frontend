@@ -73,6 +73,21 @@ body {
     color: var(--secondary-color-lecturer)
 }
 
+
+a.highlight-student:hover {
+    color: var(--secondary-color-student);
+}
+
+a.link {
+    color: var(--text-input-color);
+}
+
+a.link:hover {
+    color: var(--secondary-color-lecturer);
+
+}
+
+
 .highlight-student-background {
     color: white;
     background-color: var(--secondary-color-student)
@@ -170,6 +185,14 @@ input:focus {
     outline: none;
 }
 
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none !important;
+    cursor: pointer;
+}
 
 .semi-bold {
     font-weight: 700;
