@@ -31,7 +31,7 @@ export class LecturerTestComponent extends Component {
 
     eventsInitializer() {
         const sideMenu = this.dom.getElementById("side-menu");
-        const allTests = this.dom.getElementById("all-tests");
+        const allTests = this.dom.querySelector("APP-TEST-TABLE");
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
         sideMenu.addEventListener("openCreateTest", this.openTestBuilder);
         sideMenu.addEventListener("showAllTests", this.openAllTests);
@@ -55,6 +55,7 @@ export class LecturerTestComponent extends Component {
 
     openAllTests = () => {
         this.changePage(TestTableComponent);
+        this.eventsInitializer();
     };
 
     openTestDetail = (response) => {
