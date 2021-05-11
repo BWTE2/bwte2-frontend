@@ -1,7 +1,10 @@
 <div id="one-answer-question">
     <!--    input attribute questionWording = {text,points}-->
-    <span id="one-answer-question-question" class="text"></span>
-    <label for="one-answer-answer"></label>
-    <input class="input" type="text" name="one-answer-answer" id="one-answer-answer" placeholder="Odpoveď">
-    <app-question-wording id="question-wording-element"></app-question-wording>
+    <app-question-wording id="question-wording-element" titleHidden></app-question-wording>
+
+    <div class="flex-row">
+        <label for="student-answer"></label>
+        <input type="text" name="student-answer" id="student-answer" placeholder="Odpoveď">
+        <span id="student-points" class="text"></span>
+    </div>
 </div>
