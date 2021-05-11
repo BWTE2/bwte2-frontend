@@ -67,13 +67,12 @@ export class LecturerTestComponent extends Component {
     };
 
     activeTestDetail(test) {
-        const attribute = {name: 'students', data: test.code}
+        const attribute = {name: 'testCode', data: test.code}
         this.changePageAndSendAttribute(ActiveTestDetailComponent, attribute);
-
     }
 
     nonActiveTestDetail(test) {
-        const attribute = {name: 'students', data: test.code}
+        const attribute = {name: 'test', data: test}
         this.changePageAndSendAttribute(NonActiveTestDetailComponent, attribute);
     }
 
