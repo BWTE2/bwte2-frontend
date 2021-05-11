@@ -32,7 +32,7 @@ export class LecturerLoginFormComponent extends Component {
     }
 
     lecturerRegisterButtonClick(dom) {
-        const form = dom.getElementById("lecturer-login-form");
+        const form = dom.getElementById("home-form");
         domService.changeDom(form, LecturerRegisterFormComponent);
         form.scrollIntoView();
     }
