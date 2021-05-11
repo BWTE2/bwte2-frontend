@@ -90,7 +90,6 @@ class TestsService extends ApiService {
      */
     async readTestAnswers(testKey) {
         const url = this.rootURL + 'tests/' + testKey + '/students/';
-        console.log(url);
         const response = await fetch(url, this.requestGET()).catch(this.catchErrors);
         return response ? await response.json() : this.handleErrors(new Error());
     }

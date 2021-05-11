@@ -102,13 +102,17 @@ export class StudentTestComponent extends Component {
 
     showAllQuestions = (json) => {
         const test = json.response;
+        this.dom.getElementById("paper").innerHTML = "";
+
         //TODO: funkcia informAboutTestFetch je len pre development, po dokonceni loginu treba preprogramovat
         this.informAboutTestFetch(test);
+        console.log(test);
         if (!test.exists) {
             return;
         }
-
-        this.dom.getElementById("paper").innerHTML = "";
+        else if(test.exists && !test.activated){
+            return;
+        }
 
         let questionCount = 1;
         for (let question of test.questions) {
@@ -121,7 +125,11 @@ export class StudentTestComponent extends Component {
     informAboutTestFetch(test) {
         if (!test.exists) {
             this.dom.getElementById("test-info").innerHTML = "TEST NEEXISTUJE";
-        } else {
+        }
+        else if (test.exists && !test.activated) {
+            this.dom.getElementById("test-info").innerHTML = "TEST NIE JE AKTIVOVANY";
+        }
+        else {
             this.dom.getElementById("test-info").innerHTML = "TEST: " + test.testName;
         }
     }

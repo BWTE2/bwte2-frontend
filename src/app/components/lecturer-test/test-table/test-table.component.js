@@ -58,10 +58,11 @@ export class TestTableComponent extends Component {
         const column = document.createElement("TD");
         const activate = tableService.getIconButton("activateButton", "fa-play-circle");
         const deactivate = tableService.getIconButton("deactivateButton", "fa-stop-circle");
+        const isActive = JSON.parse(test.is_active);
         activate.addEventListener("click", () => this.activateTest(test));
         deactivate.addEventListener("click", () => this.deactivateTest(test));
-        activate.disabled = !test.is_active;
-        deactivate.disabled = test.is_active;
+        activate.disabled = isActive;
+        deactivate.disabled = !isActive;
         column.append(activate);
         column.append(deactivate);
         return column;
@@ -81,21 +82,19 @@ export class TestTableComponent extends Component {
     }
 
     activateTest = (test) => {
+        const activation = {wantActivate: true};
 
-        console.log(test);
-        //TODO:TEST ACTIVATION
-        testsService.updateTest(test.code, test).then(this.updateAllTests);
+        testsService.updateTest(test.code, activation).then(this.updateAllTests);
     };
 
     deactivateTest = (test) => {
-        console.log(test);
-        //TODO:TEST DEACTIVATION
-        testsService.updateTest(test.code, test).then(this.updateAllTests);
+        const activation = {wantActivate: false};
 
+        testsService.updateTest(test.code, activation).then(this.updateAllTests);
     };
 
     updateAllTests() {
-        domService.emitEvent(document, 'updateAllTests');
+        domService.createAndEmitEvent(document, "updateAllTests", true);
     }
 
     openDetail = (test) => {
@@ -104,7 +103,8 @@ export class TestTableComponent extends Component {
 
 
     getActivityColumn(activity) {
-        if (activity === 1) {
+        const isActive = JSON.parse(activity);
+        if (isActive === 1) {
             return tableService.getColumn("Aktívny");
         } else {
             return tableService.getColumn("Neaktívny");
