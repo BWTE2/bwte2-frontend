@@ -15,13 +15,14 @@ export class StudentTestComponent extends Component {
 
     constructor() {
         super(component);
+        this.isSetParam();
+        this.loadTest();
         this.load().then(() => this.onInit());
     }
 
     onInit() {
         this.attributesInitializer();
         this.eventsInitializer();
-        this.loadTest();
     }
 
 
@@ -33,9 +34,6 @@ export class StudentTestComponent extends Component {
         document.addEventListener("sendTest", this.sendTest);
         const sideMenu = this.dom.getElementById("side-menu");
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
-        const questionsButton = this.dom.getElementById("questions-button");
-        questionsButton.addEventListener("click", this.loadTest);
-
     }
 
     sendTest = () => {
@@ -44,16 +42,18 @@ export class StudentTestComponent extends Component {
         const allAnswers = this.getAllAnswers();
 
         testsService.createStudentTestAnswers(studentId, testKey, allAnswers)
-            .then(this.finishTest);
+            .then(this.redirectToLoginPage);
     };
 
-    finishTest = () =>{
-       window.location.replace("/bwte2/");
+    redirectToLoginPage = () =>{
+        location.replace("../../../index.html");
     }
 
     getStudentId() {
-        //TODO: prerobit podla potreby, zatial v development faze
-        return "1";
+        let queryParams = window.location.search;
+        let params = new URLSearchParams(queryParams);
+
+        return params.get("studentId");
     }
 
     getAllAnswers() {
@@ -94,25 +94,34 @@ export class StudentTestComponent extends Component {
         domService.setAttribute(sideMenu, "headerName", actualName);
     }
 
-    loadTest = () => {
+    loadTest = async () => {
+
         const testKey = this.getTestKey();
-        testsService.readQuestions(testKey)
-            .then(this.showAllQuestions);
+        const preResponse = await testsService.readQuestions(testKey);
+
+        if(preResponse.responseErrorMessage !== undefined)
+        {
+            this.handeErrorResponseMessage(preResponse.responseErrorMessage);
+        }
+        else
+        {
+            this.showAllQuestions(preResponse);
+        }
     }
 
     getTestKey() {
-        //TODO: tento kod treba prerobit ked sa vytvori prihlasovanie k testu
-        const keyInput = this.dom.getElementById("key-input");
-        return keyInput.value;
+
+        let queryParams = window.location.search;
+        let params = new URLSearchParams(queryParams);
+
+        return params.get("codeTest");
     }
 
-    showAllQuestions = (json) => {
-        const test = json.response;
+    showAllQuestions(test) {
+
+        test = test.response;
         this.dom.getElementById("paper").innerHTML = "";
 
-        //TODO: funkcia informAboutTestFetch je len pre development, po dokonceni loginu treba preprogramovat
-        this.informAboutTestFetch(test);
-        console.log(test);
         if (!test.exists) {
             return;
         } else if (test.exists && !test.activated) {
@@ -129,15 +138,6 @@ export class StudentTestComponent extends Component {
         this.startTimer();
     }
 
-    informAboutTestFetch(test) {
-        if (!test.exists) {
-            this.dom.getElementById("test-info").innerHTML = "TEST NEEXISTUJE";
-        } else if (test.exists && !test.activated) {
-            this.dom.getElementById("test-info").innerHTML = "TEST NIE JE AKTIVOVANY";
-        } else {
-            this.dom.getElementById("test-info").innerHTML = "TEST: " + test.testName;
-        }
-    }
 
     showQuestion(question) {
         if (question.type === "CHOICE") {
@@ -192,4 +192,22 @@ export class StudentTestComponent extends Component {
         const testKey = this.getTestKey();
         this.timeSource = serverSentEventsService.readTestTimer(testKey);
     }
+
+
+
+    isSetParam() {
+        if (this.getTestKey() === null || this.getStudentId() === null) {
+            this.redirectToLoginPage();
+        }
+    }
+
+    handeErrorResponseMessage(errorMessage)
+    {
+        if(errorMessage.responseCode === 401)
+        {
+            this.redirectToLoginPage();
+        }
+    }
+
+
 }

@@ -10,7 +10,7 @@ class StudentService extends ApiService {
      *
      */
     async createLecturerLogin(student) {
-        const url = this.rootURL + '/bwte2-api/student-creator/';
+        const url = this.rootURL + 'student-creator/';
         const response = await fetch(url, this.requestPOST(student)).catch(this.catchErrors);
         return response ? await response.json() : this.handleErrors(new Error());
     }
