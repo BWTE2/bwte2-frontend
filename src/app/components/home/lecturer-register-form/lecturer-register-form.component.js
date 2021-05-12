@@ -23,7 +23,25 @@ export class LecturerRegisterFormComponent extends Component {
 
     }
 
-    eventsInitializer() {
+    eventsInitializer()
+    {
+        let registerButton = this.dom.getElementById("lecturer-register-button");
+
+        registerButton.addEventListener("click", () => {
+            this.validateAndRegisterLecturer();
+        });
 
     }
+
+    validateAndRegisterLecturer()
+    {
+        if(this.isFilledInput())
+        {
+            this.registerLecturer();
+        }
+    }
+
+
+
+
 }
