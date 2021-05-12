@@ -55,8 +55,6 @@ export class SideMenuComponent extends Component {
 
         const time = this.secondsToTime(data);
         this.dom.getElementById("timer").innerText = time + "";
-        this.dom.getElementById("timer-container").style.display = "block";
-        this.dom.getElementById("timer-container").style.color = "black";
     }
 
     secondsToTime(seconds){

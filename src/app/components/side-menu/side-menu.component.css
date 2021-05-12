@@ -78,9 +78,10 @@ button, span, a {
 }
 
 #side-menu #timer-container{
-    display: none;
+    display: block;
     text-align: center;
     margin-top: 75%;
+    color: black;
 }
 
 #side-menu #timer-container span{
