@@ -11,3 +11,9 @@
     color: var(--text-input-placholder-color);
     text-align: center;
 }
+
+.edit-test {
+    font-size: 30px;
+    background-color: transparent;
+    text-align: center;
+}
