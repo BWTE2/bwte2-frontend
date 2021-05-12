@@ -48,12 +48,12 @@ export class QuestionWordingComponent extends Component {
 
     correctDeclension(points) {
         if (points === 1) {
-            return points + "bod";
+            return points + " bod";
         }
         if (points <= 4 && points > 1) {
-            return points + "bod";
+            return points + " body";
         }
-        return points + "bodov";
+        return points + " bodov";
     }
 
 }

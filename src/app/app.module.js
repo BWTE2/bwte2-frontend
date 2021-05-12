@@ -25,6 +25,11 @@ import {EditTestComponent} from "./components/lecturer-test/edit-test/edit-test.
 import {ActiveTestDetailComponent} from "./components/lecturer-test/active-test-detail/active-test-detail.component.js";
 import {NonActiveTestDetailComponent} from "./components/lecturer-test/non-active-test-detail/non-active-test-detail.component.js";
 import {SnackbarComponent} from "./components/snackbar/snackbar.component.js";
+import {MathQuestionViewComponent} from "./components/lecturer-test/edit-test/math-question-view/math-question-view.component.js";
+import {DrawQuestionViewComponent} from "./components/lecturer-test/edit-test/draw-question-view/draw-question-view.component.js";
+import {PairQuestionViewComponent} from "./components/lecturer-test/edit-test/pair-question-view/pair-question-view.component.js";
+import {OneAnswerQuestionViewComponent} from "./components/lecturer-test/edit-test/one-answer-question-view/one-answer-question-view.component.js";
+import {MultipleAnswerQuestionViewComponent} from "./components/lecturer-test/edit-test/multiple-answer-question-view/multiple-answer-question-view.component.js";
 import * as FontAwesome from "https://kit.fontawesome.com/a2f338e40d.js";
 
 
@@ -56,7 +61,12 @@ export class AppModule {
         EditTestComponent,
         ActiveTestDetailComponent,
         NonActiveTestDetailComponent,
-        SnackbarComponent
+        SnackbarComponent,
+        MathQuestionViewComponent,
+        DrawQuestionViewComponent,
+        PairQuestionViewComponent,
+        OneAnswerQuestionViewComponent,
+        MultipleAnswerQuestionViewComponent
     ]
 
     constructor() {

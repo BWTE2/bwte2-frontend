@@ -50,11 +50,11 @@ export class StudentTestComponent extends Component {
         return "1";
     }
 
-    getAllAnswers(){
+    getAllAnswers() {
         const allAnswers = [];
         const paper = this.dom.getElementById("paper");
 
-        for(let answerElement of paper.getElementsByTagName("*")){
+        for (let answerElement of paper.getElementsByTagName("*")) {
             const answer = this.getAnswer(answerElement);
             allAnswers.push(answer);
         }
@@ -64,7 +64,7 @@ export class StudentTestComponent extends Component {
         };
     }
 
-    getAnswer(answerElement){
+    getAnswer(answerElement) {
         const questionInfo = domService.getAttribute(answerElement, "questionInfo");
         const questionAnswer = answerElement.getAnswer();
         return {
@@ -109,8 +109,7 @@ export class StudentTestComponent extends Component {
         console.log(test);
         if (!test.exists) {
             return;
-        }
-        else if(test.exists && !test.activated){
+        } else if (test.exists && !test.activated) {
             return;
         }
 
@@ -125,11 +124,9 @@ export class StudentTestComponent extends Component {
     informAboutTestFetch(test) {
         if (!test.exists) {
             this.dom.getElementById("test-info").innerHTML = "TEST NEEXISTUJE";
-        }
-        else if (test.exists && !test.activated) {
+        } else if (test.exists && !test.activated) {
             this.dom.getElementById("test-info").innerHTML = "TEST NIE JE AKTIVOVANY";
-        }
-        else {
+        } else {
             this.dom.getElementById("test-info").innerHTML = "TEST: " + test.testName;
         }
     }
