@@ -15,13 +15,26 @@ export class StudentTestComponent extends Component {
 
     constructor() {
         super(component);
-        this.load().then(() => this.onInit());
+        this.checkUnauthorized().then(() => {
+            this.isSetParam();
+            this.load().then(() => this.onInit());
+        });
+    }
+
+    async checkUnauthorized() {
+        const testKey = this.getTestKey();
+        this.preResponse = await testsService.readQuestions(testKey);
+
+        if (this.preResponse.responseErrorMessage) {
+            alert(this.preResponse.responseErrorMessage.responseCode)
+            console.log(this.preResponse);
+            this.handleErrorResponseMessage(this.preResponse.responseErrorMessage);
+        }
     }
 
     onInit() {
         this.attributesInitializer();
         this.eventsInitializer();
-        this.isSetParam();
         this.loadTest();
     }
 
@@ -47,7 +60,7 @@ export class StudentTestComponent extends Component {
             .then(this.redirectToLoginPage);
     };
 
-    redirectToLoginPage = () =>{
+    redirectToLoginPage = () => {
         location.replace("../../../index.html");
     }
 
@@ -96,19 +109,8 @@ export class StudentTestComponent extends Component {
         domService.setAttribute(sideMenu, "headerName", actualName);
     }
 
-    loadTest = async () => {
-
-        const testKey = this.getTestKey();
-        const preResponse = await testsService.readQuestions(testKey);
-
-        if(preResponse.responseErrorMessage !== undefined)
-        {
-            this.handeErrorResponseMessage(preResponse.responseErrorMessage);
-        }
-        else
-        {
-            this.showAllQuestions(preResponse);
-        }
+    loadTest() {
+        this.showAllQuestions(this.preResponse);
     }
 
     getTestKey() {
@@ -189,11 +191,10 @@ export class StudentTestComponent extends Component {
         paper.appendChild(appQuestion);
     }
 
-    startTimer = () =>{
+    startTimer = () => {
         const testKey = this.getTestKey();
         this.timeSource = serverSentEventsService.readTestTimer(testKey);
     }
-
 
 
     isSetParam() {
@@ -202,10 +203,8 @@ export class StudentTestComponent extends Component {
         }
     }
 
-    handeErrorResponseMessage(errorMessage)
-    {
-        if(errorMessage.responseCode === 401)
-        {
+    handleErrorResponseMessage(errorMessage) {
+        if (errorMessage.responseCode === 401) {
             this.redirectToLoginPage();
         }
     }
