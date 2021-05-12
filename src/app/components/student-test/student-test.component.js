@@ -14,13 +14,17 @@ export class StudentTestComponent extends Component {
 
     constructor() {
         super(component);
+        this.isSetParam();
+        this.loadTest();
         this.load().then(() => this.onInit());
     }
 
     onInit() {
+        // this.isSetParam();
+        // this.loadTest();
         this.attributesInitializer();
         this.eventsInitializer();
-        this.loadTest();
+
     }
 
 
@@ -47,7 +51,12 @@ export class StudentTestComponent extends Component {
 
     getStudentId() {
         //TODO: prerobit podla potreby, zatial v development faze
-        return "1";
+
+        // return "1";
+        let queryParams = window.location.search;
+        let params = new URLSearchParams(queryParams);
+
+        return params.get("studentId");
     }
 
     getAllAnswers() {
@@ -88,20 +97,38 @@ export class StudentTestComponent extends Component {
         domService.setAttribute(sideMenu, "headerName", actualName);
     }
 
-    loadTest = () => {
+    loadTest = async () => {
+
         const testKey = this.getTestKey();
-        testsService.readQuestions(testKey)
-            .then(this.showAllQuestions);
+
+        try {
+            const preResponse = await testsService.readQuestions(testKey);
+
+            this.showAllQuestions(preResponse);
+        }catch (e) {
+            this.redirectToLoginPage();
+        }
+
+
+
+
     }
 
     getTestKey() {
         //TODO: tento kod treba prerobit ked sa vytvori prihlasovanie k testu
-        const keyInput = this.dom.getElementById("key-input");
-        return keyInput.value;
+
+        // const keyInput = this.dom.getElementById("key-input");
+        // return keyInput.value;
+
+        let queryParams = window.location.search;
+        let params = new URLSearchParams(queryParams);
+
+        return params.get("codeTest");
     }
 
-    showAllQuestions = (json) => {
-        const test = json.response;
+    showAllQuestions(test) {
+
+        test = test.response;
         this.dom.getElementById("paper").innerHTML = "";
 
         //TODO: funkcia informAboutTestFetch je len pre development, po dokonceni loginu treba preprogramovat
@@ -179,4 +206,17 @@ export class StudentTestComponent extends Component {
         domService.setAttribute(appQuestion, "questionInfo", question);
         paper.appendChild(appQuestion);
     }
+
+
+    redirectToLoginPage() {
+        location.replace("../../../index.html");
+    }
+
+    isSetParam() {
+        if (this.getTestKey() === null || this.getStudentId() === null) {
+            this.redirectToLoginPage();
+        }
+    }
+
+
 }

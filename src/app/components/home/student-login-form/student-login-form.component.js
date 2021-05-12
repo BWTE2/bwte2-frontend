@@ -46,7 +46,13 @@ export class StudentLoginFormComponent extends Component {
 
     loginStudent()
     {
-        studentService.createLecturerLogin(this.createLoginData()).then(this.verifyTestDataAndStartTest);
+        studentService.createLecturerLogin(this.createLoginData()).then(this.verifyTestDataAndStartTest).then(this.a);
+
+    }
+
+    a = (d) => {
+
+        console.log(d);
     }
 
     createLoginData()
@@ -68,31 +74,49 @@ export class StudentLoginFormComponent extends Component {
         let data = json.response;
         console.log(data);
 
-        let isAbleTestToWrite = this.isAbleTestToWrite(data.question,data.isWroteTest);
+        console.log(json);
+
+        let isAbleTestToWrite = this.isAbleTestToWrite(data);
+
+        if(isAbleTestToWrite)
+        {
+            location.replace(this.getTestUrl(data.codeTest, data.student.studentId));
+        }
 
     }
 
-    isAbleTestToWrite(question, isWroteTest)
+
+    getTestUrl(codeTest,studentId)
     {
-        if(question.exists === false)
+        let baseUrl = "app/views/student-test/index.html";
+
+        let params = "?codeTest=" + codeTest + "&studentId=" + studentId;
+
+        return baseUrl + params;
+    }
+
+
+
+    isAbleTestToWrite(testResponse)
+    {
+        if(testResponse.isExistsTest === false)
         {
-            this.showDangerMessage("Test neexistuje",3);
+            this.showDangerMessage("Test s týmto kódom neexistuje",3);
             return false;
         }
 
-        if(question.activated === false)
+        if(testResponse.isActivateTest === false)
         {
-            this.showDangerMessage("Test nebol povoleny", 3);
+            this.showDangerMessage("Test s týmto kódom nebol povolený", 3);
             return false;
         }
 
-        if(isWroteTest === true)
+        if(testResponse.isWroteTest === true)
         {
-            this.showDangerMessage("Test ste už písali", 3);
+            this.showWarningMessage("Test s týmto kódom si už odovzdal/a", 3);
             return false;
         }
 
-        this.showSuccessMessage("Login úspešný", 3);
         return true;
 
     }
