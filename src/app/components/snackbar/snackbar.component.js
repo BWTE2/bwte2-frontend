@@ -63,7 +63,7 @@ export class SnackbarComponent extends Component {
         } else if (type === "warning") {
             return '#E8B125'
         } else {
-            console.warn("Bad snacbar type {success,danger,warning}")
+            console.warn("Bad snackbar type {success,danger,warning}")
         }
     }
 }
