@@ -16,6 +16,7 @@ export class StudentTestComponent extends Component {
     constructor() {
         super(component);
         this.checkUnauthorized().then(() => {
+            this.isSetParam();
             this.load().then(() => this.onInit());
         });
     }
@@ -23,8 +24,9 @@ export class StudentTestComponent extends Component {
     async checkUnauthorized() {
         const testKey = this.getTestKey();
         this.preResponse = await testsService.readQuestions(testKey);
-        console.log(this.preResponse.responseErrorMessage.responseCode);
-        if (this.preResponse.responseErrorMessage.responseCode === 401) {
+        alert(this.preResponse.responseErrorMessage.responseCode)
+        if (this.preResponse) {
+            console.log(this.preResponse);
             this.handleErrorResponseMessage(this.preResponse.responseErrorMessage);
         }
     }
@@ -32,7 +34,6 @@ export class StudentTestComponent extends Component {
     onInit() {
         this.attributesInitializer();
         this.eventsInitializer();
-        this.isSetParam();
         this.loadTest();
     }
 
