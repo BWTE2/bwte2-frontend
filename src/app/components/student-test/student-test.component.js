@@ -1,6 +1,7 @@
 import {Component} from "../../shared/model/component/component.js";
 import {domService} from "../../shared/services/dom.service.js";
 import {testsService} from "../../api/tests/services/tests.service.js";
+import {serverSentEventsService} from "../../api/server-sent-events/services/server-sent-events.service.js";
 
 
 const component = {
@@ -22,7 +23,6 @@ export class StudentTestComponent extends Component {
     onInit() {
         this.attributesInitializer();
         this.eventsInitializer();
-
     }
 
 
@@ -40,11 +40,14 @@ export class StudentTestComponent extends Component {
         const testKey = this.getTestKey();
         const studentId = this.getStudentId();
         const allAnswers = this.getAllAnswers();
-        console.log(allAnswers)
-        testsService.createStudentTestAnswers(studentId, testKey, allAnswers)
-            .then((json) =>this.redirectToLoginPage());
 
+        testsService.createStudentTestAnswers(studentId, testKey, allAnswers)
+            .then(this.redirectToLoginPage);
     };
+
+    redirectToLoginPage = () =>{
+       window.location.replace("/bwte2/");
+    }
 
     getStudentId() {
         let queryParams = window.location.search;
@@ -119,7 +122,6 @@ export class StudentTestComponent extends Component {
         test = test.response;
         this.dom.getElementById("paper").innerHTML = "";
 
-        console.log(test);
         if (!test.exists) {
             return;
         } else if (test.exists && !test.activated) {
@@ -132,6 +134,8 @@ export class StudentTestComponent extends Component {
             this.showQuestion(question);
             questionCount++;
         }
+
+        this.startTimer();
     }
 
 
@@ -184,10 +188,12 @@ export class StudentTestComponent extends Component {
         paper.appendChild(appQuestion);
     }
 
-
-    redirectToLoginPage() {
-        location.replace("../../../index.html");
+    startTimer = () =>{
+        const testKey = this.getTestKey();
+        this.timeSource = serverSentEventsService.readTestTimer(testKey);
     }
+
+
 
     isSetParam() {
         if (this.getTestKey() === null || this.getStudentId() === null) {

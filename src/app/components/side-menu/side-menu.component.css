@@ -76,3 +76,20 @@ button, span, a {
         padding-top: 15px;
     }
 }
+
+#side-menu #timer-container{
+    display: block;
+    text-align: center;
+    margin-top: 75%;
+    color: black;
+}
+
+#side-menu #timer-container span{
+    font-size: 30px;
+    font-weight: 400;
+}
+
+#side-menu #timer-container #timer{
+    font-size: 50px;
+    font-weight: 400;
+}
