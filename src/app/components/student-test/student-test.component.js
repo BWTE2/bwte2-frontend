@@ -20,8 +20,6 @@ export class StudentTestComponent extends Component {
     }
 
     onInit() {
-        // this.isSetParam();
-        // this.loadTest();
         this.attributesInitializer();
         this.eventsInitializer();
 
@@ -36,8 +34,6 @@ export class StudentTestComponent extends Component {
         document.addEventListener("sendTest", this.sendTest);
         const sideMenu = this.dom.getElementById("side-menu");
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
-        const questionsButton = this.dom.getElementById("questions-button");
-        questionsButton.addEventListener("click", this.loadTest);
     }
 
     sendTest = () => {
@@ -46,13 +42,11 @@ export class StudentTestComponent extends Component {
         const allAnswers = this.getAllAnswers();
         console.log(allAnswers)
         testsService.createStudentTestAnswers(studentId, testKey, allAnswers)
-            .then((json) => console.log(json));
+            .then((json) =>this.redirectToLoginPage());
+
     };
 
     getStudentId() {
-        //TODO: prerobit podla potreby, zatial v development faze
-
-        // return "1";
         let queryParams = window.location.search;
         let params = new URLSearchParams(queryParams);
 
@@ -100,25 +94,19 @@ export class StudentTestComponent extends Component {
     loadTest = async () => {
 
         const testKey = this.getTestKey();
+        const preResponse = await testsService.readQuestions(testKey);
 
-        try {
-            const preResponse = await testsService.readQuestions(testKey);
-
-            this.showAllQuestions(preResponse);
-        }catch (e) {
-            this.redirectToLoginPage();
+        if(preResponse.responseErrorMessage !== undefined)
+        {
+            this.handeErrorResponseMessage(preResponse.responseErrorMessage);
         }
-
-
-
-
+        else
+        {
+            this.showAllQuestions(preResponse);
+        }
     }
 
     getTestKey() {
-        //TODO: tento kod treba prerobit ked sa vytvori prihlasovanie k testu
-
-        // const keyInput = this.dom.getElementById("key-input");
-        // return keyInput.value;
 
         let queryParams = window.location.search;
         let params = new URLSearchParams(queryParams);
@@ -131,8 +119,6 @@ export class StudentTestComponent extends Component {
         test = test.response;
         this.dom.getElementById("paper").innerHTML = "";
 
-        //TODO: funkcia informAboutTestFetch je len pre development, po dokonceni loginu treba preprogramovat
-        this.informAboutTestFetch(test);
         console.log(test);
         if (!test.exists) {
             return;
@@ -148,15 +134,6 @@ export class StudentTestComponent extends Component {
         }
     }
 
-    informAboutTestFetch(test) {
-        if (!test.exists) {
-            this.dom.getElementById("test-info").innerHTML = "TEST NEEXISTUJE";
-        } else if (test.exists && !test.activated) {
-            this.dom.getElementById("test-info").innerHTML = "TEST NIE JE AKTIVOVANY";
-        } else {
-            this.dom.getElementById("test-info").innerHTML = "TEST: " + test.testName;
-        }
-    }
 
     showQuestion(question) {
         if (question.type === "CHOICE") {
@@ -214,6 +191,14 @@ export class StudentTestComponent extends Component {
 
     isSetParam() {
         if (this.getTestKey() === null || this.getStudentId() === null) {
+            this.redirectToLoginPage();
+        }
+    }
+
+    handeErrorResponseMessage(errorMessage)
+    {
+        if(errorMessage.responseCode === 401)
+        {
             this.redirectToLoginPage();
         }
     }
