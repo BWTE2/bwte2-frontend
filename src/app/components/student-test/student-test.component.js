@@ -1,6 +1,7 @@
 import {Component} from "../../shared/model/component/component.js";
 import {domService} from "../../shared/services/dom.service.js";
 import {testsService} from "../../api/tests/services/tests.service.js";
+import {serverSentEventsService} from "../../api/server-sent-events/services/server-sent-events.service.js";
 
 
 const component = {
@@ -34,16 +35,21 @@ export class StudentTestComponent extends Component {
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
         const questionsButton = this.dom.getElementById("questions-button");
         questionsButton.addEventListener("click", this.loadTest);
+
     }
 
     sendTest = () => {
         const testKey = this.getTestKey();
         const studentId = this.getStudentId();
         const allAnswers = this.getAllAnswers();
-        console.log(allAnswers)
+
         testsService.createStudentTestAnswers(studentId, testKey, allAnswers)
-            .then((json) => console.log(json));
+            .then(this.finishTest);
     };
+
+    finishTest = () =>{
+       window.location.replace("/bwte2/");
+    }
 
     getStudentId() {
         //TODO: prerobit podla potreby, zatial v development faze
@@ -119,6 +125,8 @@ export class StudentTestComponent extends Component {
             this.showQuestion(question);
             questionCount++;
         }
+
+        this.startTimer();
     }
 
     informAboutTestFetch(test) {
@@ -178,5 +186,10 @@ export class StudentTestComponent extends Component {
         const appQuestion = document.createElement("APP-MATH-QUESTION");
         domService.setAttribute(appQuestion, "questionInfo", question);
         paper.appendChild(appQuestion);
+    }
+
+    startTimer = () =>{
+        const testKey = this.getTestKey();
+        this.timeSource = serverSentEventsService.readTestTimer(testKey);
     }
 }
