@@ -24,8 +24,9 @@ export class StudentTestComponent extends Component {
     async checkUnauthorized() {
         const testKey = this.getTestKey();
         this.preResponse = await testsService.readQuestions(testKey);
-        alert(this.preResponse.responseErrorMessage.responseCode)
+
         if (this.preResponse) {
+            alert(this.preResponse.responseErrorMessage.responseCode)
             console.log(this.preResponse);
             this.handleErrorResponseMessage(this.preResponse.responseErrorMessage);
         }
