@@ -4,11 +4,11 @@
     left: 50%;
     border-radius: 20px;
     padding: 20px;
-    width: 300px;
+    width: 380px;
     bottom: 50px;
     height: 20px;
     align-items: center;
-    color: rgba(0, 0, 0, 0.9);
+    color: var(--primary-color);
     font-size: 14px;
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14),
