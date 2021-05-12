@@ -33,6 +33,7 @@ export class SideMenuComponent extends Component {
         try {
             this.dom.getElementById("side-menu-swap-button").addEventListener("click", this.swapMenu);
             this.dom.getElementById("send-test-button").addEventListener('click', this.sendTest);
+            document.addEventListener("changeTime",this.readTime);
         } catch (e) {
             document.addEventListener("testDetail", this.showDetailMenu);
             this.dom.getElementById("create-test-button").addEventListener('click', this.openCreateTest);
@@ -40,8 +41,26 @@ export class SideMenuComponent extends Component {
             this.dom.getElementById("logout-button").addEventListener('click', this.logout);
             document.addEventListener("updateAllTests", this.openShowAll);
         }
+    }
 
+    readTime = (event) =>{
+        const data = event.detail;
+        if(data === "inactive-test" || data === "invalid-key"){
+            window.location.replace("/bwte2/");
+        }
 
+        if(data === "0"){
+            this.sendTest();
+        }
+
+        const time = this.secondsToTime(data);
+        this.dom.getElementById("timer").innerText = time + "";
+    }
+
+    secondsToTime(seconds){
+        const date = new Date(0);
+        date.setSeconds(seconds);
+        return  date.toISOString().substr(11, 8);
     }
 
     menuTypeHandler() {
@@ -148,10 +167,6 @@ export class SideMenuComponent extends Component {
         });
     }
 
-    readTime() {
-        const time = domService.getAttribute(this, "time");
-        this.dom.getElementById("timer").innerText = time + "";
-    }
 
     setHeaderName() {
         const headerName = domService.getAttribute(this, "headerName");
