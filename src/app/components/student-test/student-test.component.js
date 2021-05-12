@@ -15,14 +15,14 @@ export class StudentTestComponent extends Component {
 
     constructor() {
         super(component);
-        this.isSetParam();
-        this.loadTest();
         this.load().then(() => this.onInit());
     }
 
     onInit() {
         this.attributesInitializer();
         this.eventsInitializer();
+        this.isSetParam();
+        this.loadTest();
     }
 
 
@@ -35,6 +35,8 @@ export class StudentTestComponent extends Component {
         const sideMenu = this.dom.getElementById("side-menu");
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
     }
+
+
 
     sendTest = () => {
         const testKey = this.getTestKey();
@@ -118,7 +120,6 @@ export class StudentTestComponent extends Component {
     }
 
     showAllQuestions(test) {
-
         test = test.response;
         this.dom.getElementById("paper").innerHTML = "";
 
