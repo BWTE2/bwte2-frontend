@@ -91,6 +91,7 @@ export class PairQuestionComponent extends Component {
         let questionPlace = document.createElement("div");
         questionPlace.setAttribute("id",this.baseOfQuestionPlacePairId + order.toString());
         questionPlace.classList.add("pair-value-box");
+        questionPlace.classList.add("question-place");
         questionPlace.append(this.createValueText(question));
 
         return questionPlace;
@@ -113,7 +114,7 @@ export class PairQuestionComponent extends Component {
         let answerPlace = document.createElement("div");
         answerPlace.setAttribute("id", this.baseOfAnswerPlacePairId + order.toString());
         answerPlace.classList.add("pair-value-box");
-
+        answerPlace.classList.add("answer-place");
         answerPlace.addEventListener("drop", ev => this.drop(ev));
         answerPlace.addEventListener("dragover", ev => this.allowDrop(ev));
 

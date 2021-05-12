@@ -48,4 +48,13 @@
     margin-left: 14px;
     margin-right: 14px;
     border: 1px dotted #BDBDBD;
+    cursor: grab;
+}
+
+.question-place{
+    pointer-events: none;
+}
+
+.answer-place{
+  cursor: grab;
 }
