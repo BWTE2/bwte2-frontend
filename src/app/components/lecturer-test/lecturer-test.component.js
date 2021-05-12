@@ -59,7 +59,7 @@ export class LecturerTestComponent extends Component {
 
     openTestDetail = (response) => {
         const test = response.detail;
-        if (test.is_active === 1) {
+        if (test.is_active === '1') {
             this.activeTestDetail(test);
         } else {
             this.nonActiveTestDetail(test);

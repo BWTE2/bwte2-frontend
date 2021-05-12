@@ -55,8 +55,11 @@ export class NonActiveTestDetailComponent extends Component {
         const name = tableService.getColumn(student.name + ' ' + student.surname);
         const id = tableService.getColumn(student.id);
         const action = tableService.getIconButton('editTest', 'fa-arrow-circle-right');
+        const actionColumn = tableService.getColumn("");
+        action.classList.add("edit-test");
         action.addEventListener("click", this.editStudentTest);
-        const row = tableService.getRow([name, id, action]);
+        actionColumn.appendChild(action);
+        const row = tableService.getRow([name, id, actionColumn]);
         this.table.appendChild(row);
     };
 
