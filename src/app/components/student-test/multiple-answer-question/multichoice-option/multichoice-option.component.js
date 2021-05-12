@@ -21,20 +21,20 @@ export class MultichoiceOptionComponent extends Component {
         this.eventsInitializer();
     }
 
-    attributesInitializer(){
+    attributesInitializer() {
         const text = domService.getAttribute(this, "option").value1;
         this.dom.getElementById("option-label").innerText = text;
     }
 
-    eventsInitializer(){
+    eventsInitializer() {
 
     }
 
-    isChecked(){
+    isChecked() {
         return this.dom.getElementById("option-checkbox").checked;
     }
 
-    getAnswer(){
+    getAnswer() {
         return this.dom.getElementById("option-label").innerText;
     }
 }

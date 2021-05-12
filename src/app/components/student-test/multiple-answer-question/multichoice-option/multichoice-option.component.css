@@ -1,4 +1,4 @@
-#option-container{
+#option-container {
     margin-top: 10px;
     height: 30px;
     display: inline-flex;
@@ -16,18 +16,17 @@
     border: 2px solid #BDBDBD;
     padding: 9px;
     cursor: pointer;
-    margin:auto;
+    margin: auto;
 }
 
-#option-container #option-checkbox:checked{
+#option-container #option-checkbox:checked {
     border: 3px solid #55AB5D;
     position: relative;
 }
 
-#option-container #option-checkbox:checked:before
-{
-    content:'✔';
-    display:block;
+#option-container #option-checkbox:checked:before {
+    content: '✔';
+    display: block;
     font-size: large;
     color: #55AB5D;
     margin: auto;
@@ -36,7 +35,7 @@
     left: 4px;
 }
 
-#option-container #option-label{
+#option-container #option-label {
     vertical-align: middle;
     margin-left: 10px;
 }
