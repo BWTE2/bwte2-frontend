@@ -21,18 +21,18 @@ export class MultipleAnswerQuestionComponent extends Component {
         this.eventsInitializer();
     }
 
-    attributesInitializer(){
+    attributesInitializer() {
         const question = domService.getAttribute(this, "questionInfo");
 
-       this.loadQuestionWording(question);
-       this.loadQuestionBody(question);
+        this.loadQuestionWording(question);
+        this.loadQuestionBody(question);
     }
 
-    eventsInitializer(){
+    eventsInitializer() {
 
     }
 
-    loadQuestionWording(question){
+    loadQuestionWording(question) {
         const questionWordingElement = this.dom.getElementById("question-wording-element");
         const questionWording = {
             text: question.questionText,
@@ -41,22 +41,22 @@ export class MultipleAnswerQuestionComponent extends Component {
         domService.setAttribute(questionWordingElement, "questionWording", questionWording);
     }
 
-    loadQuestionBody(question){
+    loadQuestionBody(question) {
         const allOptions = question.otherInfo.options;
         const optionsContainer = this.dom.getElementById("options-container");
-        for(let option of allOptions){
+        for (let option of allOptions) {
             const optionElement = document.createElement("APP-MULTICHOICE-OPTION");
-            domService.setAttribute(optionElement,"option", option);
+            domService.setAttribute(optionElement, "option", option);
             optionsContainer.appendChild(optionElement);
         }
     }
 
 
-    getAnswer(){
+    getAnswer() {
         const answersId = []
         const optionsContainer = this.dom.getElementById("options-container");
-        for (let optionElement of optionsContainer.getElementsByTagName("*")){
-            if(optionElement.isChecked()) {
+        for (let optionElement of optionsContainer.getElementsByTagName("*")) {
+            if (optionElement.isChecked()) {
                 const optionInfo = domService.getAttribute(optionElement, "option");
                 const optionId = optionInfo.id;
                 answersId.push(optionId);

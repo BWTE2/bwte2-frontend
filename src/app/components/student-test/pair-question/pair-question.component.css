@@ -1,5 +1,4 @@
-#question-pairs
-{
+#question-pairs {
     display: flex;
     flex-direction: column;
     flex: 1 100%;
@@ -14,7 +13,7 @@
 }
 
 
-.pair-value-box{
+.pair-value-box {
     width: 300px;
     max-width: 300px;
     min-height: 150px;
@@ -26,7 +25,7 @@
     word-wrap: break-word;
 }
 
-.answer-div{
+.answer-div {
     max-width: 300px;
     min-height: 150px;
     text-align: center;
@@ -34,7 +33,7 @@
     justify-content: center;
 }
 
-.value-text{
+.value-text {
     margin: 5px;
     align-self: center;
     font-family: 'Roboto', serif;
@@ -43,18 +42,17 @@
 }
 
 
-.correct-place
-{
+.correct-place {
     margin-left: 14px;
     margin-right: 14px;
     border: 1px dotted #BDBDBD;
     cursor: grab;
 }
 
-.question-place{
+.question-place {
     pointer-events: none;
 }
 
-.answer-place{
-  cursor: grab;
+.answer-place {
+    cursor: grab;
 }

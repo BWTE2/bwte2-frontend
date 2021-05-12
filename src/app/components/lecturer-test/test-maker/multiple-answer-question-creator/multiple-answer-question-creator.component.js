@@ -30,7 +30,7 @@ export class MultipleAnswerQuestionCreatorComponent extends Component {
         addAnswerButton.addEventListener("click", this.addAnswer);
     }
 
-    addAnswer = () =>{
+    addAnswer = () => {
         const newAnswer = document.createElement("APP-CHECK-ANSWER");
         domService.setAttribute(newAnswer, "defaultChecked", false);
 
@@ -38,23 +38,23 @@ export class MultipleAnswerQuestionCreatorComponent extends Component {
         allAnswersContainer.appendChild(newAnswer);
     }
 
-    getInfo(){
+    getInfo() {
         const allAnswers = this.getAllAnswers();
         const question = this.dom.getElementById("question").value;
         const points = this.dom.getElementById("points").value;
 
-        return  {
+        return {
             question: question,
             points: points,
             answers: allAnswers
         };
     }
 
-    getAllAnswers(){
+    getAllAnswers() {
         const allAnswers = [];
 
         const allAnswerElements = this.dom.getElementById("all-answers-container").getElementsByTagName("*");
-        for(let answer of allAnswerElements){
+        for (let answer of allAnswerElements) {
             allAnswers.push(answer.getInfo());
         }
 
