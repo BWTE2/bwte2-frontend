@@ -46,7 +46,7 @@ export class StudentTestComponent extends Component {
     };
 
     redirectToLoginPage = () =>{
-       window.location.replace("/bwte2/");
+        location.replace("../../../index.html");
     }
 
     getStudentId() {
