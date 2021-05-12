@@ -61,7 +61,7 @@ export class SnackbarComponent extends Component {
         } else if (type === "danger") {
             return '#DE354C'
         } else if (type === "warning") {
-            return '#ded635'
+            return '#E8B125'
         } else {
             console.warn("Bad snacbar type {success,danger,warning}")
         }
