@@ -36,13 +36,14 @@ export class NonActiveTestDetailComponent extends Component {
     setStudents() {
         const testInfo = domService.getAttribute(this, 'test');
         this.dom.getElementById("test-title").innerText = testInfo.title;
-        this.dom.getElementById("test-code").innerText = "#" + testInfo.code
+        this.dom.getElementById("test-code").innerText = "#" + testInfo.code;
+        this.studentTest = {testCode: testInfo.code, studentId: null};
         testsService.readTestAnswers(testInfo.code).then(this.appendStudents);
     }
 
     appendStudents = (json) => {
         const students = json.response.students;
-        if (students) {
+        if (students && students.length !== 0) {
             students.forEach(this.createRow);
         } else {
             const body = this.dom.getElementById("test-table-body");
@@ -57,6 +58,7 @@ export class NonActiveTestDetailComponent extends Component {
         const action = tableService.getIconButton('editTest', 'fa-arrow-circle-right');
         const actionColumn = tableService.getColumn("");
         action.classList.add("edit-test");
+        this.studentTest.studentId = student.id;
         action.addEventListener("click", this.editStudentTest);
         actionColumn.appendChild(action);
         const row = tableService.getRow([name, id, actionColumn]);
@@ -64,7 +66,7 @@ export class NonActiveTestDetailComponent extends Component {
     };
 
     editStudentTest = () => {
-        //TODO:JA TO DOROBIM KED VSTANEM
+        domService.createAndEmitEvent(document, "testEdit", this.studentTest);
     };
 
 }
