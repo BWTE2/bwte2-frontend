@@ -42,7 +42,7 @@ export class ActiveTestDetailComponent extends Component {
 
     appendStudents = (json) => {
         const students = json.response.students;
-        if (students) {
+        if (students && students.length !== 0) {
             students.forEach(this.createRow);
         } else {
             const body = this.dom.getElementById("test-table-body");

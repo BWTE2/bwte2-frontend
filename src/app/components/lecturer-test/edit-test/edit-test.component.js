@@ -1,4 +1,6 @@
 import {Component} from "../../../shared/model/component/component.js";
+import {domService} from "../../../shared/services/dom.service.js";
+import {testsService} from "../../../api/tests/services/tests.service.js";
 
 const component = {
     selector: 'app-edit-test',
@@ -20,9 +22,16 @@ export class EditTestComponent extends Component {
     }
 
     attributesInitializer() {
+        const studentTestId = domService.getAttribute(this, "studentTestId");
+        testsService.readStudentTestAnswers(studentTestId.studentId, studentTestId.testCode).then(this.setTest);
 
     }
 
     eventsInitializer() {
     }
+
+    setTest = (student) => {
+        console.log(student);
+    };
 }
+
