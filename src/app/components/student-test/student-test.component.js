@@ -15,6 +15,7 @@ export class StudentTestComponent extends Component {
 
     constructor() {
         super(component);
+        this.wantSendTest = false;
         this.checkUnauthorized().then(() => {
             this.isSetParam();
             this.load().then(() => this.onInit());
@@ -47,6 +48,25 @@ export class StudentTestComponent extends Component {
         document.addEventListener("sendTest", this.sendTest);
         const sideMenu = this.dom.getElementById("side-menu");
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
+
+        window.addEventListener("beforeunload",(e) =>{
+            if(!this.wantSendTest){
+
+                e = e || window.event;
+                //IE & Firefox
+                if (e) {
+                    e.returnValue = 'Are you sure?';
+                }
+                // For Safari
+                return 'Are you sure?';
+            }
+        });
+
+        window.addEventListener("unload", () => {
+            if(!this.wantSendTest) {
+                this.sendTest()
+            }
+        });
     }
 
 
@@ -57,8 +77,13 @@ export class StudentTestComponent extends Component {
         const allAnswers = this.getAllAnswers();
 
         testsService.createStudentTestAnswers(studentId, testKey, allAnswers)
+            .then(this.unsetUnloadEvents)
             .then(this.redirectToLoginPage);
     };
+
+    unsetUnloadEvents = () =>{
+        this.wantSendTest = true;
+    }
 
     redirectToLoginPage = () => {
         location.replace("../../../index.html");
