@@ -75,7 +75,18 @@ export class LecturerRegisterFormComponent extends Component {
 
     loginLecturer(lecturer)
     {
-        //TODO: redirectni na hlavnu stranku ucitela
+        location.replace(this.getLecturerUrl(lecturer.lecturerId));
+    }
+
+    getLecturerUrl(lerturerId)
+    {
+        let baseUrl = "app/views/lecturer-test/index.html";
+
+        // let params = "?lecturerId=" + lerturerId;
+        //
+        // return baseUrl + params;
+
+        return baseUrl;
     }
 
     isAbleToLogin(data)

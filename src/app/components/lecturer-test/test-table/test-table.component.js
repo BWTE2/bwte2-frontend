@@ -15,8 +15,25 @@ export class TestTableComponent extends Component {
 
     constructor() {
         super(component);
-        this.load().then(() => this.onInit());
+        this.checkUnauthorized().then(() =>{
+            // this.isSetParam();
+            this.load().then(() => this.onInit());
+        })
+
     }
+
+    async checkUnauthorized()
+    {
+        this.preResponse = await testsService.readTests();
+
+        if(this.preResponse.responseErrorMessage)
+        {
+            alert(this.preResponse.responseErrorMessage.responseCode)
+            console.log(this.preResponse);
+            this.handleErrorResponseMessage(this.preResponse.responseErrorMessage);
+        }
+    }
+
 
     onInit() {
         this.setAllTests();
@@ -108,6 +125,30 @@ export class TestTableComponent extends Component {
             return tableService.getColumn("Aktívny");
         } else {
             return tableService.getColumn("Neaktívny");
+        }
+    }
+
+    getLecturerId() {
+
+        let queryParams = window.location.search;
+        let params = new URLSearchParams(queryParams);
+
+        return params.get("lecturerId");
+    }
+
+    redirectToLoginPage = () => {
+        location.replace("../../../index.html");
+    }
+
+    isSetParam() {
+        if (this.getLecturerId() === null) {
+            this.redirectToLoginPage();
+        }
+    }
+
+    handleErrorResponseMessage(errorMessage) {
+        if (errorMessage.responseCode === 401) {
+            this.redirectToLoginPage();
         }
     }
 
