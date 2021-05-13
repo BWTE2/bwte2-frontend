@@ -51,14 +51,14 @@ export class StudentTestComponent extends Component {
 
         window.addEventListener("beforeunload",(e) =>{
             if(!this.wantSendTest){
-
+                e.preventDefault();
                 e = e || window.event;
                 //IE & Firefox
                 if (e) {
-                    e.returnValue = 'Are you sure?';
+                    e.returnValue = 'Pokiaľ odídeš, test sa odošle.';
                 }
                 // For Safari
-                return 'Are you sure?';
+                return 'Pokiaľ odídeš, test sa odošle.';
             }
         });
 
