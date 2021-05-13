@@ -136,7 +136,6 @@ export class StudentTestComponent extends Component {
             this.showQuestion(question);
             questionCount++;
         }
-
         this.startTimer();
     }
 
