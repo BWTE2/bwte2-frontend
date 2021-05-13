@@ -29,17 +29,17 @@ export class MathPanelComponent extends Component {
 
     generateButtons(cat)
     {
-        var panel = this.dom.getElementById("math-panel");
+        let panel = this.dom.getElementById("math-panel");
 
-        var panelContent = document.createElement("div");
+        let panelContent = document.createElement("div");
         panelContent.id = "panelContent";
         panel.appendChild(panelContent);
 
-        var panelContentSymbols = document.createElement("div");
+        let panelContentSymbols = document.createElement("div");
         panelContentSymbols.id = "panelContentSymbols";
         panel.appendChild(panelContentSymbols);
 
-        let zatvorky = {
+        let parentheses = {
             "{": "{",
             "}": "}",
             "[": "[",
@@ -47,7 +47,7 @@ export class MathPanelComponent extends Component {
             "(": "(",
             ")": ")"
         }
-        let funkcie = {
+        let functions = {
             "log": "\\log",
             "ln": "\\ln",
             "sin": "\\sin",
@@ -57,8 +57,7 @@ export class MathPanelComponent extends Component {
             "arcsin": "\\arcsin",
             "arccos": "\\arccos",
         }
-
-        let operacie = {
+        let operations = {
             "≠": "\\ne",
             "=": "=",
             "+": "+",
@@ -73,22 +72,21 @@ export class MathPanelComponent extends Component {
             "∏": "\\prod",
             "lim": "\\lim",
         }
-
-        let konstanty = {
+        let constants = {
             "π": "\\pi",
             "e": "e",
             "λ": "\\lambda",
         }
 
-        var map = new Map();
-        map.set("Operácie", operacie);
-        map.set("Funkcie", funkcie);
-        map.set("Konštanty", konstanty);
-        map.set("Zátvorky", zatvorky);
+        let map = new Map();
+        map.set("Operácie", operations);
+        map.set("Funkcie", functions);
+        map.set("Konštanty", constants);
+        map.set("Zátvorky", parentheses);
 
         for (let e of map)
         {
-            var btn = document.createElement("button");
+            let btn = document.createElement("button");
             btn.innerText = e[0];
             btn.addEventListener('click', (e) => {
                 panelContent.remove();
@@ -98,14 +96,14 @@ export class MathPanelComponent extends Component {
             panelContent.appendChild(btn);
         }
 
-        for(var key in map.get(cat))
+        for(let key in map.get(cat))
         {
-            var newbtn = document.createElement("button");
+            let newbtn = document.createElement("button");
             newbtn.innerHTML = key;
 
             newbtn.addEventListener("click",
                 (e) => {
-                    domService.createAndEmitEvent(this, "fnc123", map.get(cat)[e.target.innerText]);
+                    domService.createAndEmitEvent(this, "mathSymbolAppear", map.get(cat)[e.target.innerText]);
                 });
 
             panelContentSymbols.appendChild(newbtn);

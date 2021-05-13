@@ -33,8 +33,8 @@ export class MathQuestionComponent extends Component {
     eventsInitializer() {
         const math_panel = this.dom.getElementById("math-panel");
 
-        math_panel.addEventListener("fnc123", (e) =>{
-            var answerSpan = this.dom.getElementById("answer");
+        math_panel.addEventListener("mathSymbolAppear", (e) =>{
+            let answerSpan = this.dom.getElementById("answer");
             MQ(answerSpan).cmd(e.detail);
         });
     }
@@ -48,7 +48,7 @@ export class MathQuestionComponent extends Component {
             points: question.points
         }
 
-        var newText = document.createElement("p");
+        let newText = document.createElement("p");
         newText.innerHTML = textMath[1];
         MQ.StaticMath(newText);
         this.dom.getElementById("math-exp").appendChild(newText);
@@ -57,11 +57,11 @@ export class MathQuestionComponent extends Component {
     }
 
     loadQuestionBody(question) {
-        var answerSpan = this.dom.getElementById('answer');
-        var answerMathField = MQ.MathField(answerSpan, {
+        let answerSpan = this.dom.getElementById('answer');
+        let answerMathField = MQ.MathField(answerSpan, {
             handlers: {
                 edit: function() {
-                    var enteredMath = answerMathField.latex();
+                    let enteredMath = answerMathField.latex();
                 }
             }
         });

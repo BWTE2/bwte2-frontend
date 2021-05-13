@@ -38,7 +38,7 @@ export class MathQuestionCreatorComponent extends Component {
     eventsInitializer() {
         const mathPanel = this.dom.getElementById("math-panel");
 
-        mathPanel.addEventListener("fnc123", (e) =>{
+        mathPanel.addEventListener("mathSymbolAppear", (e) =>{
             let answerSpan = this.dom.getElementById("answer");
             MQ(answerSpan).cmd(e.detail);
         });
