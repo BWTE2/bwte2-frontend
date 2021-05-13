@@ -2,6 +2,7 @@ import {Component} from "../../shared/model/component/component.js";
 import {domService} from "../../shared/services/dom.service.js";
 import {testsService} from "../../api/tests/services/tests.service.js";
 import {serverSentEventsService} from "../../api/server-sent-events/services/server-sent-events.service.js";
+import {studentService} from "../../api/student/services/student.service.js";
 
 
 const component = {
@@ -55,8 +56,25 @@ export class StudentTestComponent extends Component {
                 this.sendTest()
             }
         });
+
+
+        window.addEventListener("focus", this.updateInTestStatus);
+        window.addEventListener("blur", this.updateOutTestStatus);
     }
 
+    updateInTestStatus = () =>{
+        const testKey = this.getTestKey();
+        const studentId = this.getStudentId();
+        studentService.updateInTestStatus(testKey, studentId)
+            .then((response) => console.log(response));
+    }
+
+    updateOutTestStatus = () =>{
+        const testKey = this.getTestKey();
+        const studentId = this.getStudentId();
+        studentService.updateOutTestStatus(testKey, studentId)
+            .then((response) => console.log(response));
+    }
 
 
     sendTest = () => {
