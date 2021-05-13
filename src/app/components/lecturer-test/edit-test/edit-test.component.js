@@ -32,18 +32,20 @@ export class EditTestComponent extends Component {
 
     }
 
-    appendQuestion(question) {
-        const attribute = {name: "question", data: question};
+    appendQuestion(test) {
+        const attribute = {name: "test", data:test};
+        const question = test.question;
+        const paper=this.dom.getElementById("paper");
         if (question.type === "CHOICE") {
-            domService.appendDomAndSetAttribute(this.dom, MultipleAnswerQuestionViewComponent, attribute);
+            domService.appendDomAndSetAttribute(paper, MultipleAnswerQuestionViewComponent, attribute);
         } else if (question.type === "SHORT_ANSWER") {
-            domService.appendDomAndSetAttribute(this.dom, OneAnswerQuestionViewComponent, attribute);
+            domService.appendDomAndSetAttribute(paper, OneAnswerQuestionViewComponent, attribute);
         } else if (question.type === "PAIR") {
-            domService.appendDomAndSetAttribute(this.dom, PairQuestionViewComponent, attribute);
+            domService.appendDomAndSetAttribute(paper, PairQuestionViewComponent, attribute);
         } else if (question.type === "DRAW") {
-            domService.appendDomAndSetAttribute(this.dom, DrawQuestionViewComponent, attribute);
+            domService.appendDomAndSetAttribute(paper, DrawQuestionViewComponent, attribute);
         } else if (question.type === "MATH") {
-            domService.appendDomAndSetAttribute(this.dom, MultipleAnswerQuestionViewComponent, attribute);
+            domService.appendDomAndSetAttribute(paper, MultipleAnswerQuestionViewComponent, attribute);
         }
     }
 
@@ -52,7 +54,9 @@ export class EditTestComponent extends Component {
 
     setTest = (test) => {
         test.response.questions.forEach((questionWithAnswer) => {
-            console.log(questionWithAnswer.studentQuestionAnswer);
+            const question = questionWithAnswer.studentQuestionAnswer.question;
+            const answers = questionWithAnswer.studentQuestionAnswer.answers;
+            this.appendQuestion({question, answers});
         })
     };
 }
