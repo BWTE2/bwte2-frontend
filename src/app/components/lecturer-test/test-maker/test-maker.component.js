@@ -18,6 +18,7 @@ export class TestMakerComponent extends Component {
     }
 
     onInit() {
+        this.questionsContainer = this.dom.getElementById("question-creator-container");
         this.attributesInitializer();
         this.eventsInitializer();
     }
@@ -28,15 +29,59 @@ export class TestMakerComponent extends Component {
     }
 
     eventsInitializer() {
+        this.initButtons();
         document.addEventListener("sendTest", this.sendTest);
     }
 
-    sendTest = () =>{
+    initButtons() {
+        const addMultiChoiceButton = this.dom.getElementById("add-multichoice-button");
+        addMultiChoiceButton.addEventListener("click", this.createMultiChoiceQuestion);
+        const addOpenAnswerQuestionButton = this.dom.getElementById("add-open-answer-button");
+        addOpenAnswerQuestionButton.addEventListener("click", this.createOpenAnswerQuestion);
+        const addPairQuestionButton = this.dom.getElementById("add-pair-question-button");
+        addPairQuestionButton.addEventListener("click", this.createPairQuestion);
+        const addDrawQuestionButton = this.dom.getElementById("add-draw-question-button");
+        addDrawQuestionButton.addEventListener("click", this.createDrawQuestion);
+        const addMathQuestionButton = this.dom.getElementById("add-math-question-button");
+        addMathQuestionButton.addEventListener("click", this.createMathQuestion);
+    }
+
+    createMultiChoiceQuestion = () => {
+        const question = document.createElement("APP-MULTIPLE-ANSWER-QUESTION-CREATOR");
+        this.appendQuestionAndScroll(question);
+    }
+
+    createOpenAnswerQuestion = () => {
+        const question = document.createElement("APP-ONE-ANSWER-QUESTION-CREATOR");
+        this.appendQuestionAndScroll(question);
+    };
+
+    createPairQuestion = () => {
+        const question = document.createElement("APP-PAIR-QUESTION-CREATOR");
+        this.appendQuestionAndScroll(question);
+    };
+
+    createDrawQuestion = () => {
+        const question = document.createElement("APP-DRAW-QUESTION-CREATOR");
+        this.appendQuestionAndScroll(question);
+    };
+
+    createMathQuestion = () => {
+        const question = document.createElement("APP-MATH-QUESTION-CREATOR");
+        this.appendQuestionAndScroll(question);
+    };
+
+    appendQuestionAndScroll(question) {
+        this.questionsContainer.appendChild(question);
+        question.scrollIntoView();
+    }
+
+    sendTest = () => {
         keyGeneratorService.readGeneratedKey()
             .then(this.sendTestWithKey)
     }
 
-    sendTestWithKey = (json) =>{
+    sendTestWithKey = (json) => {
         const testName = this.dom.getElementById("test-name").value;
         const timeLimit = this.dom.getElementById("time-limit").value;
         const questions = this.getAllQuestions();
@@ -48,16 +93,14 @@ export class TestMakerComponent extends Component {
             questions: questions
         }
 
-       testsService.createTest(key, test)
-           .then(() => location.reload());
+        testsService.createTest(key, test)
+            .then(() => location.reload());
     }
 
-    getAllQuestions(){
+    getAllQuestions() {
         const allQuestions = [];
-        const questionCreatorsContainer = this.dom.getElementById("question-wording-properties");
-
-        for(let question of questionCreatorsContainer.getElementsByTagName("*") )
-        {
+        const allCreators = this.questionsContainer.getElementsByTagName("*");
+        for (let question of allCreators) {
             const questionInfo = this.getQuestionInfo(question);
             allQuestions.push(questionInfo);
         }
@@ -65,44 +108,46 @@ export class TestMakerComponent extends Component {
         return allQuestions;
     }
 
-    getQuestionInfo(question){
-        //TODO: doplnte obsah funkcii na ziskavanie info z vasej otazky
+    getQuestionInfo(question) {
         let questionInfo;
 
-        if(question.tagName === 'APP-MULTIPLE-ANSWER-QUESTION-CREATOR'){
+        if (question.tagName === 'APP-MULTIPLE-ANSWER-QUESTION-CREATOR') {
             questionInfo = this.getMultiChoiceQuestionInfo(question);
-        }
-        else if(question.tagName === 'APP-MATH-QUESTION-CREATOR'){
+        } else if (question.tagName === 'APP-MATH-QUESTION-CREATOR') {
             questionInfo = this.getMathQuestionInfo(question);
-        }
-        else if(question.tagName === 'APP-ONE-ANSWER-QUESTION-CREATOR'){
+        } else if (question.tagName === 'APP-ONE-ANSWER-QUESTION-CREATOR') {
             questionInfo = this.getOneAnswerQuestionInfo(question);
-        }
-        else if(question.tagName === 'APP-PAIR-QUESTION-CREATOR'){
+        } else if (question.tagName === 'APP-PAIR-QUESTION-CREATOR') {
             questionInfo = this.getPairQuestionInfo(question);
+        } else if (question.tagName === 'APP-DRAW-QUESTION-CREATOR') {
+            questionInfo = this.getDrawQuestionInfo(question);
         }
-
-        return  questionInfo;
+        return questionInfo;
     }
 
-    getMultiChoiceQuestionInfo(question){
+    getMultiChoiceQuestionInfo(question) {
         const data = question.getInfo();
         return {type: "multiChoice", data: data};
     }
 
-    getMathQuestionInfo(question){
+    getMathQuestionInfo(question) {
         const data = question.getInfo();
         return {type: "math", data: data};
     }
 
-    getOneAnswerQuestionInfo(question){
+    getOneAnswerQuestionInfo(question) {
         const data = question.getInfo();
-        return {type: "oneAnswer", data: data};
+        return {type: "oneAnswerQuestion", data: data};
     }
 
-    getPairQuestionInfo(question){
+    getPairQuestionInfo(question) {
         const data = question.getInfo();
-        return {type: "oneAnswer", data: data};
+        return {type: "pairQuestion", data: data};
+    }
+
+    getDrawQuestionInfo(question) {
+        const data = question.getInfo();
+        return {type: "draw", data: data};
     }
 
 }
