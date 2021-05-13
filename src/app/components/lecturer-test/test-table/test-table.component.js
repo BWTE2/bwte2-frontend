@@ -28,8 +28,6 @@ export class TestTableComponent extends Component {
 
         if(this.preResponse.responseErrorMessage)
         {
-            alert(this.preResponse.responseErrorMessage.responseCode)
-            console.log(this.preResponse);
             this.handleErrorResponseMessage(this.preResponse.responseErrorMessage);
         }
     }
