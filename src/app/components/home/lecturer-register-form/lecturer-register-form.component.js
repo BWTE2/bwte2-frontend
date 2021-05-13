@@ -36,7 +36,7 @@ export class LecturerRegisterFormComponent extends Component {
 
     validateAndRegisterLecturer()
     {
-        if(this.isFilledInput())
+        if(this.isFilledInput() && this.isCorrectFormatEmail())
         {
             this.registerLecturer();
         }
@@ -65,7 +65,7 @@ export class LecturerRegisterFormComponent extends Component {
     verifyRegistrationDataAndLoginLecturer = (json) => {
         let data = json.response;
 
-        let isAbleToLogin = this.isCorrectRegistration(data);
+        let isAbleToLogin = this.isAbleToLogin(data);
 
         if(isAbleToLogin)
         {
@@ -75,10 +75,10 @@ export class LecturerRegisterFormComponent extends Component {
 
     loginLecturer(lecturer)
     {
-
+        //TODO: redirectni na hlavnu stranku ucitela
     }
 
-    isCorrectRegistration(data)
+    isAbleToLogin(data)
     {
         if(data.lecturerAlreadyExists)
         {
@@ -89,6 +89,7 @@ export class LecturerRegisterFormComponent extends Component {
         if(!data.correctRegistration)
         {
             this.showDangerMessage("Registrácia neprebehla úspešne", 3);
+            return false;
         }
 
         return true;
@@ -153,6 +154,22 @@ export class LecturerRegisterFormComponent extends Component {
     getLecturerPassword()
     {
         return this.dom.getElementById("password-lecturer").value.trim();
+    }
+
+
+    isCorrectFormatEmail()
+    {
+        const regex = new RegExp(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/gm);
+
+        let isCorrect = regex.test(this.getLecturerEmail());
+
+        if(!isCorrect)
+        {
+            this.showDangerMessage("Nesprávny format emailu",3);
+            return false;
+        }
+
+        return true;
     }
 
 
