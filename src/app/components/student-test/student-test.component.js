@@ -56,11 +56,25 @@ export class StudentTestComponent extends Component {
                 this.sendTest()
             }
         });
-/*
-        window.addEventListener("focus", () => {});
-        window.addEventListener("blur", () => {console.log("podvadzam")});*/
+
+
+        window.addEventListener("focus", this.updateInTestStatus);
+        window.addEventListener("blur", this.updateOutTestStatus);
     }
 
+    updateInTestStatus = () =>{
+        const testKey = this.getTestKey();
+        const studentId = this.getStudentId();
+        studentService.updateInTestStatus(testKey, studentId)
+            .then((response) => console.log(response));
+    }
+
+    updateOutTestStatus = () =>{
+        const testKey = this.getTestKey();
+        const studentId = this.getStudentId();
+        studentService.updateOutTestStatus(testKey, studentId)
+            .then((response) => console.log(response));
+    }
 
 
     sendTest = () => {
