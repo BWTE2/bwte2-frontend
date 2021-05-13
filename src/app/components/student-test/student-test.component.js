@@ -15,6 +15,7 @@ export class StudentTestComponent extends Component {
 
     constructor() {
         super(component);
+        this.wantSendTest = false;
         this.checkUnauthorized().then(() => {
             this.isSetParam();
             this.load().then(() => this.onInit());
@@ -47,7 +48,28 @@ export class StudentTestComponent extends Component {
         document.addEventListener("sendTest", this.sendTest);
         const sideMenu = this.dom.getElementById("side-menu");
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
+
+        window.addEventListener("beforeunload",(e) =>{
+            if(!this.wantSendTest){
+                e.preventDefault();
+                e = e || window.event;
+                //IE & Firefox
+                if (e) {
+                    e.returnValue = 'Pokiaľ odídeš, test sa odošle.';
+                }
+                // For Safari
+                return 'Pokiaľ odídeš, test sa odošle.';
+            }
+        });
+
+        window.addEventListener("unload", () => {
+            if(!this.wantSendTest) {
+                this.sendTest()
+            }
+        });
     }
+
+
 
     sendTest = () => {
         const testKey = this.getTestKey();
@@ -55,8 +77,13 @@ export class StudentTestComponent extends Component {
         const allAnswers = this.getAllAnswers();
 
         testsService.createStudentTestAnswers(studentId, testKey, allAnswers)
+            .then(this.unsetUnloadEvents)
             .then(this.redirectToLoginPage);
     };
+
+    unsetUnloadEvents = () =>{
+        this.wantSendTest = true;
+    }
 
     redirectToLoginPage = () => {
         location.replace("../../../index.html");
@@ -120,7 +147,6 @@ export class StudentTestComponent extends Component {
     }
 
     showAllQuestions(test) {
-
         test = test.response;
         this.dom.getElementById("paper").innerHTML = "";
 
