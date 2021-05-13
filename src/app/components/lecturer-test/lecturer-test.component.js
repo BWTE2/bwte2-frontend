@@ -4,6 +4,7 @@ import {TestMakerComponent} from "./test-maker/test-maker.component.js";
 import {TestTableComponent} from "./test-table/test-table.component.js";
 import {ActiveTestDetailComponent} from "./active-test-detail/active-test-detail.component.js";
 import {NonActiveTestDetailComponent} from "./non-active-test-detail/non-active-test-detail.component.js";
+import {EditTestComponent} from "./edit-test/edit-test.component.js";
 
 
 const component = {
@@ -35,8 +36,9 @@ export class LecturerTestComponent extends Component {
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
         sideMenu.addEventListener("openCreateTest", this.openTestBuilder);
         sideMenu.addEventListener("showAllTests", this.openAllTests);
-        document.addEventListener("updateAllTests", this.openAllTests);
         allTests.addEventListener("testDetail", this.openTestDetail)
+        document.addEventListener("updateAllTests", this.openAllTests);
+        document.addEventListener("testEdit", this.testEdit);
     }
 
     menuSwapped = (e) => {
@@ -67,8 +69,14 @@ export class LecturerTestComponent extends Component {
         domService.createAndEmitEvent(document, "testDetail", true);
     };
 
+    testEdit = (testEvent) => {
+        const attribute = {name: 'studentTestId', data: testEvent.detail}
+        this.changePageAndSendAttribute(EditTestComponent, attribute);
+    };
+
+
     activeTestDetail(test) {
-        const attribute = {name: 'testCode', data: test.code}
+        const attribute = {name: 'test', data: test}
         this.changePageAndSendAttribute(ActiveTestDetailComponent, attribute);
     }
 
@@ -76,7 +84,6 @@ export class LecturerTestComponent extends Component {
         const attribute = {name: 'test', data: test}
         this.changePageAndSendAttribute(NonActiveTestDetailComponent, attribute);
     }
-
 
     changePageAndSendAttribute(component, attribute) {
         const container = this.dom.getElementById("dynamic-test-form");
