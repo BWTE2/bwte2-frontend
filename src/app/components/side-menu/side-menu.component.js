@@ -93,11 +93,13 @@ export class SideMenuComponent extends Component {
 
     openCreateTest = () => {
         this.swapCreateButton();
+        domService.createAndEmitEvent(document, "closeActivities", true);
         domService.createAndEmitEvent(this, "openCreateTest", true);
     };
 
     openShowAll = () => {
         this.swapShowAllButton()
+        domService.createAndEmitEvent(document, "closeActivities", true);
         domService.createAndEmitEvent(this, "showAllTests", true);
     };
 

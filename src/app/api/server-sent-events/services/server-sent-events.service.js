@@ -20,7 +20,22 @@ class ServerSentEventsService extends ApiService {
 
     async readTestActivities(testKey) {
         const url = this.rootURL + 'tests/' + testKey + '/activities';
-        //TODO: SSE readTestActivities odjeb async if necessary
+        const source = new EventSource(url);
+
+        source.addEventListener("activities", (event) => {
+            const response = JSON.parse(event.data).response;
+            domService.createAndEmitEvent(document, "changeActivities", response);
+            /*if(event.data === "0" || event.data === "inactive-test" || event.data === "invalid-key"){
+                source.close();
+            }*/
+        })
+        document.addEventListener("closeActivities", (event) =>{
+            source.close();
+        })
+
+
+
+        return source;
     }
 }
 
