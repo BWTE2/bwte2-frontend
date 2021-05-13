@@ -5,6 +5,7 @@ import {TestTableComponent} from "./test-table/test-table.component.js";
 import {ActiveTestDetailComponent} from "./active-test-detail/active-test-detail.component.js";
 import {NonActiveTestDetailComponent} from "./non-active-test-detail/non-active-test-detail.component.js";
 import {EditTestComponent} from "./edit-test/edit-test.component.js";
+import {lecturerService} from "../../api/lecturer/services/lecturer.service.js";
 
 
 const component = {
@@ -39,6 +40,15 @@ export class LecturerTestComponent extends Component {
         allTests.addEventListener("testDetail", this.openTestDetail)
         document.addEventListener("updateAllTests", this.openAllTests);
         document.addEventListener("testEdit", this.testEdit);
+        document.addEventListener("logout", this.logoutLecturer);
+    }
+
+    logoutLecturer = () => {
+        lecturerService.lecturerLogout(null).then(this.redirectToLoginPage);
+    }
+
+    redirectToLoginPage = () => {
+        location.replace("../../../index.html");
     }
 
     menuSwapped = (e) => {

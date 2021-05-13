@@ -2,6 +2,7 @@ import {Component} from "../../shared/model/component/component.js";
 import {StudentLoginFormComponent} from "./student-login-form/student-login-form.component.js";
 import {LecturerLoginFormComponent} from "./lecturer-login-form/lecturer-login-form.component.js";
 import {domService} from "../../shared/services/dom.service.js";
+import {lecturerService} from "../../api/lecturer/services/lecturer.service.js";
 
 
 const component = {
@@ -16,7 +17,23 @@ export class HomeComponent extends Component {
 
     constructor() {
         super(component);
-        this.load().then(() => this.onInit());
+        this.checkLoggedLecturer().then(() => {
+            this.load().then(() => this.onInit());
+        })
+
+    }
+
+    async checkLoggedLecturer()
+    {
+        this.preResponse = await lecturerService.getLecturerInfo();
+        console.log(this.preResponse.response);
+
+        let lecturerInfo = this.preResponse.response;
+
+        if(lecturerInfo.isLogged)
+        {
+            this.redirectToLecturerTest(lecturerInfo.info);
+        }
     }
 
     onInit() {
@@ -47,6 +64,23 @@ export class HomeComponent extends Component {
         const form = dom.getElementById("dynamic-form");
         domService.changeDom(form, LecturerLoginFormComponent);
         form.scrollIntoView();
+    }
+
+
+    redirectToLecturerTest(lecturer)
+    {
+        location.replace(this.getLecturerUrl(lecturer.id));
+    }
+
+    getLecturerUrl(lerturerId)
+    {
+        let baseUrl = "app/views/lecturer-test/index.html";
+
+        // let params = "?lecturerId=" + lerturerId;
+        //
+        // return baseUrl + params;
+
+        return baseUrl;
     }
 
     checkIsComponentRendered() {
