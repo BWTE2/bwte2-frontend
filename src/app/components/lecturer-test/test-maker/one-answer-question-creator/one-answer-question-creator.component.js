@@ -29,9 +29,7 @@ export class OneAnswerQuestionCreatorComponent extends Component {
     }
 
     getInfo(){
-        const question = this.dom.getElementById("question").value;
-        const points = this.dom.getElementById("points").value;
-        const correctAnswer = this.dom.getElementById("correct-answer").value;
-        return {question, points, correctAnswer};
+        //TODO: tu sa vracaju vsetky info o otazke ktoru vytvoril ucitel
+        return {};
     }
 }

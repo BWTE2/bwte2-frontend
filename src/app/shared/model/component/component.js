@@ -9,15 +9,13 @@ export class Component extends HTMLElement {
     }
 
     async load() {
+        await this.#loadHtml().then((html) => this.#setHTML(html));
         if (this.config.stylePaths) {
             this.config.stylePaths.forEach((stylePath) => this.#setCss(stylePath));
         }
         const pathEncoder = new PathEncoder();
         this.#loadCss(pathEncoder.getRootPath() + 'style.css');
-        this.#loadCss(pathEncoder.getRootPath() + 'app/shared/library/font-awesome/css/all.min.css')
-        await this.#loadHtml().then((html) => this.#setHTML(html));
     }
-
 
     async #loadHtml() {
         const pathEncoder = new PathEncoder();
@@ -27,7 +25,7 @@ export class Component extends HTMLElement {
     }
 
     #setHTML(html) {
-        this.dom.innerHTML += html;
+        this.dom.innerHTML = html;
     }
 
     #loadCss(path) {

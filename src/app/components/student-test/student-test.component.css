@@ -6,11 +6,6 @@
 #student-test #paper {
     width: 63vw;
     height: 100%;
-    transition: 0.2s;
-}
-
-#student-test #paper *{
-    width: 90%;
 }
 
 app-question-wording {

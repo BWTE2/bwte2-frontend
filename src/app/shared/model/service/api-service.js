@@ -1,5 +1,4 @@
 import {PathEncoder} from "../component/path-encoder.js";
-import {serverHostNumber} from "./config.js";
 
 export class ApiService {
 
@@ -11,7 +10,7 @@ export class ApiService {
     constructor() {
         const pathEncoder = new PathEncoder();
         if (pathEncoder.isLocalhost()) {
-            this.rootURL = 'https://wt' + serverHostNumber + '.fei.stuba.sk/bwte2/bwte2-api/';
+            this.rootURL = 'https://wt143.fei.stuba.sk/bwte2/bwte2-api/';
         } else {
             this.rootURL = '/bwte2/bwte2-api/';
         }

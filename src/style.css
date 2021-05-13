@@ -122,19 +122,17 @@ button:focus {
     outline: 0;
 }
 
-input, textarea {
+input,textarea {
     border-radius: 20px;
     color: var(--text-input-color);
     border-color: var(--text-input-color);
-    border-width: 2px !important;
     outline: none !important;
     -webkit-appearance: none;
     border-style: solid;
-    width: calc(100% - 20px);
+    width: 100%;
     height: 100%;
     padding-left: 20px;
     font-size: 20px;
-    resize: none;
 }
 
 :is(input,textarea)::placeholder {
@@ -148,11 +146,3 @@ input:focus {
     outline: none;
 }
 
-
-.semiBold {
-    font-weight: 700;
-}
-
-.fa-plus-circle {
- font-size: 30px;
-}

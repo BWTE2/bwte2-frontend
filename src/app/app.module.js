@@ -18,11 +18,6 @@ import {MathQuestionCreatorComponent} from "./components/lecturer-test/test-make
 import {MultipleAnswerQuestionCreatorComponent} from "./components/lecturer-test/test-maker/multiple-answer-question-creator/multiple-answer-question-creator.component.js";
 import {OneAnswerQuestionCreatorComponent} from "./components/lecturer-test/test-maker/one-answer-question-creator/one-answer-question-creator.component.js";
 import {PairQuestionCreatorComponent} from "./components/lecturer-test/test-maker/pair-question-creator/pair-question-creator.component.js";
-import {CheckAnswerComponent} from "./components/lecturer-test/test-maker/multiple-answer-question-creator/check-answer/check-answer.component.js";
-import {DrawQuestionCreatorComponent} from "./components/lecturer-test/test-maker/draw-question-creator/draw-question-creator.component.js";
-import {MultichoiceOptionComponent} from "./components/student-test/multiple-answer-question/multichoice-option/multichoice-option.component.js";
-import * as FontAwesome from "https://kit.fontawesome.com/a2f338e40d.js";
-
 
 
 export class AppModule {
@@ -46,15 +41,11 @@ export class AppModule {
         MathQuestionCreatorComponent,
         MultipleAnswerQuestionCreatorComponent,
         OneAnswerQuestionCreatorComponent,
-        PairQuestionCreatorComponent,
-        CheckAnswerComponent,
-        DrawQuestionCreatorComponent,
-        MultichoiceOptionComponent
+        PairQuestionCreatorComponent
     ]
 
     constructor() {
         window.onload = () => this.onLoad(this.components);
-        window.FontAwesome = FontAwesome;
     }
 
     onLoad(components) {
