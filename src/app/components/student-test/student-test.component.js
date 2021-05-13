@@ -50,20 +50,8 @@ export class StudentTestComponent extends Component {
         const sideMenu = this.dom.getElementById("side-menu");
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
 
-        window.addEventListener("beforeunload",(e) =>{
-            if(!this.wantSendTest){
-                e.preventDefault();
-                e = e || window.event;
-                //IE & Firefox
-                if (e) {
-                    e.returnValue = 'Pokiaľ odídeš, test sa odošle.';
-                }
-                // For Safari
-                return 'Pokiaľ odídeš, test sa odošle.';
-            }
-        });
-
-        window.addEventListener("unload", () => {
+        window.addEventListener("beforeunload",(event) =>{
+            event.preventDefault();
             if(!this.wantSendTest) {
                 this.sendTest()
             }
