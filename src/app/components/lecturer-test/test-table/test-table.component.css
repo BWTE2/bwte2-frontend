@@ -10,20 +10,42 @@
     margin-bottom: 44px;
 }
 
+#test-table .subtitle {
+    align-self: flex-start;
+    margin-top: -22px;
+    margin-bottom: 22px;
+}
+
+
 #test-table #table {
     border-collapse: collapse;
+    border-radius: 20px;
 }
 
 #test-table #table :is(#table-header th,td) {
-    padding: 0.4em;
     text-align: center;
     min-width: 120px;
 
 }
 
+#test-table #table th {
+    padding: 20px 50px;
+    user-select: none;
+    font-size: 30px;
+}
+
+
 #test-table #table td {
+    padding: 5px 50px;
     word-break: break-word;
 }
+
+#test-table #table td :is(#activateButton,#deactivateButton) {
+    margin: 10px;
+    font-size: 30px;
+    background-color: transparent;
+}
+
 
 #test-table #table #table-header :first-child {
     border-top-left-radius: 20px;
@@ -56,3 +78,4 @@
         font-size: 5vw !important;
     }
 }
+

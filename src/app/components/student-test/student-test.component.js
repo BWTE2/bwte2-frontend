@@ -1,6 +1,7 @@
 import {Component} from "../../shared/model/component/component.js";
 import {domService} from "../../shared/services/dom.service.js";
 import {testsService} from "../../api/tests/services/tests.service.js";
+import {serverSentEventsService} from "../../api/server-sent-events/services/server-sent-events.service.js";
 
 
 const component = {
@@ -14,7 +15,21 @@ export class StudentTestComponent extends Component {
 
     constructor() {
         super(component);
-        this.load().then(() => this.onInit());
+        this.checkUnauthorized().then(() => {
+            this.isSetParam();
+            this.load().then(() => this.onInit());
+        });
+    }
+
+    async checkUnauthorized() {
+        const testKey = this.getTestKey();
+        this.preResponse = await testsService.readQuestions(testKey);
+
+        if (this.preResponse.responseErrorMessage) {
+            alert(this.preResponse.responseErrorMessage.responseCode)
+            console.log(this.preResponse);
+            this.handleErrorResponseMessage(this.preResponse.responseErrorMessage);
+        }
     }
 
     onInit() {
@@ -32,29 +47,33 @@ export class StudentTestComponent extends Component {
         document.addEventListener("sendTest", this.sendTest);
         const sideMenu = this.dom.getElementById("side-menu");
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
-        const questionsButton = this.dom.getElementById("questions-button");
-        questionsButton.addEventListener("click", this.loadTest);
     }
 
     sendTest = () => {
         const testKey = this.getTestKey();
         const studentId = this.getStudentId();
         const allAnswers = this.getAllAnswers();
-        console.log(allAnswers)
+
         testsService.createStudentTestAnswers(studentId, testKey, allAnswers)
-            .then((json) => console.log(json));
+            .then(this.redirectToLoginPage);
     };
 
-    getStudentId() {
-        //TODO: prerobit podla potreby, zatial v development faze
-        return "1";
+    redirectToLoginPage = () => {
+        location.replace("../../../index.html");
     }
 
-    getAllAnswers(){
+    getStudentId() {
+        let queryParams = window.location.search;
+        let params = new URLSearchParams(queryParams);
+
+        return params.get("studentId");
+    }
+
+    getAllAnswers() {
         const allAnswers = [];
         const paper = this.dom.getElementById("paper");
 
-        for(let answerElement of paper.getElementsByTagName("*")){
+        for (let answerElement of paper.getElementsByTagName("*")) {
             const answer = this.getAnswer(answerElement);
             allAnswers.push(answer);
         }
@@ -64,7 +83,7 @@ export class StudentTestComponent extends Component {
         };
     }
 
-    getAnswer(answerElement){
+    getAnswer(answerElement) {
         const questionInfo = domService.getAttribute(answerElement, "questionInfo");
         const questionAnswer = answerElement.getAnswer();
         return {
@@ -88,27 +107,28 @@ export class StudentTestComponent extends Component {
         domService.setAttribute(sideMenu, "headerName", actualName);
     }
 
-    loadTest = () => {
-        const testKey = this.getTestKey();
-        testsService.readQuestions(testKey)
-            .then(this.showAllQuestions);
+    loadTest() {
+        this.showAllQuestions(this.preResponse);
     }
 
     getTestKey() {
-        //TODO: tento kod treba prerobit ked sa vytvori prihlasovanie k testu
-        const keyInput = this.dom.getElementById("key-input");
-        return keyInput.value;
+
+        let queryParams = window.location.search;
+        let params = new URLSearchParams(queryParams);
+
+        return params.get("codeTest");
     }
 
-    showAllQuestions = (json) => {
-        const test = json.response;
-        //TODO: funkcia informAboutTestFetch je len pre development, po dokonceni loginu treba preprogramovat
-        this.informAboutTestFetch(test);
+    showAllQuestions(test) {
+
+        test = test.response;
+        this.dom.getElementById("paper").innerHTML = "";
+
         if (!test.exists) {
             return;
+        } else if (test.exists && !test.activated) {
+            return;
         }
-
-        this.dom.getElementById("paper").innerHTML = "";
 
         let questionCount = 1;
         for (let question of test.questions) {
@@ -116,15 +136,10 @@ export class StudentTestComponent extends Component {
             this.showQuestion(question);
             questionCount++;
         }
+
+        this.startTimer();
     }
 
-    informAboutTestFetch(test) {
-        if (!test.exists) {
-            this.dom.getElementById("test-info").innerHTML = "TEST NEEXISTUJE";
-        } else {
-            this.dom.getElementById("test-info").innerHTML = "TEST: " + test.testName;
-        }
-    }
 
     showQuestion(question) {
         if (question.type === "CHOICE") {
@@ -174,4 +189,24 @@ export class StudentTestComponent extends Component {
         domService.setAttribute(appQuestion, "questionInfo", question);
         paper.appendChild(appQuestion);
     }
+
+    startTimer = () => {
+        const testKey = this.getTestKey();
+        this.timeSource = serverSentEventsService.readTestTimer(testKey);
+    }
+
+
+    isSetParam() {
+        if (this.getTestKey() === null || this.getStudentId() === null) {
+            this.redirectToLoginPage();
+        }
+    }
+
+    handleErrorResponseMessage(errorMessage) {
+        if (errorMessage.responseCode === 401) {
+            this.redirectToLoginPage();
+        }
+    }
+
+
 }

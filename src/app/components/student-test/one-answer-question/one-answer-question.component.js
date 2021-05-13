@@ -21,18 +21,18 @@ export class OneAnswerQuestionComponent extends Component {
         this.eventsInitializer();
     }
 
-    attributesInitializer(){
+    attributesInitializer() {
         const question = domService.getAttribute(this, "questionInfo");
 
         this.loadQuestionWording(question);
         this.loadQuestionBody(question);
     }
 
-    eventsInitializer(){
+    eventsInitializer() {
 
     }
 
-    loadQuestionWording(question){
+    loadQuestionWording(question) {
         const questionWordingElement = this.dom.getElementById("question-wording-element");
         const questionWording = {
             text: question.questionText,
@@ -41,13 +41,12 @@ export class OneAnswerQuestionComponent extends Component {
         domService.setAttribute(questionWordingElement, "questionWording", questionWording);
     }
 
-    loadQuestionBody(question){
-        //TODO: dorobit zobrazenie otazky (okrem samotneho textu otazky/zadania jej bodov)
+    loadQuestionBody(question) {
     }
 
-    getAnswer(){
-        //TODO: dorobit vratenie odpovede v podobe akej je potrebne, pre odoslanie testu
-        return [];
+    getAnswer() {
+        const studentAnswer = this.dom.getElementById("student-answer");
+        return studentAnswer.value;
     }
 
 }

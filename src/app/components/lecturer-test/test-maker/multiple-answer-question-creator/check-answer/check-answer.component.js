@@ -29,7 +29,7 @@ export class CheckAnswerComponent extends Component {
 
     }
 
-    getInfo(){
+    getInfo() {
         const checked = this.dom.getElementById("truth-box").checked;
         const answerText = this.dom.getElementById("answer").value;
 

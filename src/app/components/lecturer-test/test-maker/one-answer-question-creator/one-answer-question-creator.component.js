@@ -28,7 +28,7 @@ export class OneAnswerQuestionCreatorComponent extends Component {
 
     }
 
-    getInfo(){
+    getInfo() {
         const question = this.dom.getElementById("question").value;
         const points = this.dom.getElementById("points").value;
         const correctAnswer = this.dom.getElementById("correct-answer").value;

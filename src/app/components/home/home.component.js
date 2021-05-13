@@ -20,12 +20,8 @@ export class HomeComponent extends Component {
     }
 
     onInit() {
-        const form = this.dom.getElementById("dynamic-form");
-        domService.changeDom(form, LecturerLoginFormComponent);
-        const studentLoginButton = this.dom.getElementById("student-button");
-        studentLoginButton.addEventListener("click", () => this.studentLoginButtonClick(this.dom));
-        const lecturerLoginButton = this.dom.getElementById("lecturer-button");
-        lecturerLoginButton.addEventListener("click", () => this.lecturerLoginButtonClick(this.dom));
+        this.eventsInitializer();
+        this.attributesInitializer();
     }
 
     attributesInitializer() {
@@ -33,7 +29,12 @@ export class HomeComponent extends Component {
     }
 
     eventsInitializer() {
-
+        const form = this.dom.getElementById("dynamic-form");
+        domService.changeDom(form, LecturerLoginFormComponent);
+        const studentLoginButton = this.dom.getElementById("student-button");
+        studentLoginButton.addEventListener("click", () => this.studentLoginButtonClick(this.dom));
+        const lecturerLoginButton = this.dom.getElementById("lecturer-button");
+        lecturerLoginButton.addEventListener("click", () => this.lecturerLoginButtonClick(this.dom));
     }
 
     studentLoginButtonClick(dom) {

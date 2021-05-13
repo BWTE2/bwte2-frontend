@@ -21,6 +21,26 @@ class DomService {
     }
 
     /**
+     * Change content of DOM/Element to Component and set attribute
+     *
+     * @param {any} dom - Dom or Element
+     * @param {any} component - Component
+     * @param {any} attribute - Component
+     * @return {void}
+     *
+     * @example
+     *
+     *    changeDom(domElement,UserComponent);
+     */
+    changeDomAndSetAttribute(dom, component, attribute) {
+        dom.innerHTML = "";
+        const dynamicComponent = document.createElement(component.selector);
+        this.setAttribute(dynamicComponent, attribute.name, attribute.data);
+        dom.append(dynamicComponent);
+    }
+
+
+    /**
      * Append content of DOM/Element to Component
      *
      * @param {any} dom - Dom or Element
@@ -35,6 +55,26 @@ class DomService {
         const dynamicComponent = document.createElement(component.selector);
         dom.append(dynamicComponent);
     }
+
+
+    /**
+     * Append content of DOM/Element to Component and set attribute
+     *
+     * @param {any} dom - Dom or Element
+     * @param {any} component - Component
+     * @param {any} attribute - Component
+     * @return {void}
+     *
+     * @example
+     *
+     *    changeDom(domElement,UserComponent);
+     */
+    appendDomAndSetAttribute(dom, component, attribute) {
+        const dynamicComponent = document.createElement(component.selector);
+        this.setAttribute(dynamicComponent, attribute.name, attribute.data);
+        dom.append(dynamicComponent);
+    }
+
 
     /**
      * Get object/variable passed from parent by setAttribute()
@@ -140,6 +180,21 @@ class DomService {
         }
         if (type === "lecturer") {
             return '#3C1874'
+        }
+    }
+
+    /**
+     * Remove all elements in this.dom by class name
+     *
+     * @param {any} dom
+     * @param {string} type
+     */
+    removeAllElementsByClass(dom, type) {
+        const content = dom.querySelectorAll("*");
+        for (let studentContentElement of content) {
+            if (studentContentElement.classList.contains(type)) {
+                studentContentElement.remove();
+            }
         }
     }
 }

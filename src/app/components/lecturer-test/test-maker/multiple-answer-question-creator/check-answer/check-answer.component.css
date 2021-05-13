@@ -1,11 +1,11 @@
-#check-answer{
+#check-answer {
     margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     width: 100%;
 }
 
-#check-answer #answer{
+#check-answer #answer {
     font-size: 20px;
     line-height: 23px;
     height: 44px;
@@ -14,12 +14,12 @@
     margin-right: 15px;
 }
 
-#check-answer #checkbox-container{
+#check-answer #checkbox-container {
     display: flex;
     align-items: center;
 }
 
-#check-answer #checkbox-container #truth-box{
+#check-answer #checkbox-container #truth-box {
     width: 30px !important;
     height: 30px !important;
     -webkit-appearance: none;
@@ -33,15 +33,14 @@
     margin-left: 40px;
 }
 
-#check-answer #checkbox-container #truth-box:checked{
+#check-answer #checkbox-container #truth-box:checked {
     border: 3px solid #55AB5D;
     position: relative;
 }
 
-#check-answer #checkbox-container #truth-box:checked:before
-{
-    content:'✔';
-    display:block;
+#check-answer #checkbox-container #truth-box:checked:before {
+    content: '✔';
+    display: block;
     font-size: large;
     color: #55AB5D;
     margin: auto;
