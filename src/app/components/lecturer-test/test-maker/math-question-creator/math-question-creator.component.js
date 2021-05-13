@@ -1,5 +1,6 @@
 import {Component} from "../../../../shared/model/component/component.js";
 import {MQ} from "../../../../app.module.js";
+import {domService} from "../../../../shared/services/dom.service.js";
 
 
 const component = {
@@ -23,16 +24,29 @@ export class MathQuestionCreatorComponent extends Component {
     }
 
     attributesInitializer() {
-        let problemSpan = this.dom.getElementById('problem');
-        MQ.StaticMath(problemSpan);
+        let answerSpan = this.dom.getElementById('answer');
+
+        let answerMathField = MQ.MathField(answerSpan, {
+            handlers: {
+                edit: function() {
+                    let enteredMath = answerMathField.latex();
+                }
+            }
+        });
     }
 
     eventsInitializer() {
+        const mathPanel = this.dom.getElementById("math-panel");
 
+        mathPanel.addEventListener("fnc123", (e) =>{
+            let answerSpan = this.dom.getElementById("answer");
+            MQ(answerSpan).cmd(e.detail);
+        });
     }
 
     getInfo() {
-        //TODO: tu sa vracaju vsetky info o otazke ktoru vytvoril ucitel
-        return {};
+        const question = this.dom.getElementById("question").value + "\\MATH" + MQ( this.dom.getElementById("answer") ).latex() + "\\MATH";
+        const points = this.dom.getElementById("points").value;
+        return {question, points};
     }
 }
