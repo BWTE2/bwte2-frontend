@@ -32,7 +32,7 @@ export class MultipleAnswerQuestionViewComponent extends Component {
 
     preloadPoints(points) {
         const pointsEdit = this.dom.getElementById("points-edit");
-        domService.setAttribute(pointsEdit, "points", null);
+        domService.setAttribute(pointsEdit, "points", 2);
     }
 
 
