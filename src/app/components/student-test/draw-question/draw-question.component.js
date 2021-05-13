@@ -4,8 +4,8 @@ import {domService} from "../../../shared/services/dom.service.js";
 
 const component = {
     selector: 'app-draw-question',
-    templatePath: 'draw-question/draw-question.component.html',
-    stylePaths: ['draw-question/draw-question.component.css'],
+    templatePath: 'student-test/draw-question/draw-question.component.html',
+    stylePaths: ['student-test/draw-question/draw-question.component.css'],
 };
 
 export class DrawQuestionComponent extends Component {
@@ -21,18 +21,18 @@ export class DrawQuestionComponent extends Component {
         this.eventsInitializer();
     }
 
-    attributesInitializer(){
+    attributesInitializer() {
         const question = domService.getAttribute(this, "questionInfo");
 
         this.loadQuestionWording(question);
         this.loadQuestionBody(question);
     }
 
-    eventsInitializer(){
+    eventsInitializer() {
 
     }
 
-    loadQuestionWording(question){
+    loadQuestionWording(question) {
         const questionWordingElement = this.dom.getElementById("question-wording-element");
         const questionWording = {
             text: question.questionText,
@@ -41,11 +41,11 @@ export class DrawQuestionComponent extends Component {
         domService.setAttribute(questionWordingElement, "questionWording", questionWording);
     }
 
-    loadQuestionBody(question){
+    loadQuestionBody(question) {
         //TODO: dorobit zobrazenie otazky (okrem samotneho textu otazky/zadania jej bodov)
     }
 
-    getAnswer(){
+    getAnswer() {
         //TODO: dorobit vratenie odpovede v podobe akej je potrebne, pre odoslanie testu
         return [];
     }

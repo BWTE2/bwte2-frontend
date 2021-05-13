@@ -1,6 +1,9 @@
 #question-wording {
-    width: fit-content;
+    width: 100%;
     height: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 #question-wording #question-wording-text {

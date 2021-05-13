@@ -2,10 +2,6 @@
     width: 100%;
 }
 
-#draw-question-creator .question-header {
-
-}
-
 #draw-question-creator :is(#question,#points) {
     height: 44px;
 }

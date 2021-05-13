@@ -20,65 +20,141 @@ export class SideMenuComponent extends Component {
     onInit() {
         this.loadLottieAnimation();
         this.attributesInitializer();
+        this.menuTypeHandler();
         this.eventsInitializer();
     }
 
     attributesInitializer() {
         this.setHeaderName();
-        this.setHeaderColor();
+
     }
 
     eventsInitializer() {
-        this.dom.getElementById("side-menu-swap-button").addEventListener("click", this.swapMenu);
-        this.dom.getElementById("send-test-button").addEventListener('click', this.sendTest);
+        try {
+            this.dom.getElementById("side-menu-swap-button").addEventListener("click", this.swapMenu);
+            this.dom.getElementById("send-test-button").addEventListener('click', this.sendTest);
+            document.addEventListener("changeTime",this.readTime);
+        } catch (e) {
+            document.addEventListener("testDetail", this.showDetailMenu);
+            this.dom.getElementById("create-test-button").addEventListener('click', this.openCreateTest);
+            this.dom.getElementById("show-all-tests").addEventListener('click', this.openShowAll);
+            this.dom.getElementById("logout-button").addEventListener('click', this.logout);
+            document.addEventListener("updateAllTests", this.openShowAll);
+        }
+    }
+
+    readTime = (event) =>{
+        const data = event.detail;
+        if(data === "inactive-test" || data === "invalid-key"){
+            window.location.replace("/bwte2/");
+        }
+
+        if(data === "0"){
+            this.sendTest();
+        }
+
+        const time = this.secondsToTime(data);
+        this.dom.getElementById("timer").innerText = time + "";
+    }
+
+    secondsToTime(seconds){
+        const date = new Date(0);
+        date.setSeconds(seconds);
+        return  date.toISOString().substr(11, 8);
+    }
+
+    menuTypeHandler() {
+        this.setHeaderColor();
+        const type = this.getAttribute('type');
+        if (type === "student") {
+            domService.removeAllElementsByClass(this.dom, 'lecturer');
+        }
+        if (type === "lecturer") {
+            domService.removeAllElementsByClass(this.dom, 'student');
+        }
+
     }
 
     swapMenu = () => {
         const menu = this.dom.getElementById("side-menu");
-        const menuHeader = this.dom.getElementById("side-menu-header");
-        const menuHeaderName = this.dom.getElementById("side-menu-header-name");
         const width = menu.style.width;
         domService.createAndEmitEvent(this, "menuSwap", width);
         if (width === '0px' || width === '') {
             this.showMenu();
-            menuHeader.style.width = '400px';
-            menuHeaderName.style.display = "flex";
-            menuHeaderName.style.marginRight = "0px";
-
         } else {
             this.hideMenu();
-            menuHeader.style.width = '100px';
-            menuHeaderName.style.display = "none";
-            menuHeaderName.style.marginRight = "50px";
-
         }
     };
 
-    setAnimation = (animation) => {
-        this.animation = animation;
-    };
 
     sendTest = () => {
         domService.createAndEmitEvent(document, "sendTest", true);
     };
 
+    openCreateTest = () => {
+        this.swapCreateButton();
+        domService.createAndEmitEvent(this, "openCreateTest", true);
+    };
+
+    openShowAll = () => {
+        this.swapShowAllButton()
+        domService.createAndEmitEvent(this, "showAllTests", true);
+    };
+
+    showDetailMenu = () => {
+        const all = this.dom.getElementById("show-all-tests");
+        const create = this.dom.getElementById("create-test-button");
+        all.style.display = "flex";
+        create.style.display = "flex";
+    };
+
+    swapShowAllButton() {
+        const all = this.dom.getElementById("show-all-tests");
+        const create = this.dom.getElementById("create-test-button");
+        all.style.display = "none";
+        create.style.display = "flex";
+    }
+
+    swapCreateButton() {
+        const all = this.dom.getElementById("show-all-tests");
+        const create = this.dom.getElementById("create-test-button");
+        create.style.display = "none";
+        all.style.display = "flex";
+    }
+
+    logout = () => {
+        domService.createAndEmitEvent(document, "logout", true);
+    };
+
     showMenu() {
-        const sideMenu = this.dom.getElementById("side-menu");
-        const header = this.dom.getElementById("side-menu-header");
-        header.style.borderBottomRightRadius = '0px';
-        sideMenu.style.width = "400px";
+        const menu = this.createMenuElements();
+        menu.header.style.borderBottomRightRadius = '0px';
+        menu.sideMenu.style.width = "400px";
+        menu.menuHeader.style.width = '400px';
+        menu.menuHeaderName.style.display = "flex";
+        menu.menuHeaderName.style.marginRight = "0px";
         this.animation.setSpeed(1.8);
         this.animation.playSegments([30, 60], true);
     }
 
     hideMenu() {
-        const sideMenu = this.dom.getElementById("side-menu");
-        const header = this.dom.getElementById("side-menu-header");
-        header.style.borderBottomRightRadius = '20px';
-        sideMenu.style.width = "0px";
+        const menu = this.createMenuElements();
+        menu.header.style.borderBottomRightRadius = '20px';
+        menu.sideMenu.style.width = "0px";
+        menu.menuHeader.style.width = '100px';
+        menu.menuHeaderName.style.display = "none";
+        menu.menuHeaderName.style.marginRight = "50px";
         this.animation.setSpeed(1.8);
         this.animation.playSegments([50, 30], true);
 
+    }
+
+    createMenuElements() {
+        const sideMenu = this.dom.getElementById("side-menu");
+        const header = this.dom.getElementById("side-menu-header");
+        const menuHeader = this.dom.getElementById("side-menu-header");
+        const menuHeaderName = this.dom.getElementById("side-menu-header-name");
+        return {sideMenu, header, menuHeader, menuHeaderName};
     }
 
     loadLottieAnimation() {
@@ -91,10 +167,6 @@ export class SideMenuComponent extends Component {
         });
     }
 
-    readTime() {
-        const time = domService.getAttribute(this, "time");
-        this.dom.getElementById("timer").innerText = time + "";
-    }
 
     setHeaderName() {
         const headerName = domService.getAttribute(this, "headerName");
