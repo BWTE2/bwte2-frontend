@@ -31,13 +31,17 @@ export class NonActiveTestDetailComponent extends Component {
     }
 
     eventsInitializer() {
+        const csv = this.dom.getElementById("export-csv-button");
+        const pdf = this.dom.getElementById("export-pdf-button");
+        csv.addEventListener("click", this.exportToCSV);
+        pdf.addEventListener("click", this.exportToPDF);
     }
 
     setStudents() {
         const testInfo = domService.getAttribute(this, 'test');
         this.dom.getElementById("test-title").innerText = testInfo.title;
         this.dom.getElementById("test-code").innerText = "#" + testInfo.code;
-        this.studentTest = {testCode: testInfo.code, studentId: null};
+        this.testCode = testInfo.code;
         testsService.readTestAnswers(testInfo.code).then(this.appendStudents);
     }
 
@@ -59,15 +63,35 @@ export class NonActiveTestDetailComponent extends Component {
         const action = tableService.getIconButton('editTest', 'fa-arrow-circle-right');
         const actionColumn = tableService.getColumn("");
         action.classList.add("edit-test");
-        this.studentTest.studentId = student.id;
-        action.addEventListener("click", this.editStudentTest);
+
+        action.addEventListener("click", () => this.editStudentTest(student.id));
         actionColumn.appendChild(action);
         const row = tableService.getRow([name, id, actionColumn]);
         this.table.appendChild(row);
     };
 
-    editStudentTest = () => {
-        domService.createAndEmitEvent(document, "testEdit", this.studentTest);
+    editStudentTest(studentId) {
+        domService.createAndEmitEvent(document, "testEdit",
+            {testCode: this.testCode, studentId: studentId});
+    }
+
+    exportToCSV = () => {
+        testsService.createResultsExport(this.testCode).then((response) => {
+            this.downloadCSV(response);
+            console.log(response);
+        });
     };
 
+    exportToPDF = () => {
+
+    };
+
+
+    downloadCSV(text) {
+        const a = document.createElement('a');
+        const file = new Blob([text], {type: 'text'});
+        a.href = URL.createObjectURL(file);
+        a.download = "export-test-" + this.testCode + ".csv";
+        a.click();
+    }
 }
