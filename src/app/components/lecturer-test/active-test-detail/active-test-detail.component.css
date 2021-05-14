@@ -8,3 +8,10 @@
     color: var(--text-input-placholder-color);
     text-align: center;
 }
+
+ #editTest.edit-test{
+     background-color: transparent;
+    font-size: 30px;
+     text-align: center;
+     vertical-align: middle;
+ }
