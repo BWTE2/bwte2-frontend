@@ -65,7 +65,7 @@ export class DrawQuestionComponent extends Component {
     openCanvas = () => {
         const attribute = {
             name: "question-wording",
-            data: {questionWording: this.questionWording, comp: this}
+            data: this.questionWording
         };
 
         domService.appendDomAndSetAttribute(this.dom,

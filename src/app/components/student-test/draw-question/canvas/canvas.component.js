@@ -37,7 +37,7 @@ export class CanvasComponent extends Component {
             mode: 'brush',
             backgroundColor: 'white',
             actualColor: 'black',
-            brushWidth: 2
+            brushWidth: 10
         }
     }
 
