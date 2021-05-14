@@ -16,6 +16,7 @@ export class DrawQuestionComponent extends Component {
         super(component);
         this.load().then(() => this.onInit());
         this.imgUrl = null;
+        this.canvas = null;
     }
 
     onInit() {
@@ -55,12 +56,21 @@ export class DrawQuestionComponent extends Component {
 
 
     setImage = (event) => {
-        this.imgUrl = event.detail;
+        this.imgUrl = event.detail.imgUrl;
+        this.stage = event.detail.stage;
+        this.dom = event.detail.canvas;
+        console.log(event.detail);
     };
 
     openCanvas = () => {
-        const attribute = {name: "question-wording", data: this.questionWording};
+        const attribute = {
+            name: "question-wording",
+            data: {questionWording: this.questionWording, comp: this}
+        };
+
         domService.appendDomAndSetAttribute(this.dom,
             CanvasComponent, attribute);
+
+
     };
 }

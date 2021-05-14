@@ -126,12 +126,7 @@ export class StudentTestComponent extends Component {
     }
 
     menuSwapped = (e) => {
-        const paper = this.dom.getElementById("paper");
-        if (e.detail === "400px") {
-            paper.style.marginLeft = "0px";
-        } else {
-            paper.style.marginLeft = "400px";
-        }
+
     }
 
     setName() {

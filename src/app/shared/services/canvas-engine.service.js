@@ -9,9 +9,6 @@ class CanvasEngineService {
             strokeWidth: canvasProperties.brushWidth,
             lineCap: 'round',
             lineJoin: 'round',
-            shadowBlur: 2,
-            shadowOffsetX: 0,
-            shadowOffsetY: 2,
             globalCompositeOperation:
                 canvasProperties.mode === 'brush' ? 'source-over' : 'destination-out',
             points: [position.x, position.y],

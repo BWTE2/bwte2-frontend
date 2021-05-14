@@ -52,12 +52,7 @@ export class LecturerTestComponent extends Component {
     }
 
     menuSwapped = (e) => {
-        const formContainer = this.dom.getElementById("dynamic-test-form");
-        if (e.detail === "400px") {
-            formContainer.style.marginLeft = "0px";
-        } else {
-            formContainer.style.marginLeft = "400px";
-        }
+
     }
 
     openTestBuilder = () => {
