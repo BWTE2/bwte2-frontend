@@ -57,8 +57,7 @@ export class DrawQuestionComponent extends Component {
 
 
     setImage = (event) => {
-        this.imgUrl = event.detail.imgUrl;
-        console.log(event.detail);
+        this.imgUrl = event.detail;
     };
 
     openCanvas = () => {
