@@ -29,6 +29,7 @@ export class DrawQuestionComponent extends Component {
         document.addEventListener("saveCanvasImage", this.setImage);
         this.loadQuestionWording(question);
         this.loadQuestionBody(question);
+
     }
 
     eventsInitializer() {
@@ -57,8 +58,6 @@ export class DrawQuestionComponent extends Component {
 
     setImage = (event) => {
         this.imgUrl = event.detail.imgUrl;
-        this.stage = event.detail.stage;
-        this.dom = event.detail.canvas;
         console.log(event.detail);
     };
 
@@ -68,8 +67,8 @@ export class DrawQuestionComponent extends Component {
             data: this.questionWording
         };
 
-        domService.appendDomAndSetAttribute(this.dom,
-            CanvasComponent, attribute);
+        console.log(attribute);
+        domService.appendDomAndSetAttribute(this.dom, CanvasComponent, attribute);
 
 
     };
