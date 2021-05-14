@@ -11,16 +11,6 @@
     border-radius: 100px;
 }
 
-#multiple-answer-question #options-container .one-option-container span{
-    font-weight: 400;
-    font-size: 25px;
-    text-align: center;
-    vertical-align: middle;
-    height: 25px;
-    margin: auto 10px;
-}
-
-
 #multiple-answer-question #options-container .one-option-container input:checked {
     position: relative;
 }
@@ -36,3 +26,25 @@
     top: 4px;
 }
 
+#multiple-answer-question #options-container .one-option-container span{
+    font-weight: 400;
+    font-size: 25px;
+    text-align: center;
+    vertical-align: middle;
+    height: 25px;
+    margin: auto 10px;
+}
+
+#multiple-answer-question #options-container .one-option-container i{
+    text-align: center;
+    vertical-align: middle;
+    margin: auto 10px;
+}
+
+#multiple-answer-question #options-container .one-option-container i.fa-check{
+    color: var(--success-color);
+}
+
+#multiple-answer-question #options-container .one-option-container i.fa-times{
+    color: red;
+}

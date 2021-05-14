@@ -29,6 +29,11 @@ export class PointsEditComponent extends Component {
         } else {
             pointsField.setAttribute("placeholder",'?');
         }
+
+        const disabled = domService.getAttribute(this, "disabled");
+        if(disabled) {
+            pointsField.setAttribute("disabled", disabled);
+        }
     }
 
     getPoints() {
@@ -37,4 +42,5 @@ export class PointsEditComponent extends Component {
 
     eventsInitializer() {
     }
+
 }

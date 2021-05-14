@@ -34,6 +34,7 @@ export class MultipleAnswerQuestionViewComponent extends Component {
     preloadPoints(points) {
         const pointsEdit = this.dom.getElementById("points-edit");
         domService.setAttribute(pointsEdit, "points", points);
+
     }
 
     loadQuestionWording(question) {
@@ -52,8 +53,10 @@ export class MultipleAnswerQuestionViewComponent extends Component {
             container.classList.add("one-option-container");
             const checkbox = this.getCheckBox(option, answers.studentOptions);
             const optionElement = this.getOption(option);
+            const icon = this.getIcon(option, answers);
             container.appendChild(checkbox);
             container.appendChild(optionElement);
+            container.appendChild(icon);
             optionsContainer.appendChild(container);
         }
     }
@@ -78,6 +81,20 @@ export class MultipleAnswerQuestionViewComponent extends Component {
         }
 
         return checkbox;
+    }
+
+    getIcon(option, answers){
+        const icon = document.createElement("I");
+        icon.classList.add("fas");
+
+        if (answers.correctOptions.some(e => e.id === option.id)) {
+            icon.classList.add("fa-check");
+        }
+        else if(answers.studentOptions.some(e => e.id === option.id)){
+            icon.classList.add("fa-times");
+        }
+
+        return icon;
     }
 
 }
