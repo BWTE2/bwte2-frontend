@@ -31,6 +31,7 @@ export class ActiveTestDetailComponent extends Component {
         const testInfo = domService.getAttribute(this, 'test');
         this.dom.getElementById("test-title").innerText = testInfo.title;
         this.dom.getElementById("test-code").innerText = "#" + testInfo.code
+        this.testCode = testInfo.code;
         this.activitySource = serverSentEventsService.readTestActivities(testInfo.code);
         document.addEventListener("changeActivities", this.loadStudents);
     }
@@ -55,8 +56,7 @@ export class ActiveTestDetailComponent extends Component {
     createRow = (student) => {
         const name = tableService.getColumn(student.name + ' ' + student.surname);
         const id = tableService.getColumn(student.id);
-        const statusText = this.getStatusText(student);
-        const status = tableService.getColumn(statusText);
+        const status = this.getStatusText(student);
         const row = tableService.getRow([name, id, status]);
         const tableBody = this.dom.getElementById("test-table-body");
         tableBody.appendChild(row);
@@ -66,13 +66,29 @@ export class ActiveTestDetailComponent extends Component {
     getStatusText(student){
         const action = student.action;
         if(action === "FINISHED"){
-            return "odovzdal";
+            const action = tableService.getIconButton('editTest', 'fa-arrow-circle-right');
+            const actionColumn = tableService.getColumn("dopísal ");
+            action.classList.add("edit-test");
+
+            action.addEventListener("click", () => this.editStudentTest(student.id));
+            actionColumn.appendChild(action);
+            return actionColumn;
         }
         else if(action === "WRITING"){
-            return "píše"
+            const actionElement = document.createElement("TD");
+            actionElement.innerText = "píše";
+            return actionElement;
         }
         else if(action === "OUT_OF_TAB"){
-            return "mimo test"
+            const actionElement = document.createElement("TD");
+            actionElement.innerText = "mimo test";
+            return actionElement;
         }
     }
+
+    editStudentTest(studentId) {
+        domService.createAndEmitEvent(document, "testEdit",
+            {testCode: this.testCode, studentId: studentId});
+    }
+
 }
