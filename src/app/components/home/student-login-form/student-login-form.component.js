@@ -37,7 +37,7 @@ export class StudentLoginFormComponent extends Component {
 
     validateAndLoginStudent()
     {
-        if(this.isFilledInput())
+        if(this.isFilledInput() && this.isCorrectInput())
         {
             this.loginStudent();
         }
@@ -46,21 +46,18 @@ export class StudentLoginFormComponent extends Component {
 
     loginStudent()
     {
-        studentService.createLecturerLogin(this.createLoginData()).then(this.verifyTestDataAndStartTest).then(this.a);
+        studentService.createLecturerLogin(this.createLoginData()).then(this.verifyTestDataAndStartTest);
 
     }
 
-    a = (d) => {
 
-        console.log(d);
-    }
 
     createLoginData()
     {
-        let codeTest = this.getCodeTest().trim();
-        let studentId = this.getStudentId().trim();
-        let studentName = this.getStudnetName().trim();
-        let studentSurname = this.getStudentSurname().trim();
+        let codeTest = this.getCodeTest();
+        let studentId = this.getStudentId();
+        let studentName = this.getStudentName();
+        let studentSurname = this.getStudentSurname();
 
         return {
             codeTest: codeTest,
@@ -136,6 +133,35 @@ export class StudentLoginFormComponent extends Component {
 
     }
 
+    isCorrectInput()
+    {
+        if(this.getCodeTest().length < 6 || this.getCodeTest().length > 6)
+        {
+            this.showWarningMessage("Kód testu musí obsahovať 6 znakov",3);
+            return false;
+        }
+
+        if(this.getStudentId().length > 10)
+        {
+            this.showWarningMessage("ID študenta môže obsahovať maximálne 10 znakov",3);
+            return false;
+        }
+
+        if(this.getStudentName().length > 128)
+        {
+            this.showWarningMessage("Meno študenta presahuje maximálny počet znakov", 3);
+            return false;
+        }
+
+        if(this.getStudentSurname().length > 128)
+        {
+            this.showWarningMessage("Priezvisko študenta presahuje maximálny počet znakov",3);
+            return false;
+        }
+
+        return true;
+    }
+
     isFilledCodeTest()
     {
         let codeTest = this.getCodeTest();
@@ -152,7 +178,7 @@ export class StudentLoginFormComponent extends Component {
 
     isFilledNameStudent()
     {
-        let studentName = this.getStudnetName();
+        let studentName = this.getStudentName();
 
         return !(studentName === "" || studentName === null);
     }
@@ -167,22 +193,22 @@ export class StudentLoginFormComponent extends Component {
 
     getCodeTest()
     {
-        return this.dom.getElementById("code-test").value;
+        return this.dom.getElementById("code-test").value.trim();
     }
 
     getStudentId()
     {
-        return this.dom.getElementById("id-student").value;
+        return this.dom.getElementById("id-student").value.trim();
     }
 
-    getStudnetName()
+    getStudentName()
     {
-        return this.dom.getElementById("name-student").value;
+        return this.dom.getElementById("name-student").value.trim();
     }
 
     getStudentSurname()
     {
-        return this.dom.getElementById("surname-student").value;
+        return this.dom.getElementById("surname-student").value.trim();
     }
 
 

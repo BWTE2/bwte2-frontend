@@ -36,7 +36,7 @@ export class LecturerRegisterFormComponent extends Component {
 
     validateAndRegisterLecturer()
     {
-        if(this.isFilledInput() && this.isCorrectFormatEmail())
+        if(this.isFilledInput() && this.isCorrectInput())
         {
             this.registerLecturer();
         }
@@ -117,6 +117,34 @@ export class LecturerRegisterFormComponent extends Component {
         this.showDangerMessage("Nesprávne prihlasovacie údaje",3);
 
         return false;
+    }
+
+    isCorrectInput()
+    {
+        if(this.getLecturerName().length > 128)
+        {
+            this.showWarningMessage("Meno učiteľa presahuje maximálny počet znakov", 3);
+            return false;
+        }
+
+        if(this.getLecturerSurname().length > 128)
+        {
+            this.showWarningMessage("Priezvisko učiteľa presahuje maximálny počet znakov", 3);
+            return false;
+        }
+
+        if(!this.isCorrectFormatEmail())
+        {
+            return false;
+        }
+
+        if(this.getLecturerPassword().length > 20)
+        {
+            this.showWarningMessage("Heslo učiteľa presahuje maximálny počet znakov", 3);
+            return false;
+        }
+
+        return true;
     }
 
     isFilledLecturerName()
