@@ -71,14 +71,14 @@ class TestsService extends ApiService {
      * Export test result for all students (format:CSV)
      *
      * @param {string} testKey - Test key
-     * @param {any} test - Test
      * @return {Promise<any>} Returns promised json
      *
      */
-    async createResultsExport(testKey, test) {
+    async createResultsExport(testKey) {
         const url = this.rootURL + 'tests/' + testKey + '/export';
-        const response = await fetch(url, this.requestPOST(test)).catch(this.catchErrors);
-        return response ? await response.json() : this.handleErrors(new Error());
+        const response = await fetch(url, this.requestGET()).catch(this.catchErrors);
+        console.log(response)
+        return response ? await response.text() : this.handleErrors(new Error());
     }
 
     /**

@@ -2,6 +2,17 @@
 
 }
 
+.subtitle {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    align-self: center !important;
+}
+
+.code-header {
+    justify-content: space-between !important;
+    width: 100%;
+    margin-bottom: 20px;
+}
 
 .empty-table {
     width: 100%;
@@ -16,4 +27,15 @@
     font-size: 30px;
     background-color: transparent;
     text-align: center;
+}
+
+
+#export-csv-button, #export-pdf-button {
+    font-size: 32px !important;
+    margin: 10px;
+}
+
+:is(#export-csv-button,#export-pdf-button):hover {
+    background-color: var(--text-input-color);
+    cursor: pointer;
 }
