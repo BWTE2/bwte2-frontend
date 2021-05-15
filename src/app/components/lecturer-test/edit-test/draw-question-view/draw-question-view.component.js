@@ -1,9 +1,11 @@
 import {Component} from "../../../../shared/model/component/component.js";
+import {domService} from "../../../../shared/services/dom.service.js";
 
 const component = {
     selector: 'app-draw-question-view',
     templatePath: 'lecturer-test/edit-test/draw-question-view/draw-question-view.component.html',
-    stylePaths: ['lecturer-test/edit-test/draw-question-view/draw-question-view.component.css'],
+    stylePaths: ['lecturer-test/edit-test/draw-question-view/draw-question-view.component.css',
+        'student-test/draw-question/draw-question.component.css'],
 };
 
 export class DrawQuestionViewComponent extends Component {
@@ -20,9 +22,43 @@ export class DrawQuestionViewComponent extends Component {
     }
 
     attributesInitializer() {
+        this.test = domService.getAttribute(this, "test");
+        this.preloadPoints(this.test.question.points);
+        this.loadQuestionWording(this.test.question);
 
     }
 
     eventsInitializer() {
+        this.dom.getElementById("open-picture").addEventListener("click", this.openPicture);
     }
+
+    openPicture = () => {
+        const container = document.createElement('div');
+        container.id = "modal-image-container";
+        const image = document.createElement('img');
+        image.setAttribute("src", this.test.question.answer);
+        image.id = "modal-image";
+        container.appendChild(image);
+        container.addEventListener("click", this.closeImageView)
+        this.dom.appendChild(container);
+    };
+
+    loadQuestionWording(question) {
+        const questionWordingElement = this.dom.getElementById("question-wording-element");
+        const questionWording = {
+            text: question.text,
+            points: question.maxPoints
+        }
+        domService.setAttribute(questionWordingElement, "questionWording", questionWording);
+    }
+
+    preloadPoints(points) {
+        const pointsEdit = this.dom.getElementById("points-edit");
+        domService.setAttribute(pointsEdit, "points", points);
+
+    }
+
+    closeImageView = () => {
+        this.dom.getElementById('modal-image-container').remove();
+    };
 }

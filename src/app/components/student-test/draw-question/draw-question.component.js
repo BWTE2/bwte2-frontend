@@ -33,8 +33,7 @@ export class DrawQuestionComponent extends Component {
     }
 
     eventsInitializer() {
-        this.dom.getElementById("draw").addEventListener("click",
-            this.openCanvas);
+        this.dom.getElementById("draw").addEventListener("click", this.openCanvas);
     }
 
 
