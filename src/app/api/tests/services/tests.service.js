@@ -147,10 +147,10 @@ class TestsService extends ApiService {
      * @return {Promise<any>} Returns promised json
      *
      */
-    async createStudentTestAnswersExport(studentId, testKey, test) {
-        const url = this.rootURL + 'tests/' + testKey + '/students/' + studentId + "/export";
-        const response = await fetch(url, this.requestPOST(test)).catch(this.catchErrors);
-        return response ? await response.json() : this.handleErrors(new Error());
+    async createStudentTestAnswersExport(testKey) {
+        const url = this.rootURL + 'tests/' + testKey + '/students/export';
+        const response = await fetch(url, this.requestGET()).catch(this.catchErrors);
+        return response ? await response.text() : this.handleErrors(new Error());
     }
 }
 
