@@ -78,20 +78,29 @@ export class NonActiveTestDetailComponent extends Component {
     exportToCSV = () => {
         testsService.createResultsExport(this.testCode).then((response) => {
             this.downloadCSV(response);
-            console.log(response);
         });
     };
 
     exportToPDF = () => {
-
+        testsService.createStudentTestAnswersExport(this.testCode).then((response) => {
+            this.downloadPDF(response);
+        })
     };
 
 
-    downloadCSV(text) {
+    downloadCSV(data) {
         const a = document.createElement('a');
-        const file = new Blob([text], {type: 'text'});
+        const file = new Blob([data], {type: 'text'});
         a.href = URL.createObjectURL(file);
         a.download = "export-test-" + this.testCode + ".csv";
+        a.click();
+    }
+
+    downloadPDF(data) {
+        const a = document.createElement('a');
+        const header = "data:application/pdf;base64,";
+        a.href = header + data;
+        a.download = "export-test-" + this.testCode + "." + 'pdf';
         a.click();
     }
 }
