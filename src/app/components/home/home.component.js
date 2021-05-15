@@ -23,15 +23,13 @@ export class HomeComponent extends Component {
 
     }
 
-    async checkLoggedLecturer()
-    {
+    async checkLoggedLecturer() {
         this.preResponse = await lecturerService.getLecturerInfo();
         console.log(this.preResponse.response);
 
         let lecturerInfo = this.preResponse.response;
 
-        if(lecturerInfo.isLogged)
-        {
+        if (lecturerInfo.isLogged) {
             this.redirectToLecturerTest(lecturerInfo.info);
         }
     }
@@ -56,36 +54,28 @@ export class HomeComponent extends Component {
 
     studentLoginButtonClick(dom) {
         const form = dom.getElementById("dynamic-form");
-        domService.changeDom(form, StudentLoginFormComponent);
+        const component = this.dom.querySelector("app-student-login-form");
+        if (!component) {
+            domService.changeDom(form, StudentLoginFormComponent);
+        }
         form.scrollIntoView();
     }
 
     lecturerLoginButtonClick(dom) {
         const form = dom.getElementById("dynamic-form");
-        domService.changeDom(form, LecturerLoginFormComponent);
+        const component = this.dom.querySelector("app-lecturer-login-form");
+        if (!component) {
+            domService.changeDom(form, LecturerLoginFormComponent);
+        }
         form.scrollIntoView();
     }
 
 
-    redirectToLecturerTest(lecturer)
-    {
+    redirectToLecturerTest(lecturer) {
         location.replace(this.getLecturerUrl(lecturer.id));
     }
 
-    getLecturerUrl(lerturerId)
-    {
-        let baseUrl = "app/views/lecturer-test/index.html";
-
-        // let params = "?lecturerId=" + lerturerId;
-        //
-        // return baseUrl + params;
-
-        return baseUrl;
-    }
-
-    checkIsComponentRendered() {
-        // TODO: Skontroluj či už nahodou dany komponent nieje otvorený,
-        //  napirklad: je otvoreny Student login kliknem na Som student tak ho nebude znovu renderovat
-        //  "rendererService.changeDom(form, StudentLoginFormComponent);"
+    getLecturerUrl(lerturerId) {
+        return "app/views/lecturer-test/index.html";
     }
 }
