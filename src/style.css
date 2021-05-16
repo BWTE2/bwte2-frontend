@@ -136,7 +136,9 @@ a.link:hover {
 }
 
 .shadow {
-    box-shadow: 12px 12px 42px #F1F1F1;
+
+    box-shadow: 12px 12px 42px 0px #F1F1F1;
+
 }
 
 .shadow-light {

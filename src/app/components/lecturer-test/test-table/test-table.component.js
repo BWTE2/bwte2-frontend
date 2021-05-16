@@ -7,7 +7,8 @@ import {tableService} from "../../../shared/services/table.service.js";
 const component = {
     selector: 'app-test-table',
     templatePath: 'lecturer-test/test-table/test-table.component.html',
-    stylePaths: ['lecturer-test/test-table/test-table.component.css'],
+    stylePaths: ['lecturer-test/test-table/test-table.component.css',
+        'lecturer-test/test-table/table.css'],
 };
 
 export class TestTableComponent extends Component {
