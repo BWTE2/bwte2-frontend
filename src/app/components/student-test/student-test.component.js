@@ -133,7 +133,7 @@ export class StudentTestComponent extends Component {
     }
 
     setName() {
-        const actualName = this.studentId + " " + this.name.name + " " +  this.name.surname;
+        const actualName = this.name.name + " " +  this.name.surname;
         const sideMenu = this.dom.getElementById("side-menu");
         domService.setAttribute(sideMenu, "headerName", actualName);
     }
