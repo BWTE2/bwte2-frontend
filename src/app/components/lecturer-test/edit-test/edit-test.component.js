@@ -6,6 +6,7 @@ import {OneAnswerQuestionViewComponent} from "./one-answer-question-view/one-ans
 import {PairQuestionViewComponent} from "./pair-question-view/pair-question-view.component.js";
 import {DrawQuestionViewComponent} from "./draw-question-view/draw-question-view.component.js";
 import {snackbarService} from "../../../shared/services/snackbar.service.js";
+import {MathQuestionViewComponent} from "./math-question-view/math-question-view.component.js";
 
 const component = {
     selector: 'app-edit-test',
@@ -49,7 +50,7 @@ export class EditTestComponent extends Component {
         } else if (question.type === "DRAW") {
             domService.appendDomAndSetAttribute(paper, DrawQuestionViewComponent, attribute);
         } else if (question.type === "MATH") {
-            domService.appendDomAndSetAttribute(paper, MultipleAnswerQuestionViewComponent, attribute);
+            domService.appendDomAndSetAttribute(paper, MathQuestionViewComponent, attribute);
         }
     }
 
