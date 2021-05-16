@@ -36,10 +36,19 @@ export class DrawQuestionViewComponent extends Component {
     openPicture = () => {
         const container = document.createElement('div');
         container.id = "modal-image-container";
-        const image = document.createElement('img');
-        image.setAttribute("src", this.test.question.answer);
-        image.id = "modal-image";
-        container.appendChild(image);
+        if(this.test.question.answer) {
+            const image = document.createElement('img');
+            image.setAttribute("src", this.test.question.answer);
+            image.id = "modal-image";
+            container.appendChild(image);
+        }else{
+            const div = document.createElement("div");
+            div.id = "modal-image";
+            const span = document.createElement("span");
+            span.innerText = "Nenakreslil obrázok";
+            div.appendChild(span);
+            container.appendChild(div);
+        }
         container.addEventListener("click", this.closeImageView)
         this.dom.appendChild(container);
     };

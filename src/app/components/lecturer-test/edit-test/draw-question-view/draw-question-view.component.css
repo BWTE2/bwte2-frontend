@@ -19,3 +19,16 @@
     height: 50vh;
     transition: 0.2s;
 }
+
+div#modal-image{
+    color: gray;
+    font-size: xx-large;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div#modal-image span{
+    color: gray;
+    font-size: xx-large;
+}
