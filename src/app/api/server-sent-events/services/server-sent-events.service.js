@@ -3,13 +3,13 @@ import {domService} from "../../../shared/services/dom.service.js";
 
 class ServerSentEventsService extends ApiService {
 
-    async readTestTimer(testKey) {
-        const url = this.rootURL + 'tests/' + testKey + '/timer';
+    async readTestTimer(testKey, studentId) {
+        const url = this.rootURL + 'tests/' + testKey + '/timer/' + studentId;
         const source = new EventSource(url);
 
         source.addEventListener("timer", (event) => {
             domService.createAndEmitEvent(document, "changeTime", event.data);
-            if(event.data === "0" || event.data === "inactive-test" || event.data === "invalid-key"){
+            if(event.data === "0" || event.data === "-1" || event.data === "inactive-test" || event.data === "invalid-key"){
                 source.close();
             }
         })

@@ -221,7 +221,8 @@ export class StudentTestComponent extends Component {
 
     startTimer = () => {
         const testKey = this.getTestKey();
-        this.timeSource = serverSentEventsService.readTestTimer(testKey);
+        const studentId = this.getStudentId();
+        this.timeSource = serverSentEventsService.readTestTimer(testKey, studentId);
     }
 
 
