@@ -69,9 +69,7 @@ export class StudentLoginFormComponent extends Component {
 
     verifyTestDataAndStartTest = (json) => {
         let data = json.response;
-        console.log(data);
 
-        console.log(json);
 
         let isAbleTestToWrite = this.isAbleTestToWrite(data);
 

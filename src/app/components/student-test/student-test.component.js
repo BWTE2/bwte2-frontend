@@ -67,14 +67,14 @@ export class StudentTestComponent extends Component {
         const testKey = this.getTestKey();
         const studentId = this.getStudentId();
         studentService.updateInTestStatus(testKey, studentId)
-            .then((response) => console.log(response));
+            .then();
     }
 
     updateOutTestStatus = () =>{
         const testKey = this.getTestKey();
         const studentId = this.getStudentId();
         studentService.updateOutTestStatus(testKey, studentId)
-            .then((response) => console.log(response));
+            .then();
     }
 
 
@@ -139,7 +139,6 @@ export class StudentTestComponent extends Component {
     }
 
     loadTest() {
-        console.log(this.preResponse.response)
         this.showAllQuestions(this.preResponse.response.test);
     }
 

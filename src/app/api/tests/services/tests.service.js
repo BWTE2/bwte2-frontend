@@ -77,7 +77,7 @@ class TestsService extends ApiService {
     async createResultsExport(testKey) {
         const url = this.rootURL + 'tests/' + testKey + '/export';
         const response = await fetch(url, this.requestGET()).catch(this.catchErrors);
-        console.log(response)
+
         return response ? await response.text() : this.handleErrors(new Error());
     }
 
@@ -159,7 +159,7 @@ class TestsService extends ApiService {
  *
  * @example
  * testsService.readTests().then((response) => {
-    console.log(response)
+
 });
  */
 export const testsService = new TestsService()

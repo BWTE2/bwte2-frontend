@@ -68,7 +68,7 @@ export class DrawQuestionComponent extends Component {
             data: this.questionWording
         };
 
-        console.log(attribute);
+
         domService.appendDomAndSetAttribute(this.dom, CanvasComponent, attribute);
 
 

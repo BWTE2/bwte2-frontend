@@ -14,7 +14,7 @@ export class CanvasComponent extends Component {
 
     constructor() {
         super(component);
-        console.log(KonvaJS);
+
         this.canvasProperties = this.createCanvasProperties();
         this.load().then(() => this.onInit());
     }

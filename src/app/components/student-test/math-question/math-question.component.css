@@ -5,12 +5,12 @@
 }
 
 #answer {
-    color:grey;
-    display:block;
+    color: grey;
+    display: block;
     border-radius: 13px;
-    min-height:50px;
+    min-height: 50px;
     text-decoration: none;
-    padding:20px;
+    padding: 20px;
 }
 
 #student-answer {
@@ -18,4 +18,19 @@
     max-width: 400px;
     align-items: flex-start;
     justify-content: flex-start !important;
+}
+
+.highlight-lecturer-background {
+    margin-bottom: 30px;
+    height: 60px;
+    width: 200px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.highlight-student-background, .button-icon {
+    margin-right: 20px;
+    font-size: 30px;
 }

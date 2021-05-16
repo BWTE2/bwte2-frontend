@@ -1,6 +1,7 @@
 import {Component} from "../../../shared/model/component/component.js";
 import {domService} from "../../../shared/services/dom.service.js";
 import {MQ} from "../../../app.module.js";
+import {snackbarService} from "../../../shared/services/snackbar.service.js";
 
 
 const component = {
@@ -32,8 +33,9 @@ export class MathQuestionComponent extends Component {
 
     eventsInitializer() {
         const math_panel = this.dom.getElementById("math-panel");
-
-        math_panel.addEventListener("mathSymbolAppear", (e) =>{
+        this.dom.getElementById("scan").addEventListener("click", this.openUploader);
+        this.dom.getElementById("image-upload").addEventListener("change", this.uploadFile);
+        math_panel.addEventListener("mathSymbolAppear", (e) => {
             let answerSpan = this.dom.getElementById("answer");
             MQ(answerSpan).cmd(e.detail);
         });
@@ -60,7 +62,7 @@ export class MathQuestionComponent extends Component {
         let answerSpan = this.dom.getElementById('answer');
         let answerMathField = MQ.MathField(answerSpan, {
             handlers: {
-                edit: function() {
+                edit: function () {
                     let enteredMath = answerMathField.latex();
                 }
             }
@@ -68,7 +70,34 @@ export class MathQuestionComponent extends Component {
     }
 
     getAnswer() {
-        const studentAnswer= MQ( this.dom.getElementById("answer") ).latex();
-        return studentAnswer;
+        if (this.imgUrl) {
+            return this.imgUrl;
+        } else {
+            const studentAnswer = MQ(this.dom.getElementById("answer")).latex();
+            return studentAnswer;
+        }
+
+
     }
+
+    openUploader = () => {
+        this.dom.getElementById("image-upload").click();
+    };
+
+    uploadFile = async (e) => {
+        await this.toBase64(e.target.files[0]).then((file) => {
+            this.imgUrl = '\\picture' + file;
+            snackbarService.open(this.dom, {
+                message: 'Súbor uploadovaný',
+                type: 'success', duration: 3
+            });
+        });
+    };
+
+    toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
 }

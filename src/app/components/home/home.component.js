@@ -65,7 +65,6 @@ export class HomeComponent extends Component {
     lecturerLoginButtonClick(dom) {
         const form = dom.getElementById("dynamic-form");
         const component = this.dom.querySelector("app-lecturer-login-form");
-        console.log(component);
         if (!component) {
             domService.changeDom(form, LecturerLoginFormComponent);
             this.changeTitleColor('lecturer');

@@ -37,6 +37,7 @@ import * as FontAwesome from "https://kit.fontawesome.com/a2f338e40d.js";
 import * as Jquery from "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js";
 import * as MathQuillAll from "./shared/library/mathquill/mathquill.js";
 import {CanvasPanelComponent} from "./components/student-test/draw-question/canvas/canvas-panel/canvas-panel.component.js";
+import {DocumentationComponent} from "./components/documentation/documentation.component.js";
 
 
 export const MQ = MathQuill.getInterface(2);
@@ -78,12 +79,13 @@ export class AppModule {
         MathPanelComponent,
         PointsEditComponent,
         CanvasComponent,
-        CanvasPanelComponent
+        CanvasPanelComponent,
+        DocumentationComponent
     ]
 
     constructor() {
         window.onload = () => this.onLoad(this.components);
-        console.log("Libraries", MathQuillAll, Jquery, FontAwesome);
+
     }
 
     onLoad(components) {
@@ -92,7 +94,7 @@ export class AppModule {
 
     createComponents(component) {
         {
-            // console.log("<" + component.selector + "></" + component.selector + ">");
+
             customElements.define(component.selector, component);
         }
     }

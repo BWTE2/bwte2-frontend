@@ -319,7 +319,7 @@ export class TestMakerComponent extends Component {
             return false;
         }
 
-        console.log(data.questionPoints);
+
         if(typeof data.questionPoints === 'undefined' || data.questionPoints === null || data.questionPoints === "" || isNaN(data.questionPoints))
         {
             this.wrongQuestionPoints("Párovanie správnych odpovedí");
