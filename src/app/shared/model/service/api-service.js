@@ -3,7 +3,7 @@ import {serverHostNumber} from "./config.js";
 
 export class ApiService {
 
-    #headers = {
+    headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     }
@@ -25,7 +25,7 @@ export class ApiService {
     requestGET() {
         return {
             method: 'GET',
-            headers: this.#headers
+            headers: this.headers
         }
     }
 
@@ -37,7 +37,7 @@ export class ApiService {
     requestPOST(body) {
         return {
             method: 'POST',
-            headers: this.#headers,
+            headers: this.headers,
             body: JSON.stringify(body)
         }
     }
@@ -50,7 +50,7 @@ export class ApiService {
     requestPUT(body) {
         return {
             method: 'PUT',
-            headers: this.#headers,
+            headers: this.headers,
             body: JSON.stringify(body)
         }
     }
