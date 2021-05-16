@@ -23,6 +23,7 @@ export class MultipleAnswerQuestionViewComponent extends Component {
 
     attributesInitializer() {
         const test = domService.getAttribute(this, "test");
+        this.questionId = test.question.id;
         this.preloadPoints(test.question.points);
         this.loadQuestionWording(test.question);
         this.loadOptions(test.question.answer.answers);
@@ -97,4 +98,8 @@ export class MultipleAnswerQuestionViewComponent extends Component {
         return icon;
     }
 
+    getInfo() {
+        const pointsEdit = this.dom.getElementById("points-edit");
+        return {points: pointsEdit.getPoints(), questionId: this.questionId};
+    }
 }

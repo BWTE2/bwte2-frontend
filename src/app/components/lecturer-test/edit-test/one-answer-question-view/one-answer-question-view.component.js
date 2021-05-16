@@ -24,16 +24,21 @@ export class OneAnswerQuestionViewComponent extends Component {
 
     attributesInitializer() {
         const test = domService.getAttribute(this, "test");
-        this.preloadPoints(test.question.points);
+        console.log(test);
+        this.questionId = test.question.id;
+        this.preloadPoints(test.question.points, test.question.answer);
         this.loadQuestionWording(test.question);
     }
 
     eventsInitializer() {
     }
 
-    preloadPoints(points) {
+    preloadPoints(points, answer) {
         const pointsEdit = this.dom.getElementById("points-edit");
-        domService.setAttribute(pointsEdit, "points", null);
+        domService.setAttribute(pointsEdit, "points", points);
+        const answerBox = this.dom.getElementById("student-answer");
+        answerBox.value = answer;
+
     }
 
 
@@ -44,5 +49,10 @@ export class OneAnswerQuestionViewComponent extends Component {
             points: question.maxPoints
         }
         domService.setAttribute(questionWordingElement, "questionWording", questionWording);
+    }
+
+    getInfo() {
+        const pointsEdit = this.dom.getElementById("points-edit");
+        return {points: pointsEdit.getPoints(), questionId: this.questionId};
     }
 }
