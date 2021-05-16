@@ -19,7 +19,8 @@ export class LecturerTestComponent extends Component {
 
     constructor() {
         super(component);
-        this.load().then(() => this.onInit());
+        this.setName().then(() => this.load().then(() => this.onInit()));
+
     }
 
     onInit() {
@@ -28,7 +29,9 @@ export class LecturerTestComponent extends Component {
     }
 
     attributesInitializer() {
-        this.setName();
+
+        const sideMenu = this.dom.getElementById("side-menu");
+        domService.setAttribute(sideMenu, "headerName", this.fullName);
     }
 
     eventsInitializer() {
@@ -100,10 +103,12 @@ export class LecturerTestComponent extends Component {
         domService.changeDom(container, component);
     }
 
-    setName() {
-        const actualName = "Lubos Sremanak";
-        const sideMenu = this.dom.getElementById("side-menu");
-        domService.setAttribute(sideMenu, "headerName", actualName);
+    async setName() {
+        return await lecturerService.getLecturerInfo().then((response) => {
+            console.log(response);
+            const info = response.response.info;
+            this.fullName = info.name + ' ' + info.surname;
+        });
     }
 
 
