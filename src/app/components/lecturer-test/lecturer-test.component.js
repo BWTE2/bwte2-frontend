@@ -105,8 +105,7 @@ export class LecturerTestComponent extends Component {
 
     async setName() {
         return await lecturerService.getLecturerInfo().then((response) => {
-            console.log(response);
-            if(!response.isLogged){
+            if(!response.response.isLogged){
                 this.redirectToLoginPage();
             }
             else {
