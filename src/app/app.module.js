@@ -33,6 +33,8 @@ import {MultipleAnswerQuestionViewComponent} from "./components/lecturer-test/ed
 import {MathPanelComponent} from "./components/math-panel/math-panel.component.js";
 import {PointsEditComponent} from "./components/lecturer-test/edit-test/points-edit/points-edit.component.js";
 import {CanvasComponent} from "./components/student-test/draw-question/canvas/canvas.component.js";
+import {QrCodeComponent} from "./components/qr-code/qr-code.component.js";
+import {QrMobileComponent} from "./components/qr-mobile/qr-mobile.component.js";
 import * as FontAwesome from "https://kit.fontawesome.com/a2f338e40d.js";
 import * as Jquery from "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js";
 import * as MathQuillAll from "./shared/library/mathquill/mathquill.js";
@@ -78,7 +80,9 @@ export class AppModule {
         MathPanelComponent,
         PointsEditComponent,
         CanvasComponent,
-        CanvasPanelComponent
+        CanvasPanelComponent,
+        QrCodeComponent,
+        QrMobileComponent
     ]
 
     constructor() {
