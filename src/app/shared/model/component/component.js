@@ -8,14 +8,19 @@ export class Component extends HTMLElement {
 
     }
 
-    async load() {
+    async load(inline, html) {
         if (this.config.stylePaths) {
             this.config.stylePaths.forEach((stylePath) => this.#setCss(stylePath));
         }
         const pathEncoder = new PathEncoder();
         this.#loadCss(pathEncoder.getRootPath() + 'style.css');
         this.#loadCss(pathEncoder.getRootPath() + 'app/shared/library/font-awesome/css/all.min.css')
-        await this.#loadHtml().then((html) => this.#setHTML(html));
+        if (inline) {
+            this.dom.innerHTML += html;
+        } else {
+            await this.#loadHtml().then((html) => this.#setHTML(html));
+        }
+
     }
 
 
