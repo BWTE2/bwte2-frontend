@@ -6,4 +6,5 @@
     bottom: 70px;
     right: 70px;
     width: fit-content;
+    width: -moz-fit-content;
 }

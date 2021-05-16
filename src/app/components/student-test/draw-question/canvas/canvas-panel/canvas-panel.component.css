@@ -21,6 +21,7 @@
     position: relative;
     border-radius: 24px;
     width: fit-content;
+    width: -moz-fit-content;
     height: fit-content;
     margin: 5px 0 5px 0;
 }
@@ -52,6 +53,8 @@
 
 #canvas-panel .tools button, #color-picker-visible {
     width: fit-content;
+    width: -moz-fit-content;
+
     display: flex;
     height: fit-content;
     padding: 5px;

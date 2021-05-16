@@ -1,6 +1,7 @@
 #test-table {
     width: fit-content;
     max-width: 90vw;
+    width: -moz-fit-content;
     height: fit-content;
 }
 

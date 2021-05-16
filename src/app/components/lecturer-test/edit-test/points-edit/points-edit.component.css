@@ -13,6 +13,8 @@
 
 .flex-right {
     width: fit-content;
+    width: -moz-fit-content;
+
     align-items: flex-start;
 }
 
