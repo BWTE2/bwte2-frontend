@@ -87,7 +87,7 @@ export class StudentLoginFormComponent extends Component {
     {
         let baseUrl = "app/views/student-test/index.html";
 
-        let params = "?codeTest=" + codeTest + "&studentId=" + studentId;
+        let params = "?codeTest=" + codeTest;
 
         return baseUrl + params;
     }

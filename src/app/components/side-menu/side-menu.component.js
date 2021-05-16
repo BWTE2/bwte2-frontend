@@ -53,6 +53,10 @@ export class SideMenuComponent extends Component {
             this.sendTest();
         }
 
+        if(data === "-1"){
+            this.redirectToLoginPage();
+        }
+
         const time = this.secondsToTime(data);
         this.dom.getElementById("timer").innerText = time + "";
     }
@@ -91,6 +95,10 @@ export class SideMenuComponent extends Component {
     sendTest = () => {
         domService.createAndEmitEvent(document, "sendTest", true);
     };
+
+    redirectToLoginPage = () => {
+        location.replace("../../../index.html");
+    }
 
     openCreateTest = () => {
         this.swapCreateButton();

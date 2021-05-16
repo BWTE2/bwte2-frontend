@@ -105,9 +105,13 @@ export class LecturerTestComponent extends Component {
 
     async setName() {
         return await lecturerService.getLecturerInfo().then((response) => {
-            console.log(response);
-            const info = response.response.info;
-            this.fullName = info.name + ' ' + info.surname;
+            if(!response.response.isLogged){
+                this.redirectToLoginPage();
+            }
+            else {
+                const info = response.response.info;
+                this.fullName = info.name + ' ' + info.surname;
+            }
         });
     }
 
