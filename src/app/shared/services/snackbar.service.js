@@ -12,7 +12,6 @@ class SnackbarService {
         const actualSnackbar = dom.querySelector("APP-SNACKBAR");
 
         if (actualSnackbar) {
-            console.log("mazem",actualSnackbar);
             actualSnackbar.parentNode.removeChild(actualSnackbar);
         }
         domService.appendDomAndSetAttribute(dom, SnackbarComponent, attribute);

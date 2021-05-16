@@ -74,7 +74,7 @@ export class LecturerLoginFormComponent extends Component {
     verifyLoginDataAndLoginLecturer = (json) => {
         let data = json.response;
 
-        console.log(data);
+
 
         let isAbleToLogin = this.isAbleToLogin(data);
 

@@ -24,7 +24,6 @@ export class SnackbarComponent extends Component {
         const data = domService.getAttribute(this, "snackbar");
         this.setColorByType(data.type);
         this.setMessage(data.message);
-        console.log(data)
         this.autoHide(data.duration).then(() => {
                 this.timeout(1).then(r => {
                     this.dom.innerHTML = "";

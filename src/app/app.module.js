@@ -83,7 +83,7 @@ export class AppModule {
 
     constructor() {
         window.onload = () => this.onLoad(this.components);
-        console.log("Libraries", MathQuillAll, Jquery, FontAwesome);
+
     }
 
     onLoad(components) {
@@ -92,7 +92,7 @@ export class AppModule {
 
     createComponents(component) {
         {
-            // console.log("<" + component.selector + "></" + component.selector + ">");
+
             customElements.define(component.selector, component);
         }
     }

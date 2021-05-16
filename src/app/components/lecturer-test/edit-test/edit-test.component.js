@@ -39,7 +39,6 @@ export class EditTestComponent extends Component {
     appendQuestion(test) {
         const attribute = {name: "test", data: test};
         const question = test.question;
-        console.log(question)
         const paper = this.dom.getElementById("paper");
         if (question.type === "CHOICE") {
             domService.appendDomAndSetAttribute(paper, MultipleAnswerQuestionViewComponent, attribute);
@@ -70,7 +69,6 @@ export class EditTestComponent extends Component {
     editTest = () => {
         const studentId = this.studentTestId.studentId;
         const testCode = this.studentTestId.testCode;
-        console.log(studentId, testCode);
         this.saveEditedTest(studentId,testCode);
     };
 
@@ -83,7 +81,6 @@ export class EditTestComponent extends Component {
             allQuestionPoints.push(questionInfo);
         }
         testsService.updateStudentTestAnswers(studentId, testCode, allQuestionPoints).then((response) => {
-            console.log(response);
             const message = 'Test uložený';
             snackbarService.open(this.dom, {message, type: 'success', duration: 3})
         });

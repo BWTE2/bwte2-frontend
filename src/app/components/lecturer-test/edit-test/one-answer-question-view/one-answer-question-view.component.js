@@ -24,7 +24,6 @@ export class OneAnswerQuestionViewComponent extends Component {
 
     attributesInitializer() {
         const test = domService.getAttribute(this, "test");
-        console.log(test);
         this.questionId = test.question.id;
         this.preloadPoints(test.question.points, test.question.answer);
         this.loadQuestionWording(test.question);
