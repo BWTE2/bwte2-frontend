@@ -2,6 +2,7 @@ import {Component} from "../../shared/model/component/component.js";
 import {domService} from "../../shared/services/dom.service.js";
 import {testsService} from "../../api/tests/services/tests.service.js";
 import {serverSentEventsService} from "../../api/server-sent-events/services/server-sent-events.service.js";
+import {studentService} from "../../api/student/services/student.service.js";
 
 
 const component = {
@@ -27,9 +28,11 @@ export class StudentTestComponent extends Component {
         this.preResponse = await testsService.readQuestions(testKey);
 
         if (this.preResponse.responseErrorMessage) {
-            alert(this.preResponse.responseErrorMessage.responseCode)
-            console.log(this.preResponse);
             this.handleErrorResponseMessage(this.preResponse.responseErrorMessage);
+        }
+        else{
+            this.studentId = this.preResponse.response.studentId;
+            this.name = this.preResponse.response.studentName;
         }
     }
 
@@ -55,8 +58,24 @@ export class StudentTestComponent extends Component {
                 this.sendTest()
             }
         });
+
+        window.addEventListener("focus", this.updateInTestStatus);
+        window.addEventListener("blur", this.updateOutTestStatus);
     }
 
+    updateInTestStatus = () =>{
+        const testKey = this.getTestKey();
+        const studentId = this.getStudentId();
+        studentService.updateInTestStatus(testKey, studentId)
+            .then((response) => console.log(response));
+    }
+
+    updateOutTestStatus = () =>{
+        const testKey = this.getTestKey();
+        const studentId = this.getStudentId();
+        studentService.updateOutTestStatus(testKey, studentId)
+            .then((response) => console.log(response));
+    }
 
 
     sendTest = () => {
@@ -78,10 +97,12 @@ export class StudentTestComponent extends Component {
     }
 
     getStudentId() {
-        let queryParams = window.location.search;
+       /* let queryParams = window.location.search;
         let params = new URLSearchParams(queryParams);
 
-        return params.get("studentId");
+        return params.get("studentId");*/
+
+        return this.studentId;
     }
 
     getAllAnswers() {
@@ -108,22 +129,18 @@ export class StudentTestComponent extends Component {
     }
 
     menuSwapped = (e) => {
-        const paper = this.dom.getElementById("paper");
-        if (e.detail === "400px") {
-            paper.style.marginLeft = "0px";
-        } else {
-            paper.style.marginLeft = "400px";
-        }
+
     }
 
     setName() {
-        const actualName = "Lubos Sremanak";
+        const actualName = this.name.name + " " +  this.name.surname;
         const sideMenu = this.dom.getElementById("side-menu");
         domService.setAttribute(sideMenu, "headerName", actualName);
     }
 
     loadTest() {
-        this.showAllQuestions(this.preResponse);
+        console.log(this.preResponse.response)
+        this.showAllQuestions(this.preResponse.response.test);
     }
 
     getTestKey() {
@@ -135,7 +152,6 @@ export class StudentTestComponent extends Component {
     }
 
     showAllQuestions(test) {
-        test = test.response;
         this.dom.getElementById("paper").innerHTML = "";
 
         if (!test.exists) {
@@ -150,7 +166,6 @@ export class StudentTestComponent extends Component {
             this.showQuestion(question);
             questionCount++;
         }
-
         this.startTimer();
     }
 
@@ -214,7 +229,8 @@ export class StudentTestComponent extends Component {
 
     startTimer = () => {
         const testKey = this.getTestKey();
-        this.timeSource = serverSentEventsService.readTestTimer(testKey);
+        const studentId = this.getStudentId();
+        this.timeSource = serverSentEventsService.readTestTimer(testKey, studentId);
     }
 
 

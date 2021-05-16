@@ -4,6 +4,8 @@ import {TestMakerComponent} from "./test-maker/test-maker.component.js";
 import {TestTableComponent} from "./test-table/test-table.component.js";
 import {ActiveTestDetailComponent} from "./active-test-detail/active-test-detail.component.js";
 import {NonActiveTestDetailComponent} from "./non-active-test-detail/non-active-test-detail.component.js";
+import {EditTestComponent} from "./edit-test/edit-test.component.js";
+import {lecturerService} from "../../api/lecturer/services/lecturer.service.js";
 
 
 const component = {
@@ -17,7 +19,8 @@ export class LecturerTestComponent extends Component {
 
     constructor() {
         super(component);
-        this.load().then(() => this.onInit());
+        this.setName().then(() => this.load().then(() => this.onInit()));
+
     }
 
     onInit() {
@@ -26,7 +29,9 @@ export class LecturerTestComponent extends Component {
     }
 
     attributesInitializer() {
-        this.setName();
+
+        const sideMenu = this.dom.getElementById("side-menu");
+        domService.setAttribute(sideMenu, "headerName", this.fullName);
     }
 
     eventsInitializer() {
@@ -35,17 +40,22 @@ export class LecturerTestComponent extends Component {
         sideMenu.addEventListener("menuSwap", this.menuSwapped);
         sideMenu.addEventListener("openCreateTest", this.openTestBuilder);
         sideMenu.addEventListener("showAllTests", this.openAllTests);
-        document.addEventListener("updateAllTests", this.openAllTests);
         allTests.addEventListener("testDetail", this.openTestDetail)
+        document.addEventListener("updateAllTests", this.openAllTests);
+        document.addEventListener("testEdit", this.testEdit);
+        document.addEventListener("logout", this.logoutLecturer);
+    }
+
+    logoutLecturer = () => {
+        lecturerService.lecturerLogout(null).then(this.redirectToLoginPage);
+    }
+
+    redirectToLoginPage = () => {
+        location.replace("../../../index.html");
     }
 
     menuSwapped = (e) => {
-        const formContainer = this.dom.getElementById("dynamic-test-form");
-        if (e.detail === "400px") {
-            formContainer.style.marginLeft = "0px";
-        } else {
-            formContainer.style.marginLeft = "400px";
-        }
+
     }
 
     openTestBuilder = () => {
@@ -67,8 +77,14 @@ export class LecturerTestComponent extends Component {
         domService.createAndEmitEvent(document, "testDetail", true);
     };
 
+    testEdit = (testEvent) => {
+        const attribute = {name: 'studentTestId', data: testEvent.detail}
+        this.changePageAndSendAttribute(EditTestComponent, attribute);
+    };
+
+
     activeTestDetail(test) {
-        const attribute = {name: 'testCode', data: test.code}
+        const attribute = {name: 'test', data: test}
         this.changePageAndSendAttribute(ActiveTestDetailComponent, attribute);
     }
 
@@ -76,7 +92,6 @@ export class LecturerTestComponent extends Component {
         const attribute = {name: 'test', data: test}
         this.changePageAndSendAttribute(NonActiveTestDetailComponent, attribute);
     }
-
 
     changePageAndSendAttribute(component, attribute) {
         const container = this.dom.getElementById("dynamic-test-form");
@@ -88,10 +103,16 @@ export class LecturerTestComponent extends Component {
         domService.changeDom(container, component);
     }
 
-    setName() {
-        const actualName = "Lubos Sremanak";
-        const sideMenu = this.dom.getElementById("side-menu");
-        domService.setAttribute(sideMenu, "headerName", actualName);
+    async setName() {
+        return await lecturerService.getLecturerInfo().then((response) => {
+            if(!response.response.isLogged){
+                this.redirectToLoginPage();
+            }
+            else {
+                const info = response.response.info;
+                this.fullName = info.name + ' ' + info.surname;
+            }
+        });
     }
 
 

@@ -16,7 +16,13 @@ class TableService {
 
     getColumn(text) {
         const column = document.createElement("TD");
-        column.innerText = text;
+        const span = document.createElement("SPAN");
+        const div = document.createElement("DIV");
+        span.innerText = text;
+        span.classList.add("column-text")
+        div.appendChild(span)
+        div.classList.add("column-text-container")
+        column.appendChild(div);
         return column;
     }
 

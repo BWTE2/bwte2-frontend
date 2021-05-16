@@ -8,6 +8,10 @@
     margin-top: 50px;
 }
 
+#student-test {
+    width: 100%;
+}
+
 @media screen and (max-width: 600px) {
     #lecturer-test {
         margin-top: 0;

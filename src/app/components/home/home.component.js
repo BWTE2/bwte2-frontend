@@ -2,6 +2,7 @@ import {Component} from "../../shared/model/component/component.js";
 import {StudentLoginFormComponent} from "./student-login-form/student-login-form.component.js";
 import {LecturerLoginFormComponent} from "./lecturer-login-form/lecturer-login-form.component.js";
 import {domService} from "../../shared/services/dom.service.js";
+import {lecturerService} from "../../api/lecturer/services/lecturer.service.js";
 
 
 const component = {
@@ -16,7 +17,20 @@ export class HomeComponent extends Component {
 
     constructor() {
         super(component);
-        this.load().then(() => this.onInit());
+        this.checkLoggedLecturer().then(() => {
+            this.load().then(() => this.onInit());
+        })
+
+    }
+
+    async checkLoggedLecturer() {
+        this.preResponse = await lecturerService.getLecturerInfo();
+
+        let lecturerInfo = this.preResponse.response;
+
+        if (lecturerInfo.isLogged) {
+            this.redirectToLecturerTest(lecturerInfo.info);
+        }
     }
 
     onInit() {
@@ -39,19 +53,37 @@ export class HomeComponent extends Component {
 
     studentLoginButtonClick(dom) {
         const form = dom.getElementById("dynamic-form");
-        domService.changeDom(form, StudentLoginFormComponent);
+        const component = this.dom.querySelector("app-student-login-form");
+        if (!component) {
+            domService.changeDom(form, StudentLoginFormComponent);
+            this.changeTitleColor('student');
+        }
+
         form.scrollIntoView();
     }
 
     lecturerLoginButtonClick(dom) {
         const form = dom.getElementById("dynamic-form");
-        domService.changeDom(form, LecturerLoginFormComponent);
+        const component = this.dom.querySelector("app-lecturer-login-form");
+        console.log(component);
+        if (!component) {
+            domService.changeDom(form, LecturerLoginFormComponent);
+            this.changeTitleColor('lecturer');
+        }
         form.scrollIntoView();
     }
 
-    checkIsComponentRendered() {
-        // TODO: Skontroluj či už nahodou dany komponent nieje otvorený,
-        //  napirklad: je otvoreny Student login kliknem na Som student tak ho nebude znovu renderovat
-        //  "rendererService.changeDom(form, StudentLoginFormComponent);"
+
+    changeTitleColor(type) {
+        const title = this.dom.getElementById("dynamic-title");
+        title.style.color = domService.getColorByType(type);
+    }
+
+    redirectToLecturerTest(lecturer) {
+        location.replace(this.getLecturerUrl(lecturer.id));
+    }
+
+    getLecturerUrl(lerturerId) {
+        return "app/views/lecturer-test/index.html";
     }
 }

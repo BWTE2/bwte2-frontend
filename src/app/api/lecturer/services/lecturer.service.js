@@ -27,6 +27,20 @@ class LecturerService extends ApiService {
         const response = await fetch(url, this.requestPOST(lecturer)).catch(this.catchErrors);
         return response ? await response.json() : this.handleErrors(new Error());
     }
+
+    async getLecturerInfo()
+    {
+        const url = this.rootURL + 'lecturer-login/';
+        const response = await fetch(url,this.requestGET()).catch(this.catchErrors);
+        return response ? await response.json() : this.handleErrors(new Error());
+    }
+
+    async lecturerLogout(lecturer)
+    {
+        const url = this.rootURL + 'lecturer-logout/';
+        const response = await fetch(url,this.requestPOST(lecturer)).catch(this.catchErrors);
+        return response ? await response.json() : this.handleErrors(new Error());
+    }
 }
 
 export const lecturerService = new LecturerService();

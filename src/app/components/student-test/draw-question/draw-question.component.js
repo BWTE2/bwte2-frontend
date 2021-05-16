@@ -1,5 +1,6 @@
 import {Component} from "../../../shared/model/component/component.js";
 import {domService} from "../../../shared/services/dom.service.js";
+import {CanvasComponent} from "./canvas/canvas.component.js";
 
 
 const component = {
@@ -14,6 +15,8 @@ export class DrawQuestionComponent extends Component {
     constructor() {
         super(component);
         this.load().then(() => this.onInit());
+        this.imgUrl = null;
+        this.canvas = null;
     }
 
     onInit() {
@@ -23,22 +26,24 @@ export class DrawQuestionComponent extends Component {
 
     attributesInitializer() {
         const question = domService.getAttribute(this, "questionInfo");
-
+        document.addEventListener("saveCanvasImage", this.setImage);
         this.loadQuestionWording(question);
         this.loadQuestionBody(question);
+
     }
 
     eventsInitializer() {
-
+        this.dom.getElementById("draw").addEventListener("click", this.openCanvas);
     }
+
 
     loadQuestionWording(question) {
         const questionWordingElement = this.dom.getElementById("question-wording-element");
-        const questionWording = {
+        this.questionWording = {
             text: question.questionText,
             points: question.points
         }
-        domService.setAttribute(questionWordingElement, "questionWording", questionWording);
+        domService.setAttribute(questionWordingElement, "questionWording", this.questionWording);
     }
 
     loadQuestionBody(question) {
@@ -46,9 +51,23 @@ export class DrawQuestionComponent extends Component {
     }
 
     getAnswer() {
-        //TODO: dorobit vratenie odpovede v podobe akej je potrebne, pre odoslanie testu
-        return [];
+        return this.imgUrl;
     }
 
 
+    setImage = (event) => {
+        this.imgUrl = event.detail;
+    };
+
+    openCanvas = () => {
+        const attribute = {
+            name: "question-wording",
+            data: this.questionWording
+        };
+
+        console.log(attribute);
+        domService.appendDomAndSetAttribute(this.dom, CanvasComponent, attribute);
+
+
+    };
 }

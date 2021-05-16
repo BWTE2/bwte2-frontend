@@ -1,4 +1,5 @@
 import {Component} from "../../../../shared/model/component/component.js";
+import {domService} from "../../../../shared/services/dom.service.js";
 
 
 const component = {
@@ -21,9 +22,14 @@ export class MathQuestionViewComponent extends Component {
     }
 
     attributesInitializer() {
-
+        const test = domService.getAttribute(this, "test");
+        this.questionId = test.question.id;
     }
 
     eventsInitializer() {
+    }
+
+    getInfo(){
+        return {points: 0, questionId: this.questionId};
     }
 }
