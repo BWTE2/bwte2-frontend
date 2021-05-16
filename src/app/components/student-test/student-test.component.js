@@ -30,6 +30,10 @@ export class StudentTestComponent extends Component {
         if (this.preResponse.responseErrorMessage) {
             this.handleErrorResponseMessage(this.preResponse.responseErrorMessage);
         }
+        else{
+            this.studentId = this.preResponse.response.studentId;
+            this.name = this.preResponse.response.studentName;
+        }
     }
 
     onInit() {
@@ -54,7 +58,6 @@ export class StudentTestComponent extends Component {
                 this.sendTest()
             }
         });
-
 
         window.addEventListener("focus", this.updateInTestStatus);
         window.addEventListener("blur", this.updateOutTestStatus);
@@ -94,10 +97,12 @@ export class StudentTestComponent extends Component {
     }
 
     getStudentId() {
-        let queryParams = window.location.search;
+       /* let queryParams = window.location.search;
         let params = new URLSearchParams(queryParams);
 
-        return params.get("studentId");
+        return params.get("studentId");*/
+
+        return this.studentId;
     }
 
     getAllAnswers() {
@@ -128,13 +133,14 @@ export class StudentTestComponent extends Component {
     }
 
     setName() {
-        const actualName = "Lubos Sremanak";
+        const actualName = this.studentId + " " + this.name.name + " " +  this.name.surname;
         const sideMenu = this.dom.getElementById("side-menu");
         domService.setAttribute(sideMenu, "headerName", actualName);
     }
 
     loadTest() {
-        this.showAllQuestions(this.preResponse);
+        console.log(this.preResponse.response)
+        this.showAllQuestions(this.preResponse.response.test);
     }
 
     getTestKey() {
@@ -146,7 +152,6 @@ export class StudentTestComponent extends Component {
     }
 
     showAllQuestions(test) {
-        test = test.response;
         this.dom.getElementById("paper").innerHTML = "";
 
         if (!test.exists) {

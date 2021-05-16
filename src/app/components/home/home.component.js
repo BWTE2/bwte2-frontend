@@ -25,7 +25,6 @@ export class HomeComponent extends Component {
 
     async checkLoggedLecturer() {
         this.preResponse = await lecturerService.getLecturerInfo();
-        console.log(this.preResponse.response);
 
         let lecturerInfo = this.preResponse.response;
 
