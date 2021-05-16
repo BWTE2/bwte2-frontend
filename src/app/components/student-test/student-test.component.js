@@ -88,7 +88,7 @@ export class StudentTestComponent extends Component {
         const allAnswers = [];
         const paper = this.dom.getElementById("paper");
 
-        for (let answerElement of paper.getElementsByTagName("*")) {
+        for (let answerElement of paper.querySelectorAll("APP-DRAW-QUESTION, APP-MATH-QUESTION, APP-MULTIPLE-ANSWER-QUESTION, APP-ONE-ANSWER-QUESTION, APP-PAIR-QUESTION")) {
             const answer = this.getAnswer(answerElement);
             allAnswers.push(answer);
         }
@@ -195,6 +195,10 @@ export class StudentTestComponent extends Component {
         const appQuestion = document.createElement("APP-DRAW-QUESTION");
         domService.setAttribute(appQuestion, "questionInfo", question);
         paper.appendChild(appQuestion);
+
+        const qr = document.createElement("APP-QR-CODE");
+        domService.setAttribute(qr, "questionInfo", question);
+        paper.appendChild(qr);
     }
 
     showMathQuestion(question) {
@@ -202,6 +206,10 @@ export class StudentTestComponent extends Component {
         const appQuestion = document.createElement("APP-MATH-QUESTION");
         domService.setAttribute(appQuestion, "questionInfo", question);
         paper.appendChild(appQuestion);
+
+        const qr = document.createElement("APP-QR-CODE");
+        domService.setAttribute(qr, "questionInfo", question);
+        paper.appendChild(qr);
     }
 
     startTimer = () => {

@@ -31,6 +31,8 @@ import {PairQuestionViewComponent} from "./components/lecturer-test/edit-test/pa
 import {OneAnswerQuestionViewComponent} from "./components/lecturer-test/edit-test/one-answer-question-view/one-answer-question-view.component.js";
 import {MultipleAnswerQuestionViewComponent} from "./components/lecturer-test/edit-test/multiple-answer-question-view/multiple-answer-question-view.component.js";
 import {MathPanelComponent} from "./components/math-panel/math-panel.component.js";
+import {QrCodeComponent} from "./components/qr-code/qr-code.component.js";
+import {QrMobileComponent} from "./components/qr-mobile/qr-mobile.component.js";
 import * as FontAwesome from "https://kit.fontawesome.com/a2f338e40d.js";
 import * as Jquery from "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js";
 import * as MathQuillAll from "./shared/library/mathquill/mathquill.js";
@@ -70,7 +72,9 @@ export class AppModule {
         PairQuestionViewComponent,
         OneAnswerQuestionViewComponent,
         MultipleAnswerQuestionViewComponent,
-        MathPanelComponent
+        MathPanelComponent,
+        QrCodeComponent,
+        QrMobileComponent
     ]
 
     constructor() {

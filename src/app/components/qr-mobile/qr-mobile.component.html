@@ -1,0 +1,13 @@
+<div id="qr-mobile">
+    <form method="post" enctype="multipart/form-data" action="/bwte2/bwte2-backend/controllers/help_controllers/qrUpload.php">
+        <label for="uploadfile">Nahraj súbor z mobilu</label><br>
+        <input type="file" accept="image/*" capture="camera" name="uploadfile" id="uploadfile">
+
+        <input type="hidden" id="codeTest" name="codeTest">
+        <input type="hidden" id="studentId" name="studentId">
+        <input type="hidden" id="questionId" name="questionId">
+        <input type="hidden" id="token" name="token">
+
+        <input type="submit" value="Odoslať">
+    </form>
+</div>
