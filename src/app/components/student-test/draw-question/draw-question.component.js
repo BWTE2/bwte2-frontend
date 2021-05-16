@@ -1,6 +1,7 @@
 import {Component} from "../../../shared/model/component/component.js";
 import {domService} from "../../../shared/services/dom.service.js";
 import {CanvasComponent} from "./canvas/canvas.component.js";
+import {snackbarService} from "../../../shared/services/snackbar.service.js";
 
 
 const component = {
@@ -80,6 +81,10 @@ export class DrawQuestionComponent extends Component {
     uploadFile = async (e) => {
         await this.toBase64(e.target.files[0]).then((file) => {
             this.imgUrl = file;
+            snackbarService.open(this.dom, {
+                message: 'Súbor uploadovaný',
+                type: 'success', duration: 3
+            });
         });
     };
 
