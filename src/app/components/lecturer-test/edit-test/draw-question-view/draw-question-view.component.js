@@ -23,6 +23,7 @@ export class DrawQuestionViewComponent extends Component {
 
     attributesInitializer() {
         this.test = domService.getAttribute(this, "test");
+        this.questionId =  this.test.question.id;
         this.preloadPoints(this.test.question.points);
         this.loadQuestionWording(this.test.question);
 
@@ -61,4 +62,9 @@ export class DrawQuestionViewComponent extends Component {
     closeImageView = () => {
         this.dom.getElementById('modal-image-container').remove();
     };
+
+    getInfo() {
+        const pointsEdit = this.dom.getElementById("points-edit");
+        return {points: pointsEdit.getPoints(), questionId: this.questionId};
+    }
 }
