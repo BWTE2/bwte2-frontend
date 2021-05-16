@@ -53,6 +53,10 @@ export class SideMenuComponent extends Component {
             this.sendTest();
         }
 
+        if(data === "-1"){
+            this.redirectToLoginPage();
+        }
+
         const time = this.secondsToTime(data);
         this.dom.getElementById("timer").innerText = time + "";
     }
@@ -79,10 +83,11 @@ export class SideMenuComponent extends Component {
         const menu = this.dom.getElementById("side-menu");
         const width = menu.style.width;
         domService.createAndEmitEvent(this, "menuSwap", width);
-        if (width === '0px' || width === '') {
-            this.showMenu();
-        } else {
+        if (width === '400px' || width === '') {
             this.hideMenu();
+        } else {
+            this.showMenu();
+
         }
     };
 
@@ -91,13 +96,19 @@ export class SideMenuComponent extends Component {
         domService.createAndEmitEvent(document, "sendTest", true);
     };
 
+    redirectToLoginPage = () => {
+        location.replace("../../../index.html");
+    }
+
     openCreateTest = () => {
         this.swapCreateButton();
+        domService.createAndEmitEvent(document, "closeActivities", true);
         domService.createAndEmitEvent(this, "openCreateTest", true);
     };
 
     openShowAll = () => {
         this.swapShowAllButton()
+        domService.createAndEmitEvent(document, "closeActivities", true);
         domService.createAndEmitEvent(this, "showAllTests", true);
     };
 
@@ -132,7 +143,6 @@ export class SideMenuComponent extends Component {
         menu.sideMenu.style.width = "400px";
         menu.menuHeader.style.width = '400px';
         menu.menuHeaderName.style.display = "flex";
-        menu.menuHeaderName.style.marginRight = "0px";
         this.animation.setSpeed(1.8);
         this.animation.playSegments([30, 60], true);
     }
@@ -143,7 +153,6 @@ export class SideMenuComponent extends Component {
         menu.sideMenu.style.width = "0px";
         menu.menuHeader.style.width = '100px';
         menu.menuHeaderName.style.display = "none";
-        menu.menuHeaderName.style.marginRight = "50px";
         this.animation.setSpeed(1.8);
         this.animation.playSegments([50, 30], true);
 
@@ -165,6 +174,7 @@ export class SideMenuComponent extends Component {
             loop: false,
             autoplay: false,
         });
+        this.animation.goToAndStop(50, true);
     }
 
 

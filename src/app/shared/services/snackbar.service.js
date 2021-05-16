@@ -10,8 +10,10 @@ class SnackbarService {
         // const data = {message, type,duration};
         const attribute = {name: "snackbar", data};
         const actualSnackbar = dom.querySelector("APP-SNACKBAR");
+
         if (actualSnackbar) {
-            actualSnackbar.remove();
+            console.log("mazem",actualSnackbar);
+            actualSnackbar.parentNode.removeChild(actualSnackbar);
         }
         domService.appendDomAndSetAttribute(dom, SnackbarComponent, attribute);
     }

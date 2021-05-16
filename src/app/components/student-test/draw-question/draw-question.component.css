@@ -4,7 +4,7 @@
     margin: 20px 0;
 }
 
-#draw-question .highlight-student-background {
+#draw-question :is(.highlight-student-background,.highlight-lecturer-background) {
     margin-bottom: 30px;
     height: 60px;
     width: 200px;
@@ -14,7 +14,7 @@
     align-items: center;
 }
 
-#draw-question .highlight-student-background .button-icon {
+#draw-question :is(.highlight-student-background,.highlight-lecturer-background) .button-icon {
     margin-right: 20px;
     font-size: 30px;
 }

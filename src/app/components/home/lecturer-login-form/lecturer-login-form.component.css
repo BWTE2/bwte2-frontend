@@ -9,8 +9,11 @@
     background-color: var(--primary-color);
     box-shadow: 12px 12px 42px #F1F1F1;
     border-radius: 20px;
+    padding: 0 10px;
 }
-
+.form-header{
+    padding: 0 10px;
+}
 
 #home-form #form .subtitle:not(.form-header .subtitle) {
     margin: 50px 50px 20px 50px;

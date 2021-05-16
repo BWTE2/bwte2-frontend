@@ -3,9 +3,8 @@
     top: 0;
     left: 0;
     height: 100px;
-    width: 100px;
+    width: 400px;
     border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
     z-index: 999;
     align-items: center;
     justify-content: space-between;
@@ -19,7 +18,7 @@
 }
 
 #side-menu-header #side-menu-header-name {
-    display: none;
+    display: flex;
 }
 
 #side-menu-header .text {
@@ -36,19 +35,17 @@
 
 #side-menu {
     height: 98vh;
-    width: 0;
+    width: 400px;
     position: fixed;
-    z-index: 0;
     top: 100px;
     left: 0;
     background-color: var(--primary-color);
     color: var(--primary-color);
     overflow: hidden;
     transition: 0.2s;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
     justify-content: flex-start;
     align-items: center;
+    z-index: 999;
 }
 
 #create-test-button, #show-all-tests {
@@ -60,10 +57,7 @@
 }
 
 #logout-button, #send-test-button {
-    position: absolute;
-    top: calc(80% - 100px);
-    left: 50%;
-    transform: translateX(-50%);
+   margin-top: 100px;
 }
 
 

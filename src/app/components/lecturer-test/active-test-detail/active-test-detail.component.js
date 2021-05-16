@@ -2,6 +2,7 @@ import {Component} from "../../../shared/model/component/component.js";
 import {tableService} from "../../../shared/services/table.service.js";
 import {testsService} from "../../../api/tests/services/tests.service.js";
 import {domService} from "../../../shared/services/dom.service.js";
+import {serverSentEventsService} from "../../../api/server-sent-events/services/server-sent-events.service.js";
 
 
 const component = {
@@ -21,41 +22,73 @@ export class ActiveTestDetailComponent extends Component {
 
     onInit() {
         this.table = this.dom.getElementById("test-table-body");
-        this.setStudents();
-        this.attributesInitializer();
+        //this.setStudents();
         this.eventsInitializer();
+        this.attributesInitializer();
     }
 
     attributesInitializer() {
-
+        const testInfo = domService.getAttribute(this, 'test');
+        this.dom.getElementById("test-title").innerText = testInfo.title;
+        this.dom.getElementById("test-code").innerText = "#" + testInfo.code
+        this.testCode = testInfo.code;
+        this.activitySource = serverSentEventsService.readTestActivities(testInfo.code);
+        document.addEventListener("changeActivities", this.loadStudents);
     }
 
     eventsInitializer() {
     }
 
-    setStudents() {
-        const testInfo = domService.getAttribute(this, 'test');
-        this.dom.getElementById("test-title").innerText = testInfo.title;
-        this.dom.getElementById("test-code").innerText = "#" + testInfo.code
-        testsService.readTestAnswers(testInfo.code).then(this.appendStudents);
+    loadStudents = (response) =>{
+        const allStudents = response.detail.students;
+        const tableBody = this.dom.getElementById("test-table-body");
+        tableBody.innerHTML = "";
+
+        if (allStudents.length > 0) {
+            allStudents.forEach(this.createRow);
+        } else {
+            const placeHolder = tableService.getEmptyTablePlaceholder("Nikto nepíše test");
+            tableBody.appendChild(placeHolder);
+        }
     }
 
-    appendStudents = (json) => {
-        const students = json.response.students;
-        if (students) {
-            students.forEach(this.createRow);
-        } else {
-            const body = this.dom.getElementById("test-table-body");
-            const placeHolder = tableService.getEmptyTablePlaceholder("Nikto nepíše test");
-            body.appendChild(placeHolder);
-        }
-    };
 
     createRow = (student) => {
         const name = tableService.getColumn(student.name + ' ' + student.surname);
         const id = tableService.getColumn(student.id);
-        // const status = tableService.getColumn(student.status);
-        const row = tableService.getRow([name, id, 'placeHolder']);
-        this.table.appendChild(row);
+        const status = this.getStatusText(student);
+        const row = tableService.getRow([name, id, status]);
+        const tableBody = this.dom.getElementById("test-table-body");
+        tableBody.appendChild(row);
+
     };
+
+    getStatusText(student){
+        const action = student.action;
+        if(action === "FINISHED"){
+            const action = tableService.getIconButton('editTest', 'fa-arrow-circle-right');
+            const actionColumn = tableService.getColumn("dopísal ");
+            action.classList.add("edit-test");
+
+            action.addEventListener("click", () => this.editStudentTest(student.id));
+            actionColumn.appendChild(action);
+            return actionColumn;
+        }
+        else if(action === "WRITING"){
+            const actionElement = document.createElement("TD");
+            actionElement.innerText = "píše";
+            return actionElement;
+        }
+        else if(action === "OUT_OF_TAB"){
+            const actionElement = document.createElement("TD");
+            actionElement.innerText = "mimo test";
+            return actionElement;
+        }
+    }
+
+    editStudentTest(studentId) {
+        domService.createAndEmitEvent(document, "testEdit",
+            {testCode: this.testCode, studentId: studentId});
+    }
+
 }
