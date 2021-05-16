@@ -57,19 +57,28 @@ export class HomeComponent extends Component {
         const component = this.dom.querySelector("app-student-login-form");
         if (!component) {
             domService.changeDom(form, StudentLoginFormComponent);
+            this.changeTitleColor('student');
         }
+
         form.scrollIntoView();
     }
 
     lecturerLoginButtonClick(dom) {
         const form = dom.getElementById("dynamic-form");
         const component = this.dom.querySelector("app-lecturer-login-form");
+        console.log(component);
         if (!component) {
             domService.changeDom(form, LecturerLoginFormComponent);
+            this.changeTitleColor('lecturer');
         }
         form.scrollIntoView();
     }
 
+
+    changeTitleColor(type) {
+        const title = this.dom.getElementById("dynamic-title");
+        title.style.color = domService.getColorByType(type);
+    }
 
     redirectToLecturerTest(lecturer) {
         location.replace(this.getLecturerUrl(lecturer.id));
