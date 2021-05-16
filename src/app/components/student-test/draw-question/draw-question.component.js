@@ -34,6 +34,8 @@ export class DrawQuestionComponent extends Component {
 
     eventsInitializer() {
         this.dom.getElementById("draw").addEventListener("click", this.openCanvas);
+        this.dom.getElementById("scan").addEventListener("click", this.openUploader);
+        this.dom.getElementById("image-upload").addEventListener("change", this.uploadFile);
     }
 
 
@@ -70,4 +72,21 @@ export class DrawQuestionComponent extends Component {
 
 
     };
+
+    openUploader = () => {
+        this.dom.getElementById("image-upload").click();
+    };
+
+    uploadFile = async (e) => {
+        await this.toBase64(e.target.files[0]).then((file) => {
+            this.imgUrl = file;
+        });
+    };
+
+    toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
 }
